@@ -1,7 +1,7 @@
 <?
 /*FILE: wp-reading-list-meta.php
-* DESCRIPTION: Custom plugin meta boxes for posts/'books'
-*/
+ * DESCRIPTION: Custom plugin meta boxes for posts/'books'
+ */
 
 /* 
 *Set up meta box functions
@@ -83,3 +83,7 @@ function wprl_pages_save_meta( $post_id, $post ) {
 		delete_post_meta( $post_id, $meta_key, $meta_value );
 	}
 } 
+
+/*
+*End of File
+*/

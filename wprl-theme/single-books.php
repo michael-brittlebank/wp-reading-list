@@ -1,15 +1,17 @@
 <?php
-/*FILE: single-books.php
-* DESCRIPTION: The template for displaying a  single 'book' entry
-*/
+/**
+ * The template for displaying a book
+ *
+ * @package Andrew Spittle
+ * @since Andrew Spittle 1.0
+ */
  
 get_header(); ?>
 	<div id="primary" class="content-area">
 		<div id="content" class="site-content" role="main">
 			<?php if ( have_posts()) {
 			//Start the loop
-				while ( have_posts() ){
-					the_post(); ?>
+				while ( have_posts() ) : the_post(); ?>
 					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 						<header class="entry-header">
 							<h1 class="entry-title"><?php the_title(); ?></h1>

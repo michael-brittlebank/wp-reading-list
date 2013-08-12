@@ -1,8 +1,8 @@
 <?
 /*FILE: wp-reading-list-functions.php
-* DESCRIPTION: Core plugin functions
-*ABBREVs: wprl => wp reading list 
-*/
+ *DESCRIPTION: Core plugin functions
+ *ABBREVs: wprl => wp reading list 
+ */
  
  defined( 'ABSPATH' ) OR exit;
  
@@ -11,13 +11,13 @@
  /*
  *Load the custom taxonomies for 'books' and 'authors'
 */
- require 'wp-reading-list-taxonomies.php';
+ require 'wprl-core/wp-reading-list-taxonomies.php';
 add_action( 'init', 'wprl_custom_tax', 0);
  
 /*ADMIN*/
 
  if (is_admin()){
-	//require 'wp-reading-list-admin.php';//The admin menu option panel for wprl
+	require 'wprl-admin/wp-reading-list-admin.php';//The admin menu option panel for wprl
 }
 
 //TODO: load options/settings here

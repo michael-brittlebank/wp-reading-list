@@ -1,7 +1,7 @@
 <?
 /*FILE: wp-reading-list-taxonomies.php
-* DESCRIPTION: Create a custom taxonomy for 'authors' and a custom post type for 'books'
-*/
+ * DESCRIPTION: Create a custom taxonomy for 'authors' and a custom post type for 'books'
+ */
  
 /*
 *Create custom taxonomy for authors
@@ -141,3 +141,7 @@ function codex_custom_help_tab() {
 	}
 }
 add_action('admin_head', 'codex_custom_help_tab');
+
+/*
+*End of File
+*/

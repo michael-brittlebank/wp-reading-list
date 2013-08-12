@@ -27,8 +27,6 @@ License: GPL2
 
 defined( 'ABSPATH' ) OR exit;
 
-//http://blog.igeek.info/2012/wordpress-plugin-activationdeactivation-hooks/
-
 function wprl_setup_activation()//TODO
 {
     if ( ! current_user_can( 'activate_plugins' ) ){
@@ -66,9 +64,9 @@ function wprl_setup_uninstall()
 	//delete database entries
 }
 
-register_activation_hook(   __FILE__, 'wprl_setup_activation' );
-register_deactivation_hook( __FILE__, 'wprl_setup_deactivation' );
-register_uninstall_hook(    __FILE__, 'wprl_setup_uninstall' );
+register_activation_hook(__FILE__, 'wprl_setup_activation');
+register_deactivation_hook(__FILE__, 'wprl_setup_deactivation');
+register_uninstall_hook(__FILE__, 'wprl_setup_uninstall');
 
  //Load the plugin functions
 require 'wp-reading-list-functions.php';
