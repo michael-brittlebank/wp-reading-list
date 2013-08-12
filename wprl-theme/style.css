@@ -1,0 +1,48 @@
+/* =Archive listing
+------------------------------------------------ */
+.rl_book.hentry {
+	border-bottom: none !important;
+	margin: 0 3.8% 0 !important;
+	padding: 21px 0 21px !important;
+	vertical-align: top !important;
+}
+.single-rl_book .hentry {
+	padding-top: 0 !important;
+}
+article.book-column {
+display:inline-block !important;
+	text-align: center;
+	width: 42%;
+}
+.book-column img {
+	display: block;
+	height: inherit;
+	max-width: 100%;
+	margin: 0 auto 10px auto;
+}
+.single-rl_book img.attachment-book-cover {
+	float: left;
+	margin-right: 15px;
+}
+.book-column .entry-meta,
+.book-column .entry-meta p {
+	margin-bottom: 0;
+}
+.entry-notes {
+	clear: both;
+	color: #989898;
+	font: 13px/1.5em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font-size: 1.3rem;
+	margin: 0.5rem 0 1.5rem 0;
+}
+.entry-notes a {
+	border-bottom: 1px solid #e1e1e1;
+	color: #989898;
+	text-decoration: none;
+}
+.entry-notes a:hover,
+.entry-notes a:focus,
+.entry-notes a:active {
+	border-bottom-color: #989898;
+	color: #666;
+}
