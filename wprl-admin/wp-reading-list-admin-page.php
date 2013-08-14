@@ -4,9 +4,9 @@
  */
  
 function wprl_admin_settings() {
-if ( !current_user_can('activate_plugin'))  {
-		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-	}
+if (!current_user_can('activate_plugins'))  {
+		wp_die( __( 'You do not have sufficient permissions to access this page.' ));
+	} 
 ?>
 	<div class="wrap">
 	    <?php screen_icon(); ?>
@@ -20,13 +20,8 @@ if ( !current_user_can('activate_plugin'))  {
 	        <?php submit_button(); ?>
 	    </form>
 	</div>
-<?}
-
-
-
-
-
-
+<? }
 /*
 *End of File
 */
+?>
