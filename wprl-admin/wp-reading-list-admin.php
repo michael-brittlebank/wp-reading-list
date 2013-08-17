@@ -9,8 +9,9 @@ require 'wp-reading-list-admin-functions.php';
 function wprl_admin_menu(){
 	add_options_page('WP Reading List','WP Reading List','activate_plugins','wprl-options','wprl_admin_page');
 }
+add_action('after_setup_theme','wprl_options_init',9);
 add_action('admin_menu','wprl_admin_menu');
-add_action('admin_init', 'register_wprl_settings' );
+add_action('admin_init','register_wprl_settings');
 
 
 /*

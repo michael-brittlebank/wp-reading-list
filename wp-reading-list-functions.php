@@ -59,7 +59,7 @@ add_action( 'wp_enqueue_scripts', 'wprl_styles' );
 *Create custom image size for book covers
 */
 function wprl_cover() {
-	add_image_size( 'book-cover', 300, 400 ); //maintain 3:4 aspect ratio
+	add_image_size('book-cover', 300, 400); //maintain 3:4 aspect ratio
 }
 add_action( 'after_setup_theme', 'wprl_cover' );
 

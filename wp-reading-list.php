@@ -27,29 +27,6 @@ License: GPL2
 
 defined( 'ABSPATH' ) OR exit;
 
-function wprl_setup_activation()//TODO
-{
-    if ( ! current_user_can( 'activate_plugins' ) ){
-        return;
-	}
-    $plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
-    check_admin_referer( "activate-plugin_{$plugin}" );
-
-//set up database
-}
-
-function wprl_setup_deactivation()
-{
-    if ( ! current_user_can( 'activate_plugins' ) ){
-        return;
-	}
-    $plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
-    check_admin_referer( "deactivate-plugin_{$plugin}" );
-
-    //Uncomment the following line to see the function in action
-    //exit( var_dump( $_GET ) );
-}
-
 function wprl_setup_uninstall()
 {
     if ( ! current_user_can( 'activate_plugins' ) )
@@ -64,8 +41,6 @@ function wprl_setup_uninstall()
 	//delete database entries
 }
 
-register_activation_hook(__FILE__, 'wprl_setup_activation');
-register_deactivation_hook(__FILE__, 'wprl_setup_deactivation');
 register_uninstall_hook(__FILE__, 'wprl_setup_uninstall');
 
  //Load the plugin functions

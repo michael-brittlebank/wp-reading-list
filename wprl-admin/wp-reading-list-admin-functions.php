@@ -2,54 +2,52 @@
 /*FILE: wp-reading-list-admin-functions.php
 *DESCRIPTION: Plugin admin functions
 */
-//https://codex.wordpress.org/Creating_Options_Pages
-//http://ottopress.com/2009/wordpress-settings-api-tutorial/
-//http://planetozh.com/blog/2009/05/handling-plugins-options-in-wordpress-28-with-register_setting/
+//http://www.chipbennett.net/2011/02/17/incorporating-the-settings-api-in-wordpress-themes/2/
 
-//!!!!http://www.chipbennett.net/2011/02/17/incorporating-the-settings-api-in-wordpress-themes/2/
-
+//Set wprl default option settings
 function wprl_default_options() {
-     $options = array(
-          'books_in_feed' => false,
-          'layout' => 'list',
-          'show_post_date' => false,
-          'cover_width' => '300',
-          'cover_height' => '400',
-          'row_color' => 'blue',
-          'colunn_color' => 'grey',
-     );
-     return $options;
+	$options = array(
+          	'books_in_feed' => false,
+          	'layout' => 'list',
+          	'show_post_date' => false,
+          	'cover_width' => '300',
+          	'cover_height' => '400',
+          	'row_color' => 'blue',
+          	'colunn_color' => 'grey',
+          	'url' => ''
+    	);
+    	return $options;
 }
 
-// Initialize Theme options
+// Initialize wprl options
 function wprl_options_init() {
-     global $wprl_options;
-     $wprl_options = get_option('wprl_plugin_options');
-     if ( false === $wprl_options ) {
-          $wprl_options = wprl_default_options();
-     }
-     update_option('wprl_plugin_options', $wprl_options);
+	global $wprl_options;
+    	$wprl_options = get_option('wprl_plugin_options');
+     	if ( false == $wprl_options ) {
+       		$wprl_options = wprl_default_options();
+     	}
+     	update_option('wprl_plugin_options', $wprl_options);
 }
-add_action('after_setup_theme','wprl_options_init', 9 );
 
+//Valid layout choices
 function wprl_get_valid_layouts() {
      $layouts = array(
-                    'grid' => array(
-               'slug' => 'grid',
-               'name' => 'Grid',
-               'description' => 'The Grid layout emphasizes book cover images and multiple books per line',
-          ),
-               'list' => array(
-               'slug' => 'list',
-               'name' => 'List',
-               'description' => 'The List layout is a basic style for displaying books, one per line',
-          )
-     );
+	'grid' => array(
+	'slug' => 'grid',
+        'name' => 'Grid',
+        'description' => 'The Grid layout emphasizes book cover images and multiple books per line',
+        ),
+        'list' => array(
+        'slug' => 'list',
+        'name' => 'List',
+        'description' => 'The List layout is a basic style for displaying books, one per line',
+        )
+	);
      return $layouts;
 }
 
 //Prints current layout setting
-function wprl_settings_layouts_section_text() {     
+function wprl_settings_layouts_text() {     
 	$wprl_options = get_option('wprl_plugin_options');
 	$wprl_layouts = wprl_get_valid_layouts();
 	_e('<h4>Current Layout: ');
@@ -60,52 +58,76 @@ function wprl_settings_layouts_section_text() {
 	}
 }
 
-//layout setting selector
+//Layout setting selector
 function wprl_settings_layouts() {
-     $wprl_options = get_option('wprl_plugin_options');
-     $wprl_layouts = wprl_get_valid_layouts();
-     foreach ( $wprl_layouts as $layout) {
-          $currentlayout = ($layout ['slug'] == $wprl_options ['layout'] ? true : false);
-                _e('<strong>'.$layout['name'].'</strong>');?>
-                <input type="radio" name="layout" <?php checked( $currentlayout)?> value="<?php $layout['slug']?>"/>
-                <?php
-                _e('<small>'.$layout['description'].'</small><br/>');
-                
-	}
+     	$wprl_options = get_option('wprl_plugin_options');
+     	$wprl_layouts = wprl_get_valid_layouts();
+     	foreach ( $wprl_layouts as $layout) {
+          	$currentlayout = ($layout ['slug'] == $wprl_options ['layout'] ? true : false);?>
+                <strong><?php _e($layout['name']);?></strong>
+                <input type="radio" id="<?php _e($layout['slug']); ?>" name="wprl_plugin_options[layout]" <?php checked($currentlayout)?> value="<?php _e($layout['slug']);?>"/>
+		<?php _e($layout['description']);?><br/>     
+	<?}
 }
+
+//Prints current url
+function wprl_settings_url_text() {     
+	_e('<p>If you have an affiliate link that you would like to add to the end of the book urls, enter it here.</p>', 'wprl_options' );
+	$wprl_options = get_option('wprl_plugin_options');
+	_e('<h4>Current Link: <span class="faded">http://example.com/</span>');
+        if (empty ($wprl_options['url'])) {
+        	_e('Not Set</h4>');
+      	}
+     	else
+     	{
+     		_e($wprl_options['url'].'</h4>');
+     	}
+}
+
+//URL setting selector
+function wprl_settings_url() {
+     	$wprl_options = get_option('wprl_plugin_options');?>
+     	<label for="wprl-options-url">Link: </label>
+        <input type="text" id="wprl-options-url" name="wprl_plugin_options[url]" value="<?php _e($wprl_options['url']);?>"/>
+<?}
 
 function wprl_options_validate($input) {
-     $wprl_options = get_option('wprl_plugin_options');
-     $valid_input = $wprl_options;
+     	$wprl_options = get_option('wprl_plugin_options');
+     	$valid_input = $wprl_options;
+	//var_dump($_POST);
+	//die;
+     	// Determine which form action was submitted
+     	$submit = (!empty( $input['submit']) ? true : false);
+     	$reset = (!empty($input['reset']) ? true : false);
 
-     // Determine which form action was submitted
-     $submit = (!empty( $input['submit']) ? true : false);
-     $reset = (!empty($input['reset']) ? true : false);
-
-     if ( $submit) { // if General Settings Submit
-       //  $valid_input['layout'] = $input['layout'];
-          //$valid_input['header_nav_menu_depth'] = ( ( 1 || 2 || 3 ) == $input['header_nav_menu_depth'] ? $input['header_nav_menu_depth'] : $valid_input['header_nav_menu_depth'] );
-         // $valid_input['display_footer_credit'] = ( 'true' == $input['display_footer_credit'] ? true : false );
-
-     } elseif ($reset) { // if General Settings Reset Defaults
-       		$wprl_default_options= wprl_get_default_options();
+     	if ( $submit) { // if General Settings Submit
+     		$valid_layouts = wprl_get_valid_layouts();
+         	$valid_input['layout'] = (array_key_exists($input['layout'], $valid_layouts) ? $input['layout'] : $valid_input['layout'] );
+         	$valid_input['url'] = sanitize_text_field($input['url']);
+     	} 
+     	elseif ($reset) { // if General Settings Reset Defaults
+       		$wprl_default_options= wprl_default_options();
          	$valid_input['layout'] = $wprl_default_options['layout'];
-         // $valid_input['header_nav_menu_depth'] = $oenology_default_options['header_nav_menu_depth'];
-         //$valid_input['display_footer_credit'] = $oenology_default_options['display_footer_credit'];
-     }
-     return $valid_input;
+         	$valid_input['url'] = $wprl_default_options['url'];
+     	}
+     	return $valid_input;
 }
 
-function register_wprl_settings() {//use array in single entry
+//use single entry with array of options
+function register_wprl_settings() {
+	wp_register_style('wprl-admin-style', plugins_url('wp-reading-list/wprl-admin/wp-reading-list-admin-style.css'));  
+        wp_enqueue_style('wprl-admin-style');
 	register_setting('wprl_plugin_options', 'wprl_plugin_options', 'wprl_options_validate');
-	add_settings_section('wprl_settings_layouts', 'WP Reading List Layout', 'wprl_settings_layouts_section_text', 'wprl_options');
+	add_settings_section('wprl_settings_layouts', 'Reading List Layout', 'wprl_settings_layouts_text', 'wprl_options');
 	add_settings_field('wprl_settings_layouts', 'Available Layouts', 'wprl_settings_layouts', 'wprl_options', 'wprl_settings_layouts');
+	add_settings_section('wprl_settings_url', 'Affiliate Link', 'wprl_settings_url_text', 'wprl_options');
+	add_settings_field('wprl_settings_url', '', 'wprl_settings_url', 'wprl_options', 'wprl_settings_url');
+
 }
 
 
 //primary and secondary color picker
 //url to append to links
-//layout choice
 //show post date or not
 //choose dimensions of cover picture size, enforce 3:4
 //do you want to delete all 'books' posts?
