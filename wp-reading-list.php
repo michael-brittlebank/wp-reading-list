@@ -27,24 +27,11 @@ License: GPL2
 
 defined( 'ABSPATH' ) OR exit;
 
-function wprl_setup_uninstall()
-{
-    if ( ! current_user_can( 'activate_plugins' ) )
-        return;
-    check_admin_referer( 'bulk-plugins' );
-
-    // Important: Check if the file is the one that was registered during the uninstall hook.
-    if ( __FILE__ != WP_UNINSTALL_PLUGIN ){
-        return;
-	}
-	
-	//delete database entries
-}
-
-register_uninstall_hook(__FILE__, 'wprl_setup_uninstall');
-
- //Load the plugin functions
+//Load the plugin functions
 require 'wp-reading-list-functions.php';
+
+//For uninstalling the plugin
+register_uninstall_hook(__FILE__, 'delete_books');
 
  /*
  *End of File

@@ -6,9 +6,12 @@
 var pagesdefault;
 
 function saveVars() {
-	pagesdefault= document.getElementById("wprl-pages-admin").value;
+	pagesdefault = document.getElementById("wprl-pages-admin").value;
+	if (pagesdefault === null)
+	{
+		pagesdefault = '';
         }
-window.onload = saveVars;
+}
 
 function pageCheck()
 {
@@ -25,5 +28,6 @@ function pageCheck()
 	}
 }
 
+window.onload = saveVars;
 
 // end hiding script from old browsers -->

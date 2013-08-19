@@ -21,7 +21,7 @@ function wprl_post_meta_boxes_setup() {
 function wprl_add_post_meta_boxes() {
 
 	add_meta_box(
-		'wprl-url', // Unique ID
+		'wprl-link', // Unique ID
 		esc_html__( 'Book URL', 'wp-readinglist' ), // Title
 		'wprl_pages_meta_link',	 // Callback function
 		'books', // Add metabox to our custom post type
@@ -68,6 +68,10 @@ function wprl_pages_save_meta( $post_id, $post ) {
 		return $post_id;
 	}
 	$new_link_value = ( isset( $_POST['wprl-link'] ) ?  $_POST['wprl-link']  : '' );
+	if (!strpos($new_link_value, 'http://'))
+	{
+		$new_link_value = 'http://'.$new_link_value;
+	}
 	$new_pages_value = (isset( $_POST['wprl-pages'] ) && is_numeric($_POST['wprl-pages']) ?  $_POST['wprl-pages']  : '');
 	$link_key = 'wprl_link';
 	$pages_key = 'wprl_pages';

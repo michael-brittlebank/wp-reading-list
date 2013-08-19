@@ -34,10 +34,9 @@ function wprl_custom_tax() {
  /*
  *Load the custom meta boxes for 'books'
 */
- require 'wp-reading-list-meta.php';
+require 'wp-reading-list-meta.php';
 add_action( 'load-post.php', 'wprl_post_meta_boxes_setup' );
 add_action( 'load-post-new.php', 'wprl_post_meta_boxes_setup' );
-
 
 /*
 *Create custom post type for 'books'

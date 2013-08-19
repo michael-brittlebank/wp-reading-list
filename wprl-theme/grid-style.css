@@ -1,0 +1,8 @@
+/*FILE: grid-style.php
+*DESCRIPTION: Stylesheet for the grid layout
+*/
+.spacer{clear:both;}
+.entry-meta p {margin-bottom:0!important;}
+article{position: relative; width: 32%; float: left; margin: 0 1.95% 2% 10%;}
+img.wp-post-image {max-width:none!important;}
+.entry-meta {padding:0!important;}

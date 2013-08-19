@@ -1,15 +1,16 @@
 <?
-/*FILE: archive-books.php
-* DESCRIPTION: The template for displaying a list of 'books'
+/*FILE: list-archive-books.php
+* DESCRIPTION: The template for displaying books using the list layout
 */
 get_header(); ?>
+
 	<div id="primary" class="content-area">
 		<div id="content" class="site-content" role="main">
-			<h1 class="entry-title">Recently Read</h1>
-			<?php if (have_posts()) {
-				while (have_posts()){
-					the_post(); ?>
-					<article id="post-<?php the_ID(); ?>" <?php post_class( 'book-column' );//TODO ?>>
+		<h1 class="entry-header">Reading List</h1>
+		<?php if (have_posts()) { ?>
+		<?php while (have_posts()){ 
+			the_post(); ?>
+			<article id="post-<?php the_ID(); ?>" <?php post_class( 'book-column' );//TODO ?>>
 						<?php 
 							if (has_post_thumbnail()) { ?>
 							 	<a href="<?php get_post_meta($post->ID,'wprl_link',true)?>" target="_blank"/>
@@ -33,12 +34,14 @@ get_header(); ?>
 						</header><!-- .entry-header -->
 					</article><!-- #post-<?php the_ID(); ?> -->
 				<?php } ?>
-				<div id="books-nav-link"><?php posts_nav_link(); ?></div>
-			<?php }
-			else{
-				get_template_part('no-results', 'index');
+			<div id="books-nav-link"><?php posts_nav_link(); ?></div>
+		<?php } 
+		else{ ?>
+			_e("No Results");
+		<?php } ?>
 
-			} ?>
-			</div><!-- #content .site-content -->
-		</div><!-- #primary .content-area -->
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+<?php get_sidebar(); ?>
 <?php get_footer(); ?>

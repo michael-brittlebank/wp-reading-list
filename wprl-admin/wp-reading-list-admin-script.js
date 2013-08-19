@@ -14,6 +14,7 @@ function saveVars() {
 	row = document.getElementById("wprl-options-list-size").value;
 	titledefault = document.getElementById("wprl-options-title").value;
         }
+
 window.onload = saveVars;
 
 function numValGrid()
@@ -47,21 +48,6 @@ function numValHelper(docObj)
 		document.getElementById("wprl-options-grid-width").value = window.gw;
 		document.getElementById("wprl-options-grid-height").value = Math.round(window.gw*4/3);
 
-	}
-}
-
-function linkCheck()
-{
-	var link = document.getElementById("wprl-options-url").value;
-	if (isUrl(link))
-	{
-		alert('Do not enter a full URL here. That is reserved for the individual books. Instead just add what comes after the normal url, usually prefaced with a "?".');
-		document.getElementById("wprl-options-url").value = window.linkdefault;
-	}
-	else if (link.length > 30)
-	{
-		alert('Sorry, the text you entered is too long.');
-		document.getElementById("wprl-options-url").value = window.linkdefault;
 	}
 }
 
@@ -105,7 +91,7 @@ function titleCheck()
 	var title= document.getElementById("wprl-options-title").value;
 	if (isUrl(title))
 	{
-		alert('Do not enter a URL here. Instead, just enter what you would like to call the main body text when viewing a single book.');
+		alert('Do not enter a URL here. Instead, just enter what you would like to call the main body text.');
 		document.getElementById("wprl-options-title").value = window.titledefault;
 	}
 	else if (title.length > 30)

@@ -1,0 +1,5 @@
+/*FILE: list-style.css
+*DESCRIPTION: Stylesheet for the list layout
+*/
+<?php header("Content-type: text/css"); ?>
+@import url(<?php get_template_directory(); ?>"/style.css");

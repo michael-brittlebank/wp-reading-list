@@ -24,12 +24,12 @@ function wprl_add_help_tab() {
 	$screen->add_help_tab(array(
 	        'id'	=> 'wprl_help_overview',
 	        'title'	=> __('WPRL Overview'),
-	        'content'	=> '<p>' . __('WP Reading List (or, WPRL) is a plugin designed to help organize and display books, magazines, articles, or anything that you have read lately.  This plugin allows users to display what they have read, attach text like a review or notes to it, and provide a link to where visitors can find the piece.<br/>Please select any of the other tabs to read more about the various administration functions available in this plugin.') . '</p>',
+	        'content'	=> '<p>' . __('WP Reading List (or, WPRL) is a plugin designed to help organize and display books, magazines, articles, or anything that you have read lately.  This plugin allows users to display what they have read, attach text like a review or notes to it, and provide a link to where visitors can find the piece.<br/><br/>Please select any of the other tabs to read more about the various administration functions available in this plugin.') . '</p>',
 	    ) );    
 	$screen->add_help_tab(array(
 	        'id'	=> 'wprl_help_layout',
 	        'title'	=> __('Layout'),
-	        'content'	=> '<p>' . __('There are two available layouts at this time, "grid" and "list". "Grid" is a layout which emphasizes cover images and "flow".  It is intended to be more visually appealing.  "List" is a layout which incorporates a sortable list and, while not as pretty, compensates with increased functionality.<br/>The "Cover Size" setting changes the default dimensions for the cover image in the grid layout.') . '</p>',
+	        'content'	=> '<p>' . __('There are two available layouts at this time, "grid" and "list". "Grid" is a layout which emphasizes cover images and "flow".  It is intended to be more visually appealing.  "List" is a layout which incorporates a sortable list and, while not as pretty, compensates with increased functionality.<br/><br/>The "Cover Size" setting changes the default dimensions for the cover image in the grid layout.') . '</p>',
 	    ) );
 	    	$screen->add_help_tab(array(
 	        'id'	=> 'wprl_help_appearance',
@@ -43,9 +43,8 @@ function wprl_add_help_tab() {
 	    ) );
 }
 
-add_action('after_setup_theme','wprl_options_init',9);
-add_action('admin_menu','wprl_admin_menu');
 add_action('admin_init','register_wprl_settings');
+add_action('admin_menu','wprl_admin_menu');
 add_action('admin_enqueue_scripts', 'wprl_enqueue' );
 /*
 *End of File
