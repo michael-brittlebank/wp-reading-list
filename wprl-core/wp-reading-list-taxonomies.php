@@ -8,7 +8,7 @@
 */
 function wprl_custom_tax() {
 	$labels = array(
-		'name' => __( 'Authors', 'wp-readinglist' ),
+		'name' => __( 'Author/s', 'wp-readinglist' ),
 		'singular_name' => __( 'Author', 'wp-readinglist' ),
 		'search_items'  => __( 'Search Authors', 'wp-readinglist' ),
 		'all_items'  => __( 'All Authors', 'wp-readinglist' ),

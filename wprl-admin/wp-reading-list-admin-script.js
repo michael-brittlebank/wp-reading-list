@@ -1,13 +1,18 @@
+/*FILE: wp-reading-list-admin-script.js
+*DESCRIPTION: Browser-side admin functions
+*/
 <!-- hide script from old browsers
 
 var gw;
-var lw;
 var linkdefault;
+var row;
+var titledefault;
 
 function saveVars() {
 	gw = document.getElementById("wprl-options-grid-width").value;
-	lw = document.getElementById("wprl-options-list-width").value;
 	linkdefault = document.getElementById("wprl-options-url").value;
+	row = document.getElementById("wprl-options-list-size").value;
+	titledefault = document.getElementById("wprl-options-title").value;
         }
 window.onload = saveVars;
 
@@ -35,39 +40,13 @@ function numValGrid()
 	}
 }
 
-function numValList()
-{
-	var l=document.getElementById("wprl-options-list-width").value;
-	if (isNaN(l))
-	{
-		alert("That is not a number.");
-		numValHelper(2);
-	}
-	else if (l > 600)
-	{
-		alert("That is too large of a value. Please choose something smaller.");
-		numValHelper(2);
-	}
-	else if (l < 60)
-	{
-		alert("Please choose a value larger than 60.");
-		numValHelper(2);
-	}
-	else
-	{
-		document.getElementById("wprl-options-list-height").value = Math.round(l*4/3);
-	}
-}
-
 function numValHelper(docObj)
 {
 	if (docObj == 1)
 	{
 		document.getElementById("wprl-options-grid-width").value = window.gw;
-	}
-	else if (docObj ==2)
-	{
-		document.getElementById("wprl-options-list-width").value = window.lw;	
+		document.getElementById("wprl-options-grid-height").value = Math.round(window.gw*4/3);
+
 	}
 }
 
@@ -76,7 +55,7 @@ function linkCheck()
 	var link = document.getElementById("wprl-options-url").value;
 	if (isUrl(link))
 	{
-		alert('Do not enter a full Url here. That is reserved for the individual books. Instead just add what comes after the normal url, usually prefaced with a "?".');
+		alert('Do not enter a full URL here. That is reserved for the individual books. Instead just add what comes after the normal url, usually prefaced with a "?".');
 		document.getElementById("wprl-options-url").value = window.linkdefault;
 	}
 	else if (link.length > 30)
@@ -99,9 +78,42 @@ function isUrl(s) {
 	return false;
 }
 
+function deleteConfirm(){
+	var r=confirm('Deleting your books is permanent. If you are really sure that you want to delete your books, click "Ok".');
+	if (r==true)
+  	{
+		document.getElementById("wprl-options-delete").checked=true;
+  	}
+	else
+  	{
+		document.getElementById("wprl-options-delete").checked=false;
+  	}
+}
 
+function rowCheck()
+{
+	var rowMod = document.getElementById("wprl-options-list-size").value;
+	if (rowMod > 50 || rowMod < 1 || isNaN(rowMod))
+	{
+		alert('Please pick a number of rows between 1 and 50.');
+		document.getElementById("wprl-options-list-size").value = window.row;
+	}
+}
 
-
+function titleCheck()
+{
+	var title= document.getElementById("wprl-options-title").value;
+	if (isUrl(title))
+	{
+		alert('Do not enter a URL here. Instead, just enter what you would like to call the main body text when viewing a single book.');
+		document.getElementById("wprl-options-title").value = window.titledefault;
+	}
+	else if (title.length > 30)
+	{
+		alert('Sorry, the text you entered is too long.');
+		document.getElementById("wprl-options-title").value = window.titledefault;
+	}
+}
 
 
 

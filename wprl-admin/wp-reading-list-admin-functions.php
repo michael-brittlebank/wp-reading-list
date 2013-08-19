@@ -2,8 +2,9 @@
 /*FILE: wp-reading-list-admin-functions.php
 *DESCRIPTION: Plugin admin functions
 */
-//http://www.chipbennett.net/2011/02/17/incorporating-the-settings-api-in-wordpress-themes/2/
-//validate url on entry in meta and on display in theme
+//items to show checkbox for list
+//maybe colors for list
+//implementation
 
 //Set wprl default option settings
 function wprl_default_options() {
@@ -13,20 +14,23 @@ function wprl_default_options() {
           	'show_post_date' => false,
           	'cover_width_grid' => '300',
           	'cover_height_grid' => '400',
-          	'cover_width_list' => '150',
-          	'cover_height_list' => '200',
           	'row_color' => 'blue',
           	'colunn_color' => 'grey',
-          	'url' => ''
+          	'url' => '',
+          	'delete' => false,
+          	'title' => 'Notes',
+          	'grid_width' => '3',
+          	'grid_rows' => '5',
+          	'list_size' => '25'
     	);
     	return $options;
 }
 
-// Initialize wprl options
+//Initialize wprl options
 function wprl_options_init() {
 	global $wprl_options;
     	$wprl_options = get_option('wprl_plugin_options');
-     	if ( false == $wprl_options ) {
+     	if (false == $wprl_options) {
        		$wprl_options = wprl_default_options();
      	}
      	update_option('wprl_plugin_options', $wprl_options);
@@ -38,110 +42,170 @@ function wprl_get_valid_layouts() {
 	'grid' => array(
 	'slug' => 'grid',
         'name' => 'Grid',
-        'description' => 'The Grid layout emphasizes book cover images and multiple books per line',
+        'description' => 'The Grid layout emphasizes visual appeal and displays book cover images and multiple books per line',
         ),
         'list' => array(
         'slug' => 'list',
         'name' => 'List',
-        'description' => 'The List layout is a basic style for displaying books, one per line',
+        'description' => 'The List layout promotes functionality and displays one book per line in a sortable list',
         )
 	);
      return $layouts;
 }
 
-//Prints current layout setting
-function wprl_settings_layouts_text() {     
-	$wprl_options = get_option('wprl_plugin_options');
-	$wprl_layouts = wprl_get_valid_layouts();
-	_e('<h4>Current Layout: ');
-     	foreach ($wprl_layouts as $layout) {
-          	if ( $layout['slug'] == $wprl_options['layout'] ) {
-			 _e($layout['name'].'</h4>'); 
-     		}
-	}
+//Valid grid width choices
+function wprl_get_valid_grid_num() {
+     $width = array(
+     	'1' => array(
+	'slug' => 'One',
+        'value' => '1',
+        ),
+     	'2' => array(
+	'slug' => 'Two',
+        'value' => '2',
+        ),
+        '3' => array(
+	'slug' => 'Three',
+        'value' => '3',
+        ),
+        '4' => array(
+	'slug' => 'Four',
+        'value' => '4',
+        ),
+       	'3' => array(
+	'slug' => 'Three',
+        'value' => '3',
+        ), 
+        '5' => array(
+	'slug' => 'Five',
+        'value' => '5',
+        ),
+       	'6' => array(
+	'slug' => 'Six',
+        'value' => '6',
+        ),
+	'7' => array(
+	'slug' => 'Seven',
+        'value' => '7',
+        ),
+      	'8' => array(
+	'slug' => 'Eight',
+        'value' => '8',
+        ),
+        '9' => array(
+	'slug' => 'Nine',
+        'value' => '9',
+        ),
+        '10' => array(
+	'slug' => 'Ten',
+        'value' => '10',
+        )
+        );
+     return $width ;
 }
 
 //Layout setting selector
 function wprl_settings_layouts() {
-     	$wprl_options = get_option('wprl_plugin_options');
-     	$wprl_layouts = wprl_get_valid_layouts();
-     	foreach ( $wprl_layouts as $layout) {
-          	$currentlayout = ($layout ['slug'] == $wprl_options ['layout'] ? true : false);?>
-                <strong><?php _e($layout['name']);?></strong>
+	$wprl_options = get_option('wprl_plugin_options');
+	$wprl_layouts = wprl_get_valid_layouts();
+	$i = 0;
+     	foreach ($wprl_layouts as $layout) {
+          	$currentlayout = ($layout ['slug'] == $wprl_options ['layout'] ? true : false); ?>
+                <label for="<?php _e($layout['slug']); ?>"><?php _e($layout['name']);?></label>
                 <input type="radio" id="<?php _e($layout['slug']); ?>" name="wprl_plugin_options[layout]" <?php checked($currentlayout)?> value="<?php _e($layout['slug']);?>"/>
 		<?php _e($layout['description']);?><br/>     
 	<?}
 }
 
-//Prints current image sizes
-function wprl_settings_size_text() {     
-	_e('<p>Change the default size of the cover image. Sizes are enforced to a 3:4 aspect ratio and capped at a 600px by 800px maximum and 60px by 80px minimum.</p>', 'wprl_options' );
-	$wprl_options = get_option('wprl_plugin_options');
-	_e('<h4>Current Cover Size (Grid): ');
-	_e($wprl_options['cover_width_grid'].'px, ');
-     	_e($wprl_options['cover_height_grid'].'px</h4>');
-     	_e('<h4>Current Cover Size (List): ');
-     	_e($wprl_options['cover_width_list'].'px, ');
-     	_e($wprl_options['cover_height_list'].'px</h4>');
-}
+//Grid options setting selector
+function wprl_settings_grid_width() {
+     	$wprl_options = get_option('wprl_plugin_options');
+     	$wprl_nums = wprl_get_valid_grid_num();
+     	$currentwidth= $wprl_options ['grid_width'];
+     	$i = 0; ?>
+     	<select id="wprl-options-grid-width" class="grid-nums" name="wprl_plugin_options[grid_width]" value="<?php _e($wprl_options['grid_width']);?>">
+     	<? foreach ($wprl_nums as $width) {
+     	     	if ($i > 3)
+                {
+                      	break;
+                } ?>
+                <option <?php selected($width['value'], $currentwidth)?> value="<?php _e($width['value']);?>"><?php _e($width['slug']);?></option>
+	<?php $i++; } ?>
+<?}
 
-//Size setting
+//Number of grid rows setting
+function wprl_settings_grid_rows() {
+     	$wprl_options = get_option('wprl_plugin_options');
+     	$wprl_nums = wprl_get_valid_grid_num();
+     	$currentrows = $wprl_options ['grid_rows'];
+     	$i = 0; ?>
+     	<select id="wprl-options-grid-tall" class="grid-nums" name="wprl_plugin_options[grid_rows]" value="<?php _e($wprl_options['grid_rows']);?>">
+	<? foreach ($wprl_nums as $rows) { ?>
+                <option <?php selected($rows['value'], $currentrows)?> value="<?php _e($rows['value']);?>"><?php _e($rows['slug']);?></option>
+	<?php } ?>
+	</select>
+<? }
+
+//Book cover size setting
 function wprl_settings_size() {
      	$wprl_options = get_option('wprl_plugin_options');?>
-     	<label for="wprl-options-grid-width"><strong>Grid: </strong></label>
-        <input type="text" id="wprl-options-grid-width" name="wprl_plugin_options[cover_width_grid]" value="<?php _e($wprl_options['cover_width_grid']);?>" onchange="numValGrid()"/>
-        <input type="text" id="wprl-options-grid-height" name="wprl_plugin_options[cover_height_grid]" value="<?php _e($wprl_options['cover_height_grid']);?>"readonly/>
-        <br/>
-        <label for="wprl-options-list-width"><strong>List: </strong></label>
-        <input type="text" id="wprl-options-list-width" name="wprl_plugin_options[cover_width_list]" value="<?php _e($wprl_options['cover_width_list']);?>" onchange="numValList()"/>
-        <input type="text" id="wprl-options-list-height" name="wprl_plugin_options[cover_height_list]" value="<?php _e($wprl_options['cover_height_list']);?>"readonly/>
-
-<?}
-
-//Prints current date setting
-function wprl_settings_date_text() {     
-	_e('<p>If you would like to show the date when you published your reading list book, check here.</p>', 'wprl_options' );
+        <input type="text" id="wprl-options-grid-width" name="wprl_plugin_options[cover_width_grid]" size="4" value="<?php _e($wprl_options['cover_width_grid']);?>" onchange="numValGrid()"/>
+        <input type="text" id="wprl-options-grid-height" name="wprl_plugin_options[cover_height_grid]" size="4" value="<?php _e($wprl_options['cover_height_grid']);?>"readonly/>
+	<? _e('<p>(Sizes are enforced to a 3:4 aspect ratio and capped at a 600px by 800px maximum and 60px by 80px minimum.)</p>', 'wprl_options' );
 }
 
-//Date setting selector
+//Show date setting 
 function wprl_settings_date() {
      	$wprl_options = get_option('wprl_plugin_options');?>
-     	<label for="wprl-options-date"><strong>Show Book Date: </strong></label>
      	<input type="checkbox" id="wprl-options-date" name="wprl_plugin_options[show_post_date]"<? if($wprl_options['show_post_date']){_e('checked="checked"');} ?> value="show-post-date"/>
-<?}
-
-//Prints current url
-function wprl_settings_url_text() {     
-	_e('<p>If you have an affiliate link that you would like to add to the end of the book urls, enter it here.</p>', 'wprl_options' );
-	$wprl_options = get_option('wprl_plugin_options');
-	_e('<h4>Current Link: <span class="faded">http://example.com/</span>');
-        if (empty ($wprl_options['url'])) {
-        	_e('Not Set</h4>');
-      	}
-     	else
-     	{
-     		_e($wprl_options['url'].'</h4>');
-     	}
+	<? _e('<p>If you would like to show the date when you published your book, check here.</p>', 'wprl_options' );
 }
 
-//URL setting selector
-function wprl_settings_url() {
+//Show books on homepage setting 
+function wprl_settings_homepage() {
      	$wprl_options = get_option('wprl_plugin_options');?>
-     	<label for="wprl-options-url"><strong>Link: </strong></label>
-        <input type="text" id="wprl-options-url" name="wprl_plugin_options[url]" value="<?php _e($wprl_options['url']);?>" onchange="linkCheck()"/>
-<?}
+     	<input type="checkbox" id="wprl-options-homepage" name="wprl_plugin_options[books_in_feed]"<? if($wprl_options['books_in_feed']){_e('checked="checked"');} ?> value="books-in-feed"/>
+	<? _e('<p>If you would like to show your books as part of your feed on the homepage and as search results.</p>', 'wprl_options' );
+}
+
+//Affiliate link setting
+function wprl_settings_url() {
+     	$wprl_options = get_option('wprl_plugin_options'); ?>
+        <input type="text" id="wprl-options-url" size="30" name="wprl_plugin_options[url]" value="<?php _e($wprl_options['url']);?>" onchange="linkCheck()"/>
+	<? _e('<p>If you are part of the <a href="https://affiliate-program.amazon.com/" target="_blank">Amazon Associates program</a> and have an affiliate name that you would like to add to the end of your book URLs, enter it here.</p>', 'wprl_options' );
+}
+
+//Delete books setting
+function wprl_settings_delete() {
+     	$wprl_options = get_option('wprl_plugin_options');?>
+        <input type="checkbox" id="wprl-options-delete" name="wprl_plugin_options[delete]" value="<?php _e($wprl_options['delete']);?>" onclick="if(this.checked){deleteConfirm()}"/>
+	<? _e('<p>Everyone needs a fresh start sometimes.  Check if you would like to delete your books. However, please realize that this is permanent, there is no way back.</p>', 'wprl_options');
+}
+
+//Single book title
+function wprl_settings_single(){
+     	$wprl_options = get_option('wprl_plugin_options');?>
+        <input type="text" id="wprl-options-title" name="wprl_plugin_options[title]" size="30" value="<?php _e($wprl_options['title']);?>" onchange="titleCheck()" />
+	<? _e('<p>What are you writing about your books? Just notes, a review, fan fiction, ...?</p>', 'wprl_options');
+}
+
+function wprl_settings_list_size(){
+     	$wprl_options = get_option('wprl_plugin_options');?>
+        <input type="text" id="wprl-options-list-size" name="wprl_plugin_options[list_size]" size="4" value="<?php _e($wprl_options['list_size']);?>" onchange="rowCheck()" />
+	<? _e('<p>Show up to 50 items in your list.</p>', 'wprl_options');
+}
 
 function wprl_options_validate($input) {
-     	$wprl_options = get_option('wprl_plugin_options');
-     	$valid_input = $wprl_options;
+     	$valid_input = get_option('wprl_plugin_options'); 
      	$wprl_defaults=wprl_default_options();
      	$submit = (!empty( $input['submit']) ? true : false);
      	$reset = (!empty($input['reset']) ? true : false);
 
      	if ( $submit) { // if General Settings Submit
      		$valid_layouts = wprl_get_valid_layouts();
+     		$valid_grid_height = wprl_get_valid_grid_num();
          	$valid_input['layout'] = (array_key_exists($input['layout'], $valid_layouts) ? $input['layout'] : $valid_input['layout'] );
-         	if (is_numeric ($input['cover_width_grid']) && is_numeric ($input['cover_height_grid']))
+         	if (is_numeric($input['cover_width_grid']) && is_numeric($input['cover_height_grid']))
          	{
 	         	$valid_input['cover_width_grid'] = sanitize_text_field($input['cover_width_grid']);
 	         	$valid_input['cover_height_grid'] = sanitize_text_field($input['cover_height_grid']);
@@ -151,88 +215,72 @@ function wprl_options_validate($input) {
 	         	$valid_input['cover_width_grid'] = $wprl_defaults['cover_width_grid'];
 	         	$valid_input['cover_height_grid'] = $wprl_defaults['cover_height_grid'];
          	}
-         	if (is_numeric ($input['cover_width_list']) && is_numeric ($input['cover_height_list']))
+         	if(isset($input['books_in_feed']))
          	{
-	         	$valid_input['cover_width_list'] = sanitize_text_field($input['cover_width_list']);
-	         	$valid_input['cover_height_list'] = sanitize_text_field($input['cover_height_list']);
+         		$valid_input['books_in_feed'] = true;
          	}
-         	else
-         	{
-	         	$valid_input['cover_width_list'] = $wprl_defaults['cover_width_list'];
-	         	$valid_input['cover_height_list'] = $wprl_defaults['cover_height_list'];
-         	}
-         	$valid_input['url'] = sanitize_text_field($input['url']);
+		else{
+			$valid_input['books_in_feed'] = false;
+		}
          	if(isset($input['show_post_date']))
          	{
-         		$valid_input['show_post_date'] = $input['show_post_date'];
+         		$valid_input['show_post_date'] = true;
          	}
 		else{
 			$valid_input['show_post_date'] = false;
 		}
+		$valid_input['url'] = sanitize_text_field($input['url']);
+		if (is_numeric($input['list_size']))
+		{
+		$valid_input['list_size'] = sanitize_text_field($input['list_size']);
+		}
+		$valid_input['title'] = sanitize_text_field($input['title']);
+		if ($input['grid_width'] > 0 && $input['grid_width'] < 5)
+		{
+		$valid_input['grid_width'] = $input['grid_width'];
+		}
+		$valid_input['grid_rows'] = (array_key_exists($input['grid_rows'], $valid_grid_height) ? $input['grid_rows'] : $valid_input['grid_rows'] );
+		$valid_input['delete'] = delete_books();
+
      	} 
      	elseif ($reset) { // if General Settings Reset Defaults
        		$valid_input = $wprl_defaults;
      	}
      	return $valid_input;
 }
+function wprl_enqueue( $hook){
+        print $hook;
+        //die;
+	if ('settings_page_wprl-options' == $hook){
+        wp_register_script('wprl-admin-script', plugins_url('wp-reading-list/wprl-admin/wp-reading-list-admin-script.js'));  
+        wp_enqueue_script('wprl-admin-script');
+        wp_register_style('wprl-admin-style', plugins_url('wp-reading-list/wprl-admin/wp-reading-list-admin-style.css'));  
+        wp_enqueue_style('wprl-admin-style');
+        }
+        else
+        {
+        wp_register_script('wprl-core-script', plugins_url('wp-reading-list/wprl-core/wp-reading-list-core-script.js'));  
+	wp_enqueue_script('wprl-core-script');
+        }
+}
 
 //use single entry with array of options
 function register_wprl_settings() {
-	wp_register_style('wprl-admin-style', plugins_url('wp-reading-list/wprl-admin/wp-reading-list-admin-style.css'));  
-        wp_enqueue_style('wprl-admin-style');
-        wp_register_script('wprl-admin-script', plugins_url('wp-reading-list/wprl-admin/wp-reading-list-admin-script.js'));  
-        wp_enqueue_script('wprl-admin-script');
 	register_setting('wprl_plugin_options', 'wprl_plugin_options', 'wprl_options_validate');
-	add_settings_section('wprl_settings_layouts', 'Reading List Layout', 'wprl_settings_layouts_text', 'wprl_options');
-	add_settings_field('wprl_settings_layouts', 'Available Layouts', 'wprl_settings_layouts', 'wprl_options', 'wprl_settings_layouts');
-	add_settings_section('wprl_settings_size', 'Cover Size', 'wprl_settings_size_text', 'wprl_options');
-	add_settings_field('wprl_settings_size', '', 'wprl_settings_size', 'wprl_options', 'wprl_settings_size');
-	add_settings_section('wprl_settings_date', 'Post Date', 'wprl_settings_date_text', 'wprl_options');
-	add_settings_field('wprl_settings_date', '', 'wprl_settings_date', 'wprl_options', 'wprl_settings_date');
-	add_settings_section('wprl_settings_url', 'Affiliate Link', 'wprl_settings_url_text', 'wprl_options');
-	add_settings_field('wprl_settings_url', '', 'wprl_settings_url', 'wprl_options', 'wprl_settings_url');
-
+	add_settings_section('wprl_settings_layout', 'Layout', '', 'wprl_options');
+	add_settings_field('wprl_settings_layouts', 'Available Layouts', 'wprl_settings_layouts', 'wprl_options', 'wprl_settings_layout');
+	add_settings_field('wprl_settings_size', 'Grid Cover Size', 'wprl_settings_size', 'wprl_options', 'wprl_settings_layout');
+	add_settings_field('wprl_settings_grid_width', 'Grid Width', 'wprl_settings_grid_width', 'wprl_options', 'wprl_settings_layout');
+	add_settings_field('wprl_settings_grid_height', 'Number of Grid Rows', 'wprl_settings_grid_rows', 'wprl_options', 'wprl_settings_layout');
+	add_settings_field('wprl_settings_list_size', 'Number of List Rows', 'wprl_settings_list_size', 'wprl_options', 'wprl_settings_layout');
+	add_settings_section('wprl_settings_appearance', 'Appearance', '', 'wprl_options');
+	add_settings_field('wprl_settings_date', 'Show Date?', 'wprl_settings_date', 'wprl_options', 'wprl_settings_appearance');
+	add_settings_field('wprl_settings_homepage', 'Show Books on Homepage?', 'wprl_settings_homepage', 'wprl_options', 'wprl_settings_appearance');
+	add_settings_field('wprl_settings_homepage', 'Single Book Header', 'wprl_settings_single', 'wprl_options', 'wprl_settings_appearance');
+	add_settings_field('wprl_settings_url', 'Amazon Affiliate', 'wprl_settings_url', 'wprl_options', 'wprl_settings_appearance');
+	add_settings_section('wprl_settings_admin', 'Admin', '', 'wprl_options');
+	add_settings_field('wprl_settings_delete', 'Delete All Books?', 'wprl_settings_delete', 'wprl_options', 'wprl_settings_admin');
 }
-
-//appearance and admin tabs
-//primary and secondary color picker
-//do you want to delete all 'books' posts?
-//do you want to change all 'books' posts to regular posts?
-// Show posts of 'post', 'page' and 'book' post types on home page
-/*
-add_action( 'pre_get_posts', 'add_my_post_types_to_query' );
-
-function add_my_post_types_to_query( $query ) {
-	if ( is_home() && $query->is_main_query() )
-		$query->set( 'post_type', array( 'post', 'page', 'book' ) );
-	return $query;
-}
-*/
- 
- /*
-function wprl_admin_contextual_help() {
-    global $wprl-options;
-    $wprl-options = add_options_page(__('My Admin Page', 'wprl_options'), __('My Admin Page', 'wprl_options'), 'manage_options', 'wprl_options', 'wprl-options');
-
-    // Adds my_help_tab when my_admin_page loads
-    add_action('load-'.$wprl-options, 'wprl_admin_add_context');
-}
-
-function wprl_admin_add_context() {
-    global $wprl-options;
-    $screen = get_current_screen();
-
-    if ( $screen->id != $wprl-options)
-        return;
-
-    $screen->add_help_tab( array(
-        'id'	=> 'my_help_tab',
-        'title'	=> __('My Help Tab'),
-        'content'	=> '<p>' . __( 'Descriptive content that will show in My Help Tab-body goes here.' ) . '</p>',
-    ) );
-}
-add_action('admin_menu', 'wprl_admin_contextual_help');
-*/
 
 /*
 *End of File

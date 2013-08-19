@@ -21,9 +21,17 @@ function wprl_post_meta_boxes_setup() {
 function wprl_add_post_meta_boxes() {
 
 	add_meta_box(
-		'wprl-pages', // Unique ID
-		esc_html__( 'Link URL', 'wp-readinglist' ), // Title
+		'wprl-url', // Unique ID
+		esc_html__( 'Book URL', 'wp-readinglist' ), // Title
 		'wprl_pages_meta_link',	 // Callback function
+		'books', // Add metabox to our custom post type
+		'side',	 // Context
+		'default' // Priority
+	);
+	add_meta_box(
+		'wprl-pages', // Unique ID
+		esc_html__( 'Number of Pages', 'wp-readinglist' ), // Title
+		'wprl_pages_meta_pages',	 // Callback function
 		'books', // Add metabox to our custom post type
 		'side',	 // Context
 		'default' // Priority
@@ -34,53 +42,54 @@ function wprl_add_post_meta_boxes() {
 *Display link meta box
 */
 function wprl_pages_meta_link( $object, $box ) { ?>
-
 	<?php wp_nonce_field( basename( __FILE__ ), 'wprl_pages_nonce' ); ?>
-
 	<p class="wprl-link-p-admin"><label for="wprl-link"><?php _e( "Add a link to the book", 'wp-readinglist' ); ?></label></p>
 	<p><input class="wprl-link-input" type="text" name="wprl-link" id="wprl-link-admin" value="<?php echo esc_attr(get_post_meta( $object->ID, 'wprl_link', true)); ?>" size="30" /></p>
+<?php }
+
+/*
+*Display pages meta box
+*/
+function wprl_pages_meta_pages( $object, $box ) { ?>
+	<?php wp_nonce_field( basename( __FILE__ ), 'wprl_pages_nonce' ); ?>
+	<p><input class="wprl-pages-input" type="text" name="wprl-pages" id="wprl-pages-admin" value="<?php echo esc_attr(get_post_meta( $object->ID, 'wprl_pages', true)); ?>" size="30" onchange="pageCheck()"/></p>
 <?php }
 
 /* 
 *Save meta box data as post_meta
 */
 function wprl_pages_save_meta( $post_id, $post ) {
-
-	//Verify the nonce before proceeding
-	if ( !isset( $_POST['wprl_pages_nonce'] ) || !wp_verify_nonce( $_POST['wprl_pages_nonce'], basename( __FILE__ ) ) ) {
+	if ( !isset( $_POST['wprl_pages_nonce'] ) || !wp_verify_nonce( $_POST['wprl_pages_nonce'], basename( __FILE__ ) ) ) 
+	{
 		return $post_id;
 	}
-	
-	//Get the post type object
 	$post_type = get_post_type_object( $post->post_type );
-
-	//Check if the current user has permission to edit the post
 	if ( !current_user_can( $post_type->cap->edit_post, $post_id ) ){
 		return $post_id;
 	}
-	
-	//Get the posted data and sanitize it for use as an HTML class
-	$new_meta_value = ( isset( $_POST['wprl-link'] ) ?  $_POST['wprl-link']  : '' );
-
-	//Get the meta key
-	$meta_key = 'wprl_link';
-
-	//Get the meta value of the custom field key
-	$meta_value = get_post_meta( $post_id, $meta_key, true );
-
-	//If a new meta value was added and there was no previous value, add it
-	if ( $new_meta_value && '' == $meta_value ){
-		add_post_meta( $post_id, $meta_key, $new_meta_value, true );
+	$new_link_value = ( isset( $_POST['wprl-link'] ) ?  $_POST['wprl-link']  : '' );
+	$new_pages_value = (isset( $_POST['wprl-pages'] ) && is_numeric($_POST['wprl-pages']) ?  $_POST['wprl-pages']  : '');
+	$link_key = 'wprl_link';
+	$pages_key = 'wprl_pages';
+	$link_value = get_post_meta( $post_id, $link_key, true );
+	$pages_value = get_post_meta( $post_id, $pages_key, true );
+	if ( $new_link_value && '' == $link_value ){
+		add_post_meta( $post_id, $link_key, $new_link_value, true );
 	}
-	
-	//If the new meta value does not match the old value, update it
-	elseif ( $new_meta_value && $new_meta_value != $meta_value ) {
-		update_post_meta( $post_id, $meta_key, $new_meta_value );
+	elseif ( $new_link_value && $new_link_value != $link_value ) {
+		update_post_meta( $post_id, $link_key, $new_link_value );
 	}
-	
-	//If there is no new meta value but an old value exists, delete it
-	elseif ( '' == $new_meta_value && $meta_value ) {
-		delete_post_meta( $post_id, $meta_key, $meta_value );
+	elseif ( '' == $new_link_value && $link_value ) {
+		delete_post_meta( $post_id, $link_key, $link_value );
+	}
+	if ( $new_pages_value && '' == $pages_value ){
+		add_post_meta( $post_id, $pages_key, $new_pages_value, true );
+	}
+	elseif ( $new_pages_value && $new_pages_value != $pages_value ) {
+		update_post_meta( $post_id, $pages_key, $new_pages_value );
+	}
+	elseif ( '' == $new_pages_value && $pages_value ) {
+		delete_post_meta( $post_id, $pages_key, $pages_value );
 	}
 } 
 
