@@ -8,73 +8,71 @@
 */
 function wprl_custom_tax() {
 	$labels = array(
-		'name' => __( 'Author/s', 'wp-readinglist' ),
-		'singular_name' => __( 'Author', 'wp-readinglist' ),
-		'search_items'  => __( 'Search Authors', 'wp-readinglist' ),
-		'all_items'  => __( 'All Authors', 'wp-readinglist' ),
-		'edit_item'	=> __( 'Edit Author', 'wp-readinglist' ), 
-		'update_item'	=> __( 'Update Author', 'wp-readinglist' ),
-		'add_new_item' 	=> __( 'Add New Author', 'wp-readinglist' ),
-		'new_item_name' 	=> __( 'New Author Name', 'wp-readinglist' ),
-		'separate_items_with_commas' 	=> __( 'Separate authors with commas', 'wp-readinglist' ),
-		'choose_from_most_used' 	=> __( 'Choose from the most used authors', 'wp-readinglist' ),
-		'menu_name' 	=> __( 'Authors', 'wp-readinglist' ),
+		'name' => __('Author/s', 'wp-readinglist'),
+		'singular_name' => __('Author', 'wp-readinglist'),
+		'search_items' => __('Search Authors', 'wp-readinglist'),
+		'all_items' => __('All Authors', 'wp-readinglist'),
+		'edit_item' => __('Edit Author', 'wp-readinglist'), 
+		'update_item' => __('Update Author', 'wp-readinglist'),
+		'add_new_item' => __('Add New Author', 'wp-readinglist'),
+		'new_item_name' => __('New Author Name', 'wp-readinglist'),
+		'separate_items_with_commas' => __('Separate authors with commas', 'wp-readinglist'),
+		'choose_from_most_used' => __('Choose from the most used authors', 'wp-readinglist'),
+		'menu_name' => __('Authors', 'wp-readinglist'),
 	); 	
 		
-	register_taxonomy( 'book-author', array( 'books' ), array(
-		'hierarchical' 	=> false,
-		'labels' 		=> $labels,
-		'show_ui' 	=> true,
-		'show_admin_column'	 => true,
-		'query_var' 	=> true,
-		'rewrite' 	=> array( 'slug' => 'book-author' ),
+	register_taxonomy('book-author', array( 'books'), array(
+		'hierarchical' => false,
+		'labels' => $labels,
+		'show_ui' => true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => array('slug' => 'book-author'),
 	));
 }
 
- /*
- *Load the custom meta boxes for 'books'
+/*
+*Load the custom meta boxes for 'books'
 */
 require 'wp-reading-list-meta.php';
-add_action( 'load-post.php', 'wprl_post_meta_boxes_setup' );
-add_action( 'load-post-new.php', 'wprl_post_meta_boxes_setup' );
+add_action('load-post.php', 'wprl_post_meta_boxes_setup');
+add_action('load-post-new.php', 'wprl_post_meta_boxes_setup');
 
 /*
 *Create custom post type for 'books'
 */
 function wprl_custom_post() {
 	$labels = array(
-		'name' 	=> __( 'Books', 'wp-readinglist' ),
-		'singular_name' 	=> __( 'Book', 'wp-readinglist' ),
-		'menu_name' 	=> __( 'Books', 'wp-readinglist' ),
-		'all_items'	=> __( 'All Books', 'wp-readinglist' ),
-		'add_new_item' 	=> __( 'Add New Book', 'wp-readinglist' ),
-		'edit_item'	=> __( 'Edit Book', 'wp-readinglist' ),
-		'new_item' 	=> __( 'New Book', 'wp-readinglist' ),
-		'view_item'		=> __( 'View Book', 'wp-readinglist' ),
-		'search_items'	=> __( 'Search Books', 'wp-readinglist' ),
-		'not_found'		=> __( 'No Books Found', 'wp-readinglist' ),
-		'not_found_in_trash'		=> __( 'No Books in Trash', 'wp-readinglist' ),
-		'update_item' 	=> __( 'Update Book', 'wp-readinglist' )
+		'name' => __('Books', 'wp-readinglist'),
+		'singular_name' => __('Book', 'wp-readinglist'),
+		'menu_name' => __('Books', 'wp-readinglist'),
+		'all_items' => __('All Books', 'wp-readinglist'),
+		'add_new_item' => __('Add New Book', 'wp-readinglist'),
+		'edit_item' => __('Edit Book', 'wp-readinglist'),
+		'new_item' => __('New Book', 'wp-readinglist'),
+		'view_item' => __('View Book', 'wp-readinglist'),
+		'search_items' => __('Search Books', 'wp-readinglist'),
+		'not_found' => __('No Books Found', 'wp-readinglist'),
+		'not_found_in_trash' => __('No Books in Trash', 'wp-readinglist'),
+		'update_item' => __('Update Book', 'wp-readinglist')
 	);
 	
 	$args = array (
-		'labels' 	=> $labels,
-		'description'	=> 'Holds books and book information',
-		'public' 	=> true,
-		'exclude_from_search'	=> false,
-		'menu_position' 	=> 20,
-		'supports' 	=> array( 'title', 'thumbnail', 'editor' , 'revisions'),
-		'has_archive' 	=> true,
-		'rewrite'	=> array( 'slug' => 'books' )
+		'labels' => $labels,
+		'description' => 'Holds Reading List information',
+		'public' => true,
+		'exclude_from_search' => false,
+		'menu_position' => 20,
+		'supports' => array('title', 'thumbnail', 'editor' , 'revisions'),
+		'has_archive' => true,
+		'rewrite' => array('slug' => 'books')
 	);
-	register_post_type( 'books', $args );
+	register_post_type('books', $args);
 }
-add_action( 'init', 'wprl_custom_post' );
+add_action('init', 'wprl_custom_post');
 
 /*
 *Customize admin messages related to the wprl custom post type
-*
-*http://codex.wordpress.org/Function_Reference/register_post_type
 */
 function wprl_custom_messages( $messages ) {
 	 global $post, $post_ID;
@@ -99,15 +97,13 @@ add_filter( 'post_updated_messages', 'wprl_custom_messages' );
 
 /*
 *Customize contextual help for wprl 'books'
-*
-*http://codex.wordpress.org/Function_Reference/register_post_type
 */
 function wprl_custom_help_text( $contextual_help, $screen_id, $screen ) { //TODO
 	if ( 'books' == $screen->id ||  'edit-books' == $screen->id  ) {
 		$contextual_help =
 		'<p>' . __('Things to remember when adding or editing a book:', 'wp-readinglist') . '</p>' .
 		'<ul>' .
-		'<li>' . __('Set a featured image to be the book cover.', 'wp-readinglist') . '</li>' .
+		'<li>' . __('Set a featured image to be the cover image.', 'wp-readinglist') . '</li>' .
 		'<li>' . __('Be sure to specify the author of the book in the Author meta box.', 'wp-readinglist') . '</li>' .
 		'<li>' . __('Add a link to your book to guide readers to where they can find a copy or use it for self-referral, such as in Amazon&apos;s Associates Program.', 'wp-readinglist') . '</li>' .
 		'</ul>' .
@@ -121,8 +117,6 @@ add_action( 'contextual_help', 'wprl_custom_help_text', 10, 3 );
 
 /*
 *Custom help tab for wprl
-*
-*http://codex.wordpress.org/Function_Reference/register_post_type
 */
 function codex_custom_help_tab() {
 	global $post_ID;

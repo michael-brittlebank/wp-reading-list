@@ -7,18 +7,21 @@ var gw;
 var linkdefault;
 var row;
 var titledefault;
+var margin;
+var padding;
 
 function saveVars() {
 	gw = document.getElementById("wprl-options-grid-width").value;
 	linkdefault = document.getElementById("wprl-options-url").value;
 	row = document.getElementById("wprl-options-list-size").value;
 	titledefault = document.getElementById("wprl-options-title").value;
+	margin = document.getElementById("wprl-options-margin-left").value;
+	padding = document.getElementById("wprl-options-padding").value;
         }
 
 window.onload = saveVars;
 
-function numValGrid()
-{
+function numValGrid(){
 	var g=document.getElementById("wprl-options-grid-width").value;
 	if (isNaN(g))
 	{
@@ -41,8 +44,7 @@ function numValGrid()
 	}
 }
 
-function numValHelper(docObj)
-{
+function numValHelper(docObj){
 	if (docObj == 1)
 	{
 		document.getElementById("wprl-options-grid-width").value = window.gw;
@@ -51,7 +53,7 @@ function numValHelper(docObj)
 	}
 }
 
-function isUrl(s) {
+function isUrl(s){
 	var testFor =new Array("http","https","ftp","ftps",".com",".net",".org",".edu",".gov",".int",".mil",".biz",".info",".jobs",
 	".mobi",".name","@");
 	for (i=0;i<testFor.length;i++)
@@ -65,7 +67,7 @@ function isUrl(s) {
 }
 
 function deleteConfirm(){
-	var r=confirm('Deleting your books is permanent. If you are really sure that you want to delete your books, click "Ok".');
+	var r=confirm('Deleting your Reading List items is permanent. This will also delete the list of authors.  If you are sure that you want to do this, click "Ok" and hit "Save Settings".');
 	if (r==true)
   	{
 		document.getElementById("wprl-options-delete").checked=true;
@@ -76,18 +78,7 @@ function deleteConfirm(){
   	}
 }
 
-function rowCheck()
-{
-	var rowMod = document.getElementById("wprl-options-list-size").value;
-	if (rowMod > 50 || rowMod < 1 || isNaN(rowMod))
-	{
-		alert('Please pick a number of rows between 1 and 50.');
-		document.getElementById("wprl-options-list-size").value = window.row;
-	}
-}
-
-function titleCheck()
-{
+function titleCheck(){
 	var title= document.getElementById("wprl-options-title").value;
 	if (isUrl(title))
 	{
@@ -101,12 +92,32 @@ function titleCheck()
 	}
 }
 
+function rowCheck(){
+	var rowMod = document.getElementById("wprl-options-list-size").value;
+	if (rowMod > 50 || rowMod < 1 || isNaN(rowMod) || rowMod.length === 0 || rowMod.replace(/\s/g,"") == "")
+	{
+		alert('Please pick a number of rows between 1 and 50.');
+		document.getElementById("wprl-options-list-size").value = window.row;
+	}
+}
 
+function marginCheck(){
+	var marginMod = document.getElementById("wprl-options-margin-left").value;
+	if (marginMod > 100 || marginMod < 0 || isNaN(marginMod) || marginMod.length === 0 || marginMod.replace(/\s/g,"") == "")
+	{
+		alert('Please pick a percentage between 0 and 100.');
+		document.getElementById("wprl-options-margin-left").value = window.margin;
+	}
+}
 
-
-
-
-
+function paddingCheck(){
+	var paddingMod = document.getElementById("wprl-options-padding").value;
+	if (paddingMod > 100 || paddingMod  < 0 || isNaN(paddingMod) || paddingMod.length === 0 || paddingMod.replace(/\s/g,"") == "")
+	{
+		alert('Please pick a value between 0 and 100.');
+		document.getElementById("wprl-options-padding").value = window.padding;
+	}
+}
 
 
 // end hiding script from old browsers -->

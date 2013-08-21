@@ -1,5 +1,5 @@
-/*FILE: list-style.css
-*DESCRIPTION: Stylesheet for the list layout
+/*FILE: single-style.css
+*DESCRIPTION: Stylesheet for a single post
 */
 /*Modified snippet of Eric Meyer's reset css http://meyerweb.com/eric/tools/css/reset/ */
 #content div, #content span, #content h1, #content h2, #content h3, #content  p, #content a, #content img, #content article, #content header, #content table, #content td, #content tr, #content tbody{
@@ -11,11 +11,10 @@
 /* HTML5 display-role reset for older browsers */
 #content article, #content header {display: block!important;}
 /*End reset*/
-#content .entry-meta {display: inline-block!important;width: auto!important;vertical-align:text-bottom!important;margin-bottom:20px!important;}
-#content .entry-meta p {margin-bottom:0!important;}
 #content article {word-wrap:break-word;}
 #content .wp-post-image {max-width:none!important;}
-#content .meta-header {vertical-align:top!important;}
-#content h1.entry-header {margin: 0.75em 0 20px!important;}
-#content header.entry-header {max-width:none!important;margin-right:15px!important}
-#content td span{margin-right:25px!important;margin-bottom:15px!important;}
+#content #post-thumbnail {float: right !important;vertical-align: text-top!important;margin-left: 10px!important;}
+#content .entry-meta {border-bottom-style:solid none!important;border-width:1px!important;border-color:#E6E6E6!important;margin-bottom:20px!important;}
+#content #entry-header {margin: 0.75em 0 0!important;}
+#content #single-title {margin-bottom:10px!important;display:inline-block!important;}
+#content .metaspan {margin-right:20px!important;}

@@ -21,6 +21,7 @@ function wprl_add_help_tab() {
 	if ( $screen->id != $wprl_admin_page ){
 		return;
 	}
+
 	$screen->add_help_tab(array(
 	        'id'	=> 'wprl_help_overview',
 	        'title'	=> __('WPRL Overview'),
@@ -46,6 +47,11 @@ function wprl_add_help_tab() {
 add_action('admin_init','register_wprl_settings');
 add_action('admin_menu','wprl_admin_menu');
 add_action('admin_enqueue_scripts', 'wprl_enqueue' );
+add_action('edit_form_advanced', 'force_post_title');
+add_filter('admin_post_thumbnail_html', 'wprl_featured_image_html');
+add_filter('gettext', 'wprl_featured_image_mod');
+add_filter('ngettext', 'wprl_featured_image_mod');
+
 /*
 *End of File
 */

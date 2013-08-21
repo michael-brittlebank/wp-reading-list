@@ -10,7 +10,7 @@ if (!current_user_can('activate_plugins'))  {
 ?>
 	<div class="wrap">
 	    	<?php screen_icon();?>
-	   	<h2>WP Reading List Settings</h2>	
+	   	<h2>WP Reading List Settings</h2>
 	    	<form method="post" action="options.php">
 	      		<?php
 			    settings_fields('wprl_plugin_options');	
