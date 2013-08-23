@@ -11,7 +11,7 @@ var margin;
 var padding;
 
 function saveVars() {
-	gw = document.getElementById("wprl-options-grid-width").value;
+	gw = document.getElementById("wprl-options-cover-width").value;
 	linkdefault = document.getElementById("wprl-options-url").value;
 	row = document.getElementById("wprl-options-list-size").value;
 	titledefault = document.getElementById("wprl-options-title").value;
@@ -22,33 +22,23 @@ function saveVars() {
 window.onload = saveVars;
 
 function numValGrid(){
-	var g=document.getElementById("wprl-options-grid-width").value;
-	if (isNaN(g))
+	var g=document.getElementById("wprl-options-cover-width").value;
+	if (isNaN(g) || g > 600 || g < 60)
 	{
-		alert("That is not a number.");
-		numValHelper(1);
-	}
-	else if (g > 600)
-	{
-		alert("That is too large of a value. Please choose something smaller.");
-		numValHelper(1);
-	}
-	else if (g < 60)
-	{
-		alert("Please choose a value larger than 60.");
+		alert("Please choose a number between 60 and 600.");
 		numValHelper(1);
 	}
 	else
 	{
-		document.getElementById("wprl-options-grid-height").value = Math.round(g*4/3);
+		document.getElementById("wprl-options-cover-height").value = Math.round(g*4/3);
 	}
 }
 
 function numValHelper(docObj){
 	if (docObj == 1)
 	{
-		document.getElementById("wprl-options-grid-width").value = window.gw;
-		document.getElementById("wprl-options-grid-height").value = Math.round(window.gw*4/3);
+		document.getElementById("wprl-options-cover-width").value = window.gw;
+		document.getElementById("wprl-options-cover-height").value = Math.round(window.gw*4/3);
 
 	}
 }
@@ -103,18 +93,18 @@ function rowCheck(){
 
 function marginCheck(){
 	var marginMod = document.getElementById("wprl-options-margin-left").value;
-	if (marginMod > 100 || marginMod < 0 || isNaN(marginMod) || marginMod.length === 0 || marginMod.replace(/\s/g,"") == "")
+	if (marginMod > 25 || marginMod < 0 || isNaN(marginMod) || marginMod.length === 0 || marginMod.replace(/\s/g,"") == "")
 	{
-		alert('Please pick a percentage between 0 and 100.');
+		alert('Please pick a percentage between 0 and 25.');
 		document.getElementById("wprl-options-margin-left").value = window.margin;
 	}
 }
 
 function paddingCheck(){
 	var paddingMod = document.getElementById("wprl-options-padding").value;
-	if (paddingMod > 100 || paddingMod  < 0 || isNaN(paddingMod) || paddingMod.length === 0 || paddingMod.replace(/\s/g,"") == "")
+	if (paddingMod > 10 || paddingMod  < 1 || isNaN(paddingMod) || paddingMod.length === 0 || paddingMod.replace(/\s/g,"") == "")
 	{
-		alert('Please pick a value between 0 and 100.');
+		alert('Please pick a percentage between 1 and 10.');
 		document.getElementById("wprl-options-padding").value = window.padding;
 	}
 }

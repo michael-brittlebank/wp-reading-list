@@ -25,13 +25,13 @@ function wprl_default_options() {
 		'cover_image' => plugins_url('wp-reading-list/wprl-theme/sample.png'),
 		'order' => 'date',
 		'direction' => 'DESC',
-          	'cover_width_grid' => '250',
+		'cover_width_grid' => '250',
           	'cover_height_grid' => '333',
           	'grid_width' => '3',
           	'grid_rows' => '4',
           	'list_size' => '25',
 		'css_margin_left' => '15',
-		'padding' => '20',
+		'padding' => '4',
           	'books_in_feed' => false,
           	'show_post_date' => false,
           	'delete' => false,
@@ -41,6 +41,7 @@ function wprl_default_options() {
 		'show_url' => true,
 		'show_book' => true,
 		'list_image' => true,
+		'version' => '1.0',
     	);
     	return $options;
 }
@@ -189,7 +190,7 @@ function force_post_title() {
 	}
 }
 
-// GET FEATURED IMAGE
+//get featured image for books listing in admin columns
 function wprl_get_cover_image($post_ID) {
 	$post_thumbnail_id = get_post_thumbnail_id($post_ID);
 	if ($post_thumbnail_id) {
@@ -197,14 +198,14 @@ function wprl_get_cover_image($post_ID) {
 		return $post_thumbnail_img[0];
 	}
 }
-// ADD NEW COLUMN
+//add new column to admin listing for books
 function wprl_columns_head($defaults) {
 	$defaults['author'] = 'Post Author';
 	$defaults['featured_image'] = 'Featured Image';
 	return $defaults;
 }
 
-// SHOW THE FEATURED IMAGE
+//show the cover image for the admin books listing
 function wprl_columns_content($column_name, $post_ID) {
 	if ($column_name == 'featured_image') {
 		$cover_image= wprl_get_cover_image($post_ID);

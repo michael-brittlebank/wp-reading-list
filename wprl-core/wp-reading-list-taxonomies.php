@@ -96,26 +96,6 @@ function wprl_custom_messages( $messages ) {
 add_filter( 'post_updated_messages', 'wprl_custom_messages' );
 
 /*
-*Customize contextual help for wprl 'books'
-*/
-function wprl_custom_help_text( $contextual_help, $screen_id, $screen ) { //TODO
-	if ( 'books' == $screen->id ||  'edit-books' == $screen->id  ) {
-		$contextual_help =
-		'<p>' . __('Things to remember when adding or editing a book:', 'wp-readinglist') . '</p>' .
-		'<ul>' .
-		'<li>' . __('Set a featured image to be the cover image.', 'wp-readinglist') . '</li>' .
-		'<li>' . __('Be sure to specify the author of the book in the Author meta box.', 'wp-readinglist') . '</li>' .
-		'<li>' . __('Add a link to your book to guide readers to where they can find a copy or use it for self-referral, such as in Amazon&apos;s Associates Program.', 'wp-readinglist') . '</li>' .
-		'</ul>' .
-		'<p><strong>' . __('For more information:', 'wp-readinglist') . '</strong></p>' .
-		'<p>' . __('<a href="http://codex.wordpress.org/Posts_Edit_SubPanel" target="_blank">Edit Posts Documentation</a>', 'wp-readinglist') . '</p>' .
-		'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>', 'wp-readinglist') . '</p>' ;
-	}
-	return $contextual_help;
-}
-add_action( 'contextual_help', 'wprl_custom_help_text', 10, 3 );
-
-/*
 *Custom help tab for wprl
 */
 function codex_custom_help_tab() {
@@ -127,10 +107,44 @@ function codex_custom_help_tab() {
 
 	if( $post_type == 'books' ){
 		$screen->add_help_tab( array(
-			'id'  => 'wprl_help_tab', //unique id for the tab
-			'title'  => 'WP Reading List  Help', //unique visible title for the tab
-			'content' => '<h3>WP Reading List  Help</h3><p>I shall help you</p>',  //TODO
-		));
+	        'id'	=> 'wprl_help_overview',
+	        'title'	=> __('WPRL Overview'),
+	        'content'	=> '<p>' . __('<b>WP Reading List</b> (or, <b>WPRL</b>) is a plugin designed to help organize and display books, magazines, articles, and or anything else that you have read lately.  This plugin allows users to display what they have read, attach text like a review or notes to it, and provide a link to where visitors can find the piece.<br/><br/>Please select any of the other tabs to read more about the various administration functions available in this plugin.') . '</p>',
+	    ) );    
+	$screen->add_help_tab(array(
+	        'id'	=> 'wprl_help_author',
+	        'title'	=> __('Author/s'),
+	        'content'	=> '<p>' . __('
+This metabox allows you to add "authors" to your Reading List items.  You can add any number of authors, just like regular post tags; just separate them with commas.  These authors can then be shown in your layout and managed from the "Authors" tab under the "Books" tab in the admin menu.
+<br/>
+Examples: "William Shakespeare", "John" "Kate" "Will", "J. K. Rowling"
+') . '</p>',
+	    ) );
+	    	$screen->add_help_tab(array(
+	        'id'	=> 'wprl_help_url',
+	        'title'	=> __('Book URL'),
+	        'content'	=> '<p>' . __('
+This metabox allows you to add custom urls to link to external sources by wrapping the link around the posts&apos;s cover image.  Use this box to direct users to where the original Reading List item can be found or use it as a link for affiliate programs like <a href="https://affiliate-program.amazon.com/" target="_blank">Amazon Associates</a>.  Be sure to verify the link is correct and make sure you have the "Show Cover Image Links" setting turned on in the general "WP Reading List Settings" page.  Also, make sure you have a cover image to link from!
+</br>
+Example: "http://www.amazon.com/The-Riverside-Shakespeare-2nd-Edition/dp/0395754909/ref=sr_1_1?ie=UTF8&qid=1377294257&sr=8-1&keywords=shakespeare+riverside"
+') . '</p>',
+	    ) );
+	    	$screen->add_help_tab(array(
+	        'id'	=> 'wprl_help_pages',
+	        'title'	=> __('Number of Pages'),
+	        'content'	=> '<p>' . __('
+This metabox allows you to specify how many pages are in the Reading List item.  Unfortunately at this time we cannot support page ranges, i.e. "210-450".  Make sure you do not spell out the page number.
+<br/>Examples: "1", "999"
+<br/>Range: 1-10000.
+') . '</p>',
+	    ) );
+	    	$screen->add_help_tab(array(
+	        'id'	=> 'wprl_help_cover_image',
+	        'title'	=> __('Cover Image'),
+	        'content'	=> '<p>' . __('
+This metabox allows you to set a featured image or "cover image" for your Reading List item.  This can then be shown in a Reading List layout.
+') . '</p>',
+	    ) );
 	}
 }
 add_action('admin_head', 'codex_custom_help_tab');

@@ -10,7 +10,7 @@ $padding = $wprl_options['padding']/2;
 get_header(); ?>
 	<div id="primary" class="content-area">
 		<div id="content" class="site-content" role="main">
-			<h1 class="entry-header" style="margin-left:<? _e($wprl_options['css_margin_left'])?>%!important;"><?php _e($wprl_options['multiple_title']);?></h1>
+			<h1 class="entry-title" style="margin-left:<? _e($wprl_options['css_margin_left'])?>%!important;"><?php _e($wprl_options['multiple_title']);?></h1>
 			<?php if (have_posts()) 
 			{
 				while (have_posts())

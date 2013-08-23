@@ -16,16 +16,11 @@ function saveVars() {
 function pageCheck()
 {
 	var pagesMod = document.getElementById("wprl-pages-admin").value;
-	if (isNaN(pagesMod))
+	if(isNaN(pagesMod) || pagesMod > 10000 || pagesMod < 1)
 	{
-		alert('Please pick a number and do not write it out.  Unfortunately at this time we cannot support page ranges, i.e. "210-450".');
+		alert('Please pick a number between 1 and 10,000 and do not write it out.  Unfortunately at this time we cannot support page ranges, i.e. "210-450".');
 		document.getElementById("wprl-pages-admin").value = window.pagesdefault;
 	}	
-	else if (pagesMod > 10000)
-	{
-		alert('Sorry that number is too long.');
-		document.getElementById("wprl-pages-admin").value = window.pagesdefault;
-	}
 }
 
 window.onload = saveVars;

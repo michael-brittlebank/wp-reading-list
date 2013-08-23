@@ -2,7 +2,7 @@
 *DESCRIPTION: Stylesheet for a single post
 */
 /*Modified snippet of Eric Meyer's reset css http://meyerweb.com/eric/tools/css/reset/ */
-#content div, #content span, #content h1, #content h2, #content h3, #content  p, #content a, #content img, #content article, #content header, #content table, #content td, #content tr, #content tbody{
+#content div, #content span, #content h1, #content h2, #content h3, #content  p, #content a, #content img, #content article, #content header, #content table, #content td, #content tr, #content tbody, #content{
 	margin: 0!important;
 	padding: 0!important;
 	border: 0!important;
@@ -10,6 +10,7 @@
 }
 /* HTML5 display-role reset for older browsers */
 #content article, #content header {display: block!important;}
+#content table {border-collapse: collapse!important; border-spacing: 0!important;}
 /*End reset*/
 #content article {word-wrap:break-word;}
 #content .wp-post-image {max-width:none!important;}
@@ -18,3 +19,5 @@
 #content #entry-header {margin: 0.75em 0 0!important;}
 #content #single-title {margin-bottom:10px!important;display:inline-block!important;}
 #content .metaspan {margin-right:20px!important;}
+#content .entry-title {font-size:140%;font-weight:bold;}
+#primary, .site-content, #content .entry-content {width:100%!important;}

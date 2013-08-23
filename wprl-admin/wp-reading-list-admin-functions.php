@@ -2,10 +2,9 @@
 /*FILE: wp-reading-list-admin-functions.php
 *DESCRIPTION: Plugin admin functions
 */
-//maybe colors for list
 //default cover image picker
 //change name of taxonomy
-//eventually combined layout
+//page ranges support
 
 //Valid layout choices
 function wprl_get_valid_layouts() {
@@ -89,13 +88,13 @@ function wprl_get_valid_grid_num() {
 //Valid order by choices
 function wprl_get_valid_order_by() {
      $width = array(
-     	'author' => array(
-	'slug' => 'Post Author',
-        'value' => 'author',
-        ),
      	'date' => array(
 	'slug' => 'Date',
         'value' => 'date',
+        ),
+     	'author' => array(
+	'slug' => 'Post Author',
+        'value' => 'author',
         ),
         'rand' => array(
 	'slug' => 'Random',
@@ -148,6 +147,14 @@ function wprl_settings_grid_width() {
 	<?php $i++; } ?>
 <?}
 
+//Book cover size setting
+function wprl_settings_size() {
+     	$wprl_options = get_option('wprl_plugin_options');?>
+        <input type="text" id="wprl-options-cover-width" name="wprl_plugin_options[cover_width_grid]" size="4" value="<?php _e($wprl_options['cover_width_grid']);?>" onchange="numValGrid()"/>
+        <input type="text" id="wprl-options-cover-height" name="wprl_plugin_options[cover_height_grid]" size="4" value="<?php _e($wprl_options['cover_height_grid']);?>"readonly/>
+	<? _e('<p class="margin">(Sizes are enforced to a 3:4 aspect ratio and capped at a 600px by 800px maximum and 60px by 80px minimum.)</p>', 'wprl_options' );
+}
+
 //Number of grid rows setting
 function wprl_settings_grid_rows() {
      	$wprl_options = get_option('wprl_plugin_options');
@@ -169,14 +176,6 @@ function wprl_settings_list_order (){
 	<?php } ?>
 	</select>
 <? }
-
-//Book cover size setting
-function wprl_settings_size() {
-     	$wprl_options = get_option('wprl_plugin_options');?>
-        <input type="text" id="wprl-options-grid-width" name="wprl_plugin_options[cover_width_grid]" size="4" value="<?php _e($wprl_options['cover_width_grid']);?>" onchange="numValGrid()"/>
-        <input type="text" id="wprl-options-grid-height" name="wprl_plugin_options[cover_height_grid]" size="4" value="<?php _e($wprl_options['cover_height_grid']);?>"readonly/>
-	<? _e('<p class="margin">(Sizes are enforced to a 3:4 aspect ratio and capped at a 600px by 800px maximum and 60px by 80px minimum.)</p>', 'wprl_options' );
-}
 
 //Show date setting 
 function wprl_settings_date() {
@@ -213,8 +212,7 @@ function wprl_settings_page_nums() {
 function wprl_settings_book_link() {
      	$wprl_options = get_option('wprl_plugin_options');?>
      	<input type="checkbox" id="wprl-options-book-link" name="wprl_plugin_options[show_book]"<? if($wprl_options['show_book']){_e('checked="checked"');} ?> value="show-book-link"/>
-     	<? _e('<p class="margin">Layout view only?</p>', 'wprl_options' );
-}
+<? }
 
 //Show image in list layout setting
 function wprl_settings_list_image(){
@@ -226,7 +224,7 @@ function wprl_settings_list_image(){
 function wprl_settings_post_author(){
      	$wprl_options = get_option('wprl_plugin_options');?>
      	<input type="checkbox" id="wprl-options-post-author" name="wprl_plugin_options[post_author]"<? if($wprl_options['post_author']){_e('checked="checked"');} ?> value="show-post-author"/>
-     	<? _e('<p class="margin">(If you wish to enable this, it is recommended that you also turn on the "Show Posts on Homepage" setting)</p>');
+     	<? _e('<p class="margin">(If you wish to enable this, it is recommended that you also turn on the "Display on Whole Site" setting)</p>');
 }
 
 //Delete books setting
@@ -269,8 +267,7 @@ function wprl_settings_margin_left(){
 function wprl_settings_padding(){
      	$wprl_options = get_option('wprl_plugin_options');?>
         <input type="text" id="wprl-options-padding" name="wprl_plugin_options[padding]" size="4" value="<?php _e($wprl_options['padding']);?>" onchange="paddingCheck()" />
-	<? _e('px<p class="margin">Space between cover images/list items</p>', 'wprl_options' );
-
+	<? _e('%', 'wprl_options' );
 }
 
 //validate checkboxes
@@ -360,17 +357,17 @@ function register_wprl_settings() {
 	register_setting('wprl_plugin_options', 'wprl_plugin_options', 'wprl_options_validate');
 	add_settings_section('wprl_settings_layout_options', 'Layout', '', 'wprl_options');
 	add_settings_field('wprl_settings_layouts', 'Available Layouts', 'wprl_settings_layouts', 'wprl_options', 'wprl_settings_layout_options');
-	add_settings_field('wprl_settings_size', 'Book Cover Size', 'wprl_settings_size', 'wprl_options', 'wprl_settings_layout_options');
 	add_settings_field('wprl_settings_list_order', 'Order Posts By', 'wprl_settings_list_order', 'wprl_options', 'wprl_settings_layout_options');
 	add_settings_field('wprl_settings_list_direction', 'Order Direction', 'wprl_settings_list_direction', 'wprl_options', 'wprl_settings_layout_options');
 	add_settings_field('wprl_settings_margin_left', 'Left Margin', 'wprl_settings_margin_left', 'wprl_options', 'wprl_settings_layout_options');
-	add_settings_field('wprl_settings_padding', 'Cover Image Spacing', 'wprl_settings_padding', 'wprl_options', 'wprl_settings_layout_options');
+	add_settings_field('wprl_settings_padding', 'Layout Item Spacing', 'wprl_settings_padding', 'wprl_options', 'wprl_settings_layout_options');
 	add_settings_section('wprl_settings_grid_layout', 'Grid', '', 'wprl_options');
 	add_settings_field('wprl_settings_grid_width', 'Grid Width', 'wprl_settings_grid_width', 'wprl_options', 'wprl_settings_grid_layout');
 	add_settings_field('wprl_settings_grid_height', 'Number of Grid Rows', 'wprl_settings_grid_rows', 'wprl_options', 'wprl_settings_grid_layout');
 	add_settings_section('wprl_settings_list_layout', 'List', '', 'wprl_options');
 	add_settings_field('wprl_settings_list_size', 'Number of List Items', 'wprl_settings_list_size', 'wprl_options', 'wprl_settings_list_layout');
 	add_settings_field('wprl_settings_list_image', 'Show Cover Image', 'wprl_settings_list_image', 'wprl_options', 'wprl_settings_list_layout');
+	add_settings_field('wprl_settings_size', 'Book Cover Size', 'wprl_settings_size', 'wprl_options', 'wprl_settings_list_layout');
 	add_settings_section('wprl_settings_layout_dispay', 'Display', '', 'wprl_options');
 	add_settings_field('wprl_settings_show_url', 'Show Cover Image Link', 'wprl_settings_show_url', 'wprl_options', 'wprl_settings_layout_dispay');
 	add_settings_field('wprl_settings_book_link', 'Show Link to Single Post', 'wprl_settings_book_link', 'wprl_options', 'wprl_settings_layout_dispay');	

@@ -21,7 +21,7 @@ get_header(); ?>
 						<h1 class="entry-title" id="entry-header"><?php the_title(); ?></h1>
 						<div class="entry-content">
 							<div class="entry-meta">
-								<?php edit_post_link('Edit', '<span class="edit-link metaspan">', '</span>' );
+								<?php edit_post_link('Edit', '<span class="metaspan">', '</span>' );
 									if ($wprl_options['show_author']) { ?>
 										<span id="book-author" class="metaspan">By: <?php if ($authorlist = get_the_terms($post->ID, 'book-author'))
 										foreach($authorlist as $author)
@@ -63,7 +63,7 @@ get_header(); ?>
 										_e('</a>');
 									} 
 								} ?>
-							<h3 id="single-title"><?php _e($wprl_options['title']);?></h3>
+							<h2 id="single-title"><?php _e($wprl_options['title']);?></h2>
 							<span id="the-content">
 								<?php the_content(); ?>
 							</span>
@@ -75,7 +75,7 @@ get_header(); ?>
 				<?php comments_template(); ?>
 		<?php } 
 		else{ ?>
-			<h3 class="entry-header">No Results</h3>
+			<h2 class="entry-header">No Results</h2>
 		<? } ?>
 	</div><!-- #content -->
 </div><!-- #primary -->
