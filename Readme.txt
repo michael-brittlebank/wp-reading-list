@@ -12,7 +12,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-**WP Reading List** (or, **WPRL**) is a plugin designed to help organize and display books, magazines, articles, and or anything else that you have read lately.  This plugin allows users to display what they have read, attach text like a review or notes to it, and provide a link to where visitors can find the piece.  The plugin comes bundled with three exisiting templates, complete with easily customizable CSS.
+**WP Reading List** (or, **WPRL**) is a plugin designed to help organize and display books, magazines, articles, and or anything else that you have read lately.  This plugin allows users to display what they have read, attach text like a review or notes to it, and provide a link to where visitors can find the piece.  The plugin comes bundled with three existing templates, complete with easily customizable CSS.
 
 == Installation ==
 
