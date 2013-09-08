@@ -4,7 +4,7 @@ Donate link: http://mikestumpf.com/portfolio/wordpress-reading-list-plugin/
 Tags: reading-list, works, custom-post, plugin, posts, images, links
 Requires at least: 3.0.1
 Tested up to: 3.6
-Stable tag: 1.2
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,11 @@ Yes. Think of "works" as specialized "posts" and similarly for "authors" as a di
 
 == Changelog ==
 
+= 1.3 =
+* Fixed minor bugs from 1.2
+* Improved terminology and taxonomy.  Deleted all references to "books" in favor of "works"
+* Added to Readme
+
 = 1.2 =
 * Added native update feature for future versions of the plugin
 * Added admin feature for links to author archives
@@ -87,6 +92,9 @@ Yes. Think of "works" as specialized "posts" and similarly for "authors" as a di
 * First Stable release
 
 == Upgrade Notice ==
+
+= 1.2 =
+Fixed bugs from 1.2 and improved taxonomy and terminology
 
 = 1.2 =
 Added built-in update feature for future versions of the plugin and fixed small bugs

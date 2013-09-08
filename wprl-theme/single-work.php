@@ -1,6 +1,6 @@
 <?php
 /*FILE: single-work.php
-* DESCRIPTION: The template for displaying a single book
+* DESCRIPTION: The template for displaying a single reading list item
 */
 
 $wprl_options = get_option('wprl_plugin_options');
@@ -14,7 +14,7 @@ get_header(); ?>
 				while (have_posts())
 				{ 
 					the_post(); 
-					$booklink = get_post_meta($post->ID, "wprl_link", true);  ?>
+					$worklink = get_post_meta($post->ID, "wprl_link", true);  ?>
 					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> >
 						<h1 class="entry-header" id="entry-header"><?php the_title(); ?></h1>
 						<div class="entry-content">
@@ -51,11 +51,11 @@ get_header(); ?>
 									<?php }
 									if ($wprl_options['show_page_nums'] && get_post_meta($post->ID,'wprl_pages',true))
 									{ ?>
-										<span id="book-pages" class="metaspan">Pages: <?php _e(get_post_meta($post->ID,'wprl_pages',true));?></span>
+										<span id="work-pages" class="metaspan">Pages: <?php _e(get_post_meta($post->ID,'wprl_pages',true));?></span>
 									<?php }
 									if ($wprl_options['show_post_date'])
 									{ ?>
-											<span id="book-time" class="metaspan">Posted on: <?php _e(the_date()); ?></span>
+											<span id="work-time" class="metaspan">Posted on: <?php _e(the_date()); ?></span>
 									<?php } 
 									if ($wprl_options['post_author'])
 									{ ?>
@@ -65,9 +65,9 @@ get_header(); ?>
 							</div><!-- .entry-meta -->
 							<?php if ($wprl_options['list_image']) 
 								{
-									if ($booklink && $wprl_options['show_url'])
+									if ($worklink && $wprl_options['show_url'])
 									{
-										_e('<a href="'.esc_url($booklink).'" target="_blank"/>');
+										_e('<a href="'.esc_url($worklink).'" target="_blank"/>');
 									}
 									if (has_post_thumbnail()) {
 										the_post_thumbnail(array($cover_width, $cover_height), array(
@@ -78,7 +78,7 @@ get_header(); ?>
 									else{
 										_e('<img id="post-thumbnail" src="'.esc_url($wprl_options['cover_image']).'" width="'.$cover_width.'" height="'.$cover_height.'">');
 									}
-									if ($booklink)
+									if ($worklink)
 									{
 										_e('</a>');
 									} 

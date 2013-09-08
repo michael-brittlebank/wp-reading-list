@@ -36,10 +36,10 @@ function wprl_default_options() {
           	'show_author' => true,
           	'post_author' => false,
 		'show_url' => true,
-		'show_work' => true,
+		'show_single_work' => true,
 		'list_image' => true,
 		'author_link' => true,
-		'version' => '1.2',
+		'version' => '1.3',
     	);
     	return $options;
 }
@@ -47,7 +47,7 @@ function wprl_default_options() {
 /*Initialize wprl options */
 global $wprl_options;
 $wprl_options = get_option('wprl_plugin_options');
-if (false == $wprl_options || $wprl_options['version'] != '1.2') 
+if (false == $wprl_options || $wprl_options['version'] != '1.3') 
 {
 	$wprl_options = wprl_default_options();
 }

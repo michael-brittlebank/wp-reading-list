@@ -216,7 +216,7 @@ function wprl_settings_page_nums() {
 /*Show single item link setting  */
 function wprl_settings_work_link() {
      	$wprl_options = get_option('wprl_plugin_options');?>
-     	<input type="checkbox" id="wprl-options-work-link" name="wprl_plugin_options[show_work]"<?php if($wprl_options['show_work']){_e('checked="checked"');} ?> value="show-work-link"/>
+     	<input type="checkbox" id="wprl-options-work-link" name="wprl_plugin_options[show_single_work]"<?php if($wprl_options['show_single_work']){_e('checked="checked"');} ?> value="show-work-link"/>
 <?php }
 
 /*Show image in list layout setting */
@@ -330,7 +330,7 @@ function wprl_options_validate($input) {
          	$valid_input['post_author'] = wprl_options_validate_helper('post_author', $input);
          	$valid_input['list_image'] = wprl_options_validate_helper('list_image', $input);
          	$valid_input['show_url'] = wprl_options_validate_helper('show_url', $input);
-         	$valid_input['show_work'] = wprl_options_validate_helper('show_work', $input);
+         	$valid_input['show_single_work'] = wprl_options_validate_helper('show_single_work', $input);
          	$valid_input['order'] = (array_key_exists($input['order'], $valid_order) ? $input['order'] : $valid_input['order'] );
          	$valid_input['direction'] = (array_key_exists($input['direction'], $valid_direction) ? $input['direction'] : $valid_input['direction'] );
 		$valid_input['grid_rows'] = (array_key_exists($input['grid_rows'], $valid_grid_height) ? $input['grid_rows'] : $valid_input['grid_rows'] );

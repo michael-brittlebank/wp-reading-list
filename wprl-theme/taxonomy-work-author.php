@@ -17,7 +17,7 @@ get_header(); ?>
 				<?php while (have_posts()) 
 				{
 					the_post(); 
-					$booklink = get_post_meta($post->ID, "wprl_link", true);  ?>
+					$worklink = get_post_meta($post->ID, "wprl_link", true);  ?>
 					<article id="post-<?php the_ID(); ?>" 
 					<?php post_class();
 					if ($postCount == sizeof($posts))
@@ -29,9 +29,9 @@ get_header(); ?>
 						<header class="entry-header">
 						<?php if ($wprl_options['list_image']) 
 								{
-									if ($booklink && $wprl_options['show_url'])
+									if ($worklink && $wprl_options['show_url'])
 									{
-										_e('<a href="'.esc_url($booklink).'" target="_blank"/>');
+										_e('<a href="'.esc_url($worklink).'" target="_blank"/>');
 									}
 									if (has_post_thumbnail()) {
 										the_post_thumbnail(array(200,267));
@@ -39,18 +39,18 @@ get_header(); ?>
 									else{
 										_e('<img id="post-thumbnail" src="'.esc_url($wprl_options['cover_image']).'" width="200" height="267">');
 									}
-									if ($booklink)
+									if ($worklink)
 									{
 										_e('</a>');
 									} 
 								} ?>
 							<h1 class="entry-title">
-								<?php if($wprl_options['show_book'])
+								<?php if($wprl_options['show_single_work'])
 								{ ?>
 									<a href="<?php the_permalink(); ?>" rel="bookmark">
 								<?php }
 								the_title(); 
-								if($wprl_options['show_book'])
+								if($wprl_options['show_single_work'])
 								{ ?>
 									</a>
 								<?php } ?>
@@ -65,8 +65,8 @@ get_header(); ?>
 				$postCount++;
 				} ?>
 				<nav class="navigation paging-navigation" role="navigation">
-					<h1 class="screen-reader-text">Books navigation</h1>
-					<div class="wprl-book-links nav-links">
+					<h1 class="screen-reader-text">Works navigation</h1>
+					<div class="wprl-work-links nav-links">
 						<?php posts_nav_link(); ?>			
 					</div><!-- .nav-links -->
 				</nav>

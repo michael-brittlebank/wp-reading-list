@@ -16,7 +16,7 @@ get_header(); ?>
 				while (have_posts())
 				{ 
 					the_post(); 
-					$booklink = get_post_meta($post->ID, "wprl_link", true); 
+					$worklink = get_post_meta($post->ID, "wprl_link", true); 
 					$cssstyle = 'margin: 0 '.$padding.'px 0 '.$wprl_options['css_margin_left'].'%!important;';
 					$liststyle = 'max-width:'.$cover_width.'px!important;';
 					if ($wp_query->current_post == 0 && !is_paged())
@@ -40,9 +40,9 @@ get_header(); ?>
 						<header class="entry-header" style=" <?php _e($liststyle);?>"><?php 
 							if ($wprl_options['list_image']) 
 							{
-								if ($booklink && $wprl_options['show_url'])
+								if ($worklink && $wprl_options['show_url'])
 								{
-									_e('<a href="'.esc_url($booklink).'" target="_blank"/>');
+									_e('<a href="'.esc_url($worklink).'" target="_blank"/>');
 								}
 								if (has_post_thumbnail()) {
 									the_post_thumbnail(array($cover_width , $cover_height));
@@ -50,18 +50,18 @@ get_header(); ?>
 								else{
 									_e('<img src="'.esc_url($wprl_options['cover_image']).'" width="'.$cover_width.'" height="'.$cover_height.'">');
 								}
-								if ($booklink && $wprl_options['show_url'])
+								if ($worklink && $wprl_options['show_url'])
 								{
 									_e('</a>');
 								} 
 							} ?></header>
 						<div class="entry-meta">
-							<?php if($wprl_options['show_book'])
+							<?php if($wprl_options['show_single_work'])
 							{ ?>
 								<a href="<?php _e(the_permalink());?>">
 							<?php } ?>
 							<h2 class="entry-title"><?php _e(the_title());?></h2>
-							<?php if($wprl_options['show_book'])
+							<?php if($wprl_options['show_single_work'])
 							{ ?>
 								</a>
 							<?php } ?>
@@ -102,9 +102,9 @@ get_header(); ?>
 										<?php } ?>
 									</td>
 									<td>
-										<?php if ($wprl_options['show_post_date'])
+										<?php if ($wprl_options['show_post_date'] && get_the_date())
 										{ ?>
-											<span id="book-time">Posted on: <?php _e(the_date()); ?></span>
+											<span id="work-time">Posted on: <?php _e(get_the_date(get_option('date_format'))); ?></span>
 										<?php } ?>	
 									</td>
 								</tr>
@@ -112,7 +112,7 @@ get_header(); ?>
 									<td>
 										<?php if ($wprl_options['show_page_nums'] && get_post_meta($post->ID,'wprl_pages',true))
 										{ ?>
-											<span id="book-pages">Pages: <?php _e(get_post_meta($post->ID,'wprl_pages',true));?></span>
+											<span id="work-pages">Pages: <?php _e(get_post_meta($post->ID,'wprl_pages',true));?></span>
 										<?php } ?>
 									</td>
 									<td>
@@ -127,8 +127,8 @@ get_header(); ?>
 					</article><!-- #post-<?php the_ID();?> -->
 				<?php } ?>
 				<nav class="navigation paging-navigation" role="navigation">
-					<h1 class="screen-reader-text">Books navigation</h1>
-					<div class="wprl-book-links nav-links" style="margin-left:<?php _e($wprl_options['css_margin_left'])?>%!important;">
+					<h1 class="screen-reader-text">Works navigation</h1>
+					<div class="wprl-work-links nav-links" style="margin-left:<?php _e($wprl_options['css_margin_left'])?>%!important;">
 						<?php posts_nav_link(); ?>			
 					</div><!-- .nav-links -->
 				</nav>
