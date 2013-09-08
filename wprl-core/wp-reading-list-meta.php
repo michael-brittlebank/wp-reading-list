@@ -58,11 +58,7 @@ function wprl_pages_save_meta( $post_id, $post ) {
 	{
 		return $post_id;
 	}
-	$new_link_value = ( isset( $_POST['wprl-link'] ) ?  $_POST['wprl-link']  : '' );
-	if (!strpos($new_link_value, 'http:/*'))
-	{
-		$new_link_value = 'http:/*'.$new_link_value;
-	}
+	$new_link_value = esc_url_raw( isset( $_POST['wprl-link'] ) ?  $_POST['wprl-link']  : '' );
 	$new_pages_value = (isset( $_POST['wprl-pages'] ) && is_numeric($_POST['wprl-pages']) ?  $_POST['wprl-pages']  : '');
 	$link_key = 'wprl_link';
 	$pages_key = 'wprl_pages';
