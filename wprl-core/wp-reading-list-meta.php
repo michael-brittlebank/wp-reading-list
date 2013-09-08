@@ -59,7 +59,11 @@ function wprl_pages_save_meta( $post_id, $post ) {
 		return $post_id;
 	}
 	$new_link_value = esc_url_raw( isset( $_POST['wprl-link'] ) ?  $_POST['wprl-link']  : '' );
+<<<<<<< HEAD
 	$new_pages_value = sanitize_text_field((isset( $_POST['wprl-pages'] ) ?  $_POST['wprl-pages']  : ''));
+=======
+	$new_pages_value = (isset( $_POST['wprl-pages'] ) && is_numeric($_POST['wprl-pages']) ?  $_POST['wprl-pages']  : '');
+>>>>>>> 484f1718dd7ee2d01dec8a7f43d63db147a47d0e
 	$link_key = 'wprl_link';
 	$pages_key = 'wprl_pages';
 	$link_value = get_post_meta( $post_id, $link_key, true );
