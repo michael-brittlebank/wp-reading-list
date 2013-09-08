@@ -24,7 +24,7 @@ function saveVars() {
 
 window.onload = saveVars;
 
-/*validate the book cover size */
+/*validate the work cover size */
 function numValGrid(){
 	var g=document.getElementById("wprl-options-cover-width").value;
 	if (isNaN(g) || g > 600 || g < 60)
@@ -38,7 +38,7 @@ function numValGrid(){
 	}
 }
 
-/*helper function for book cover validatation */
+/*helper function for work cover validatation */
 function numValHelper(docObj){
 	if (docObj == 1)
 	{

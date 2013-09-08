@@ -1,6 +1,6 @@
 <?php
-/*FILE: list-archive-books.php
-* DESCRIPTION: The template for displaying books using the list layout
+/*FILE: list-archive-works.php
+* DESCRIPTION: The template for displaying reading list items using the list layout
 */
 
 $wprl_options = get_option('wprl_plugin_options');
@@ -50,7 +50,7 @@ get_header(); ?>
 								else{
 									_e('<img src="'.esc_url($wprl_options['cover_image']).'" width="'.$cover_width.'" height="'.$cover_height.'">');
 								}
-								if ($booklink)
+								if ($booklink && $wprl_options['show_url'])
 								{
 									_e('</a>');
 								} 
@@ -70,7 +70,7 @@ get_header(); ?>
 									<td>
 										<?php if ($wprl_options['show_author'])
 										{ ?>
-											<span id="book-author"><?php if ($authorlist = get_the_terms($post->ID, 'book-author'))
+											<span id="work-author"><?php if ($authorlist = get_the_terms($post->ID, 'work-author'))
 											{
 												_e('By: ');
 													$j=1;
@@ -86,8 +86,16 @@ get_header(); ?>
 															elseif ($j!=1)
 															{
 																_e(', ');
-															} ?>
-															<a href="<?php _e(site_url());?>/book-author/<?php _e($name);?>"><?php _e(trim($author->name));?></a><?php 
+															}
+															if ($wprl_options['author_link'])
+															{ ?>
+																<a href="<?php _e(site_url());?>/work-author/<?php _e($name);?>">
+															<?php }
+															_e(trim($author->name));
+															if ($wprl_options['author_link'])
+															{ ?>
+																</a>
+															<?php }
 														$j++;
 														}
 											}?></span>
@@ -102,7 +110,7 @@ get_header(); ?>
 								</tr>
 								<tr>
 									<td>
-										<?php if ($wprl_options['show_page_nums'])
+										<?php if ($wprl_options['show_page_nums'] && get_post_meta($post->ID,'wprl_pages',true))
 										{ ?>
 											<span id="book-pages">Pages: <?php _e(get_post_meta($post->ID,'wprl_pages',true));?></span>
 										<?php } ?>

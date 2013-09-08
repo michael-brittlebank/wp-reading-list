@@ -9,12 +9,12 @@ function wprl_get_valid_layouts() {
 	'grid' => array(
 	'slug' => 'grid',
         'name' => 'Grid',
-        'description' => 'Display multiple books per line',
+        'description' => 'Display multiple items per line',
         ),
         'list' => array(
         'slug' => 'list',
         'name' => 'List',
-        'description' => 'Display one book per line',
+        'description' => 'Display one item per line',
         )
 	);
      return $layouts;
@@ -146,7 +146,7 @@ function wprl_settings_grid_width() {
 	<?php $i++; } ?>
 <?php }
 
-/*Book cover size setting */
+/* cover size setting */
 function wprl_settings_size() {
      	$wprl_options = get_option('wprl_plugin_options');?>
         <input type="text" id="wprl-options-cover-width" name="wprl_plugin_options[cover_width_grid]" size="4" value="<?php _e($wprl_options['cover_width_grid']);?>" onchange="numValGrid()"/>
@@ -182,17 +182,23 @@ function wprl_settings_date() {
      	<input type="checkbox" id="wprl-options-date" name="wprl_plugin_options[show_post_date]"<?php if($wprl_options['show_post_date']){_e('checked="checked"');} ?> value="show-post-date"/>
 <?php }
 
-/*Show books on homepage setting  */
+/*Show reading list items on homepage setting  */
 function wprl_settings_homepage() {
      	$wprl_options = get_option('wprl_plugin_options');?>
-     	<input type="checkbox" id="wprl-options-homepage" name="wprl_plugin_options[books_in_feed]"<?php if($wprl_options['books_in_feed']){_e('checked="checked"');} ?> value="books-in-feed"/>
+     	<input type="checkbox" id="wprl-options-homepage" name="wprl_plugin_options[works_in_feed]"<?php if($wprl_options['works_in_feed']){_e('checked="checked"');} ?> value="works-in-feed"/>
 	<?php _e('<p class="margin">Shows Reading List items on the homepage and in search results</p>', 'wprl_options' );
 }
 
-/*Show book author setting  */
+/*Show item author setting  */
 function wprl_settings_author() {
      	$wprl_options = get_option('wprl_plugin_options');?>
      	<input type="checkbox" id="wprl-options-author" name="wprl_plugin_options[show_author]"<?php if($wprl_options['show_author']){_e('checked="checked"');} ?> value="show-author"/>
+<?php }
+
+/*Show author link setting  */
+function wprl_settings_author_link() {
+     	$wprl_options = get_option('wprl_plugin_options');?>
+     	<input type="checkbox" id="wprl-options-author-link" name="wprl_plugin_options[author_link]"<?php if($wprl_options['author_link']){_e('checked="checked"');} ?> value="author-link"/>
 <?php }
 
 /*Show cover image url setting  */
@@ -207,10 +213,10 @@ function wprl_settings_page_nums() {
      	<input type="checkbox" id="wprl-options-page-nums" name="wprl_plugin_options[show_page_nums]"<?php if($wprl_options['show_page_nums']){_e('checked="checked"');} ?> value="show-page-nums"/>
 <?php }
 
-/*Show single book link setting  */
-function wprl_settings_book_link() {
+/*Show single item link setting  */
+function wprl_settings_work_link() {
      	$wprl_options = get_option('wprl_plugin_options');?>
-     	<input type="checkbox" id="wprl-options-book-link" name="wprl_plugin_options[show_book]"<?php if($wprl_options['show_book']){_e('checked="checked"');} ?> value="show-book-link"/>
+     	<input type="checkbox" id="wprl-options-work-link" name="wprl_plugin_options[show_work]"<?php if($wprl_options['show_work']){_e('checked="checked"');} ?> value="show-work-link"/>
 <?php }
 
 /*Show image in list layout setting */
@@ -226,21 +232,21 @@ function wprl_settings_post_author(){
      	<?php _e('<p class="margin">(If you wish to enable this, it is recommended that you also turn on the "Display on Whole Site" setting)</p>');
 }
 
-/*Delete books setting */
+/*Delete items setting */
 function wprl_settings_delete() {
      	$wprl_options = get_option('wprl_plugin_options');?>
         <input type="checkbox" id="wprl-options-delete" name="wprl_plugin_options[delete]" value="<?php _e($wprl_options['delete']);?>" onclick="if(this.checked){deleteConfirm()}"/>
 	<?php _e('<p class="margin">Everyone needs a fresh start sometimes.  Check if you would like to delete your Reading List items and authors. However, please realize that this is permanent; there is no way back.</p>', 'wprl_options');
 }
 
-/*Single book title */
+/*Single item title */
 function wprl_settings_single(){
      	$wprl_options = get_option('wprl_plugin_options');?>
         <input type="text" id="wprl-options-title" name="wprl_plugin_options[title]" size="30" value="<?php _e($wprl_options['title']);?>" onchange="titleCheck()" />
 	<?php _e('<p class="margin">What are you writing about? Notes, a review, fan fiction, ...?</p>', 'wprl_options');
 }
 
-/*Multiple book or layout title */
+/*Multiple item or layout title */
 function wprl_settings_multiple(){
 	$wprl_options = get_option('wprl_plugin_options');?>
         <input type="text" id="wprl-options-multiple-title" name="wprl_plugin_options[multiple_title]" size="30" value="<?php _e($wprl_options['multiple_title']);?>" onchange="layoutHeaderCheck()" />
@@ -305,7 +311,7 @@ function wprl_options_validate($input) {
      		$valid_order = wprl_get_valid_order_by();         	
 		if(isset($input['delete']))
          	{
-         		$valid_input['delete'] = delete_books();
+         		$valid_input['delete'] = delete_works();
          	}
 		else{
 			$valid_input['delete'] = false;
@@ -316,14 +322,15 @@ function wprl_options_validate($input) {
 		$valid_input['css_margin_left'] = wprl_options_validate_helper_numCheck('css_margin_left', $input, $wprl_defaults, 0, 100);
 		$valid_input['padding'] = wprl_options_validate_helper_numCheck('padding', $input, $wprl_defaults, 0, 100);
 		$valid_input['list_size'] = wprl_options_validate_helper_numCheck('list_size', $input, $wprl_defaults, 1, 50);
-		$valid_input['books_in_feed'] = wprl_options_validate_helper('books_in_feed', $input);
+		$valid_input['works_in_feed'] = wprl_options_validate_helper('works_in_feed', $input);
          	$valid_input['show_post_date'] = wprl_options_validate_helper('show_post_date', $input);
          	$valid_input['show_page_nums'] = wprl_options_validate_helper('show_page_nums', $input);
          	$valid_input['show_author'] = wprl_options_validate_helper('show_author', $input);
+			$valid_input['author_link'] = wprl_options_validate_helper('author_link', $input);
          	$valid_input['post_author'] = wprl_options_validate_helper('post_author', $input);
          	$valid_input['list_image'] = wprl_options_validate_helper('list_image', $input);
          	$valid_input['show_url'] = wprl_options_validate_helper('show_url', $input);
-         	$valid_input['show_book'] = wprl_options_validate_helper('show_book', $input);
+         	$valid_input['show_work'] = wprl_options_validate_helper('show_work', $input);
          	$valid_input['order'] = (array_key_exists($input['order'], $valid_order) ? $input['order'] : $valid_input['order'] );
          	$valid_input['direction'] = (array_key_exists($input['direction'], $valid_direction) ? $input['direction'] : $valid_input['direction'] );
 		$valid_input['grid_rows'] = (array_key_exists($input['grid_rows'], $valid_grid_height) ? $input['grid_rows'] : $valid_input['grid_rows'] );
@@ -345,7 +352,7 @@ function wprl_enqueue($hook){
 	        wp_register_style('wprl-admin-style', plugins_url('wp-reading-list/wprl-admin/wp-reading-list-admin-style.css'));  
         	wp_enqueue_style('wprl-admin-style');
         }
-        elseif (is_admin() && 'books' == get_post_type())
+        elseif (is_admin() && 'works' == get_post_type())
         {
 	        wp_register_script('wprl-core-script', plugins_url('wp-reading-list/wprl-core/wp-reading-list-core-script.js'));  
 		wp_enqueue_script('wprl-core-script');
@@ -369,11 +376,12 @@ function register_wprl_settings() {
 	add_settings_section('wprl_settings_list_layout', 'List', '', 'wprl_options');
 	add_settings_field('wprl_settings_list_size', 'Number of List Items', 'wprl_settings_list_size', 'wprl_options', 'wprl_settings_list_layout');
 	add_settings_field('wprl_settings_list_image', 'Show Cover Image', 'wprl_settings_list_image', 'wprl_options', 'wprl_settings_list_layout');
-	add_settings_field('wprl_settings_size', 'Book Cover Size', 'wprl_settings_size', 'wprl_options', 'wprl_settings_list_layout');
+	add_settings_field('wprl_settings_size', 'Cover Size', 'wprl_settings_size', 'wprl_options', 'wprl_settings_list_layout');
 	add_settings_section('wprl_settings_layout_dispay', 'Display', '', 'wprl_options');
 	add_settings_field('wprl_settings_show_url', 'Show Cover Image Link', 'wprl_settings_show_url', 'wprl_options', 'wprl_settings_layout_dispay');
-	add_settings_field('wprl_settings_book_link', 'Show Link to Single Post', 'wprl_settings_book_link', 'wprl_options', 'wprl_settings_layout_dispay');	
+	add_settings_field('wprl_settings_work_link', 'Show Link to Single Post', 'wprl_settings_work_link', 'wprl_options', 'wprl_settings_layout_dispay');	
 	add_settings_field('wprl_settings_author', 'Show Item Author/s', 'wprl_settings_author', 'wprl_options', 'wprl_settings_layout_dispay');
+	add_settings_field('wprl_settings_author_link', 'Show Author/s Link', 'wprl_settings_author_link', 'wprl_options', 'wprl_settings_layout_dispay');
 	add_settings_field('wprl_settings_post_author', 'Show Post Author', 'wprl_settings_post_author', 'wprl_options', 'wprl_settings_layout_dispay');
 	add_settings_field('wprl_settings_date', 'Show Date Published', 'wprl_settings_date', 'wprl_options', 'wprl_settings_layout_dispay');
 	add_settings_field('wprl_settings_page_nums', 'Show Page Numbers', 'wprl_settings_page_nums', 'wprl_options', 'wprl_settings_layout_dispay');
@@ -387,7 +395,7 @@ function register_wprl_settings() {
 
 /* Change description of "featured image" */
 function wprl_featured_image_html($content) {
-	if (is_admin() && 'books' == get_post_type())
+	if (is_admin() && 'works' == get_post_type())
         {
 		$content = str_replace(__('Set featured image'), __('Set cover image'), $content);
 		return $content = str_replace(__('Remove featured image'), __('Remove cover image'), $content);
@@ -401,7 +409,7 @@ function wprl_featured_image_html($content) {
 
 /* Changed name of "featured image" */
 function wprl_featured_image_mod($title) {
-	if (is_admin() && 'books' == get_post_type())
+	if (is_admin() && 'works' == get_post_type())
         {
      		return $title = str_replace('Featured Image', 'Cover Image', $title);
      	}

@@ -1,5 +1,5 @@
 <?php
-/*FILE: single-book.php
+/*FILE: single-work.php
 * DESCRIPTION: The template for displaying a single book
 */
 
@@ -20,7 +20,7 @@ get_header(); ?>
 						<div class="entry-content">
 							<div class="entry-meta">
 									<?php if ($wprl_options['show_author']) { ?>
-										<span id="book-author" class="metaspan">By: <?php if ($authorlist = get_the_terms($post->ID, 'book-author')){
+										<span id="work-author" class="metaspan">By: <?php if ($authorlist = get_the_terms($post->ID, 'work-author')){
 													$j=1;
 													$k=0;
 													$numItems = count($authorlist);
@@ -34,14 +34,22 @@ get_header(); ?>
 															elseif ($j!=1)
 															{
 																_e(', ');
-															} ?>
-															<a href="<?php _e(site_url());?>/book-author/<?php _e($name);?>"><?php _e(trim($author->name));?></a><?php 
-														$j++;
+															}
+															if ($wprl_options['author_link'])
+															{ ?>
+																<a href="<?php _e(site_url());?>/work-author/<?php _e($name);?>">
+															<?php }
+															_e(trim($author->name));
+															if ($wprl_options['author_link'])
+															{ ?>
+																</a>
+															<?php }
+															$j++;
 														}
 													} ?>
 										</span>
 									<?php }
-									if ($wprl_options['show_page_nums'])
+									if ($wprl_options['show_page_nums'] && get_post_meta($post->ID,'wprl_pages',true))
 									{ ?>
 										<span id="book-pages" class="metaspan">Pages: <?php _e(get_post_meta($post->ID,'wprl_pages',true));?></span>
 									<?php }

@@ -1,6 +1,6 @@
 <?php
 /*FILE: wp-reading-list-meta.php
- * DESCRIPTION: Custom plugin meta boxes for posts/'books'
+ * DESCRIPTION: Custom plugin meta boxes for posts/'works'
  */
 
 /* Set up meta box functions */
@@ -13,14 +13,14 @@ function wprl_post_meta_boxes_setup() {
 	add_action( 'save_post', 'wprl_pages_save_meta', 10, 2 );
 }
 
-/* Custom meta boxes for post/'book' admin screen.  */
+/* Custom meta boxes for post/'work' admin screen.  */
 function wprl_add_post_meta_boxes() {
 
 	add_meta_box(
 		'wprl-link', /* Unique ID */
-		esc_html__( 'Book URL', 'wp-readinglist' ), /* Title */
+		esc_html__( 'work URL', 'wp-readinglist' ), /* Title */
 		'wprl_pages_meta_link',	 /* Callback function */
-		'books', /* Add metabox to our custom post type */
+		'works', /* Add metabox to our custom post type */
 		'side',	 /* Context */
 		'default' /* Priority */
 	);
@@ -28,7 +28,7 @@ function wprl_add_post_meta_boxes() {
 		'wprl-pages', /* Unique ID */
 		esc_html__( 'Number of Pages', 'wp-readinglist' ), /* Title */
 		'wprl_pages_meta_pages',	 /* Callback function */
-		'books', /* Add metabox to our custom post type */
+		'works', /* Add metabox to our custom post type */
 		'side',	 /* Context */
 		'default' /* Priority */
 	);
@@ -37,7 +37,7 @@ function wprl_add_post_meta_boxes() {
 /* Display link meta box */
 function wprl_pages_meta_link( $object, $box ) { ?>
 	<?php wp_nonce_field( basename( __FILE__ ), 'wprl_pages_nonce' ); ?>
-	<p class="wprl-link-p-admin"><label for="wprl-link"><?php _e( "Add a link to the book", 'wp-readinglist' ); ?></label></p>
+	<p class="wprl-link-p-admin"><label for="wprl-link"><?php _e( "Add a link to the work", 'wp-readinglist' ); ?></label></p>
 	<p><input class="wprl-link-input" type="text" name="wprl-link" id="wprl-link-admin" value="<?php echo esc_attr(get_post_meta( $object->ID, 'wprl_link', true)); ?>" size="30" /></p>
 <?php }
 
@@ -58,12 +58,8 @@ function wprl_pages_save_meta( $post_id, $post ) {
 	{
 		return $post_id;
 	}
-	$new_link_value = ( isset( $_POST['wprl-link'] ) ?  $_POST['wprl-link']  : '' );
-	if (!strpos($new_link_value, 'http:/*'))
-	{
-		$new_link_value = 'http:/*'.$new_link_value;
-	}
-	$new_pages_value = (isset( $_POST['wprl-pages'] ) && is_numeric($_POST['wprl-pages']) ?  $_POST['wprl-pages']  : '');
+	$new_link_value = esc_url_raw( isset( $_POST['wprl-link'] ) ?  $_POST['wprl-link']  : '' );
+	$new_pages_value = sanitize_text_field((isset( $_POST['wprl-pages'] ) ?  $_POST['wprl-pages']  : ''));
 	$link_key = 'wprl_link';
 	$pages_key = 'wprl_pages';
 	$link_value = get_post_meta( $post_id, $link_key, true );

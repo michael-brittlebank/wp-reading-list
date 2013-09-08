@@ -11,7 +11,7 @@
 /* HTML5 display-role reset for older browsers */
 #content article, #content header {display: block!important;}
 /*End reset*/
-#content .entry-meta {display:inline-block!important;width: auto!important;vertical-align:text-bottom!important;margin-bottom:20px!important;}
+#content .entry-meta {display:inline-block!important;width: auto!important;vertical-align:text-bottom!important;margin:0 0 20px 10px!important;}
 #content .entry-meta p {margin-bottom:0!important;}
 #content article {word-wrap:break-word;}
 #content .wp-post-image {max-width:none!important;}

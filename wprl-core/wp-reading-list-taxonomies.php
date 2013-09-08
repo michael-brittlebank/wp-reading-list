@@ -1,6 +1,6 @@
 <?php
 /*FILE: wp-reading-list-taxonomies.php
- * DESCRIPTION: Create a custom taxonomy for 'authors' and a custom post type for 'books'
+ * DESCRIPTION: Create a custom taxonomy for 'authors' and a custom post type for 'works'
  */
  
 /* Create custom taxonomy for authors */
@@ -19,36 +19,36 @@ function wprl_custom_tax() {
 		'menu_name' => __('Authors', 'wp-readinglist'),
 	); 	
 		
-	register_taxonomy('book-author', array( 'books'), array(
+	register_taxonomy('work-author', array( 'works'), array(
 		'hierarchical' => false,
 		'labels' => $labels,
 		'show_ui' => true,
 		'show_admin_column' => true,
 		'query_var' => true,
-		'rewrite' => array('slug' => 'book-author'),
+		'rewrite' => array('slug' => 'work-author'),
 	));
 }
 
-/* Load the custom meta boxes for 'books' */
+/* Load the custom meta boxes for 'works' */
 require 'wp-reading-list-meta.php';
 add_action('load-post.php', 'wprl_post_meta_boxes_setup');
 add_action('load-post-new.php', 'wprl_post_meta_boxes_setup');
 
-/* Create custom post type for 'books' */
+/* Create custom post type for reading list 'items' */
 function wprl_custom_post() {
 	$labels = array(
-		'name' => __('Books', 'wp-readinglist'),
-		'singular_name' => __('Book', 'wp-readinglist'),
-		'menu_name' => __('Books', 'wp-readinglist'),
-		'all_items' => __('All Books', 'wp-readinglist'),
-		'add_new_item' => __('Add New Book', 'wp-readinglist'),
-		'edit_item' => __('Edit Book', 'wp-readinglist'),
-		'new_item' => __('New Book', 'wp-readinglist'),
-		'view_item' => __('View Book', 'wp-readinglist'),
-		'search_items' => __('Search Books', 'wp-readinglist'),
-		'not_found' => __('No Books Found', 'wp-readinglist'),
-		'not_found_in_trash' => __('No Books in Trash', 'wp-readinglist'),
-		'update_item' => __('Update Book', 'wp-readinglist')
+		'name' => __('Works', 'wp-readinglist'),
+		'singular_name' => __('Work', 'wp-readinglist'),
+		'menu_name' => __('Works', 'wp-readinglist'),
+		'all_items' => __('All Works', 'wp-readinglist'),
+		'add_new_item' => __('Add New Work', 'wp-readinglist'),
+		'edit_item' => __('Edit Work', 'wp-readinglist'),
+		'new_item' => __('New Work', 'wp-readinglist'),
+		'view_item' => __('View Work', 'wp-readinglist'),
+		'search_items' => __('Search Works', 'wp-readinglist'),
+		'not_found' => __('No Works Found', 'wp-readinglist'),
+		'not_found_in_trash' => __('No Works in Trash', 'wp-readinglist'),
+		'update_item' => __('Update Work', 'wp-readinglist')
 	);
 	
 	$args = array (
@@ -59,9 +59,9 @@ function wprl_custom_post() {
 		'menu_position' => 20,
 		'supports' => array('title', 'thumbnail', 'editor' , 'revisions'),
 		'has_archive' => true,
-		'rewrite' => array('slug' => 'books')
+		'rewrite' => array('slug' => 'reading-list')
 	);
-	register_post_type('books', $args);
+	register_post_type('works', $args);
 }
 add_action('init', 'wprl_custom_post');
 
@@ -69,19 +69,19 @@ add_action('init', 'wprl_custom_post');
 function wprl_custom_messages( $messages ) {
 	 global $post, $post_ID;
 
-	 $messages['books'] = array(
+	 $messages['works'] = array(
 			0 => '', /* Unused. Messages start at index 1. */
-			1 => sprintf( __('Book updated. <a href="%s">View book</a>', 'wp-readinglist'), esc_url( get_permalink($post_ID) ) ),
+			1 => sprintf( __('Work updated. <a href="%s">View Work</a>', 'wp-readinglist'), esc_url( get_permalink($post_ID) ) ),
 			2 => __('Custom field updated.', 'wp-readinglist'),
 			3 => __('Custom field deleted.', 'wp-readinglist'),
-			4 => __('Book updated.', 'wp-readinglist'),
-			5 => isset($_GET['revision']) ? sprintf( __('Book restored to revision from %s', 'wp-readinglist'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-			6 => sprintf( __('Book published. <a href="%s">View book</a>', 'wp-readinglist'), esc_url( get_permalink($post_ID) ) ),
-			7 => __('Book saved.', 'wp-readinglist'),
-			8 => sprintf( __('Book submitted. <a target="_blank" href="%s">Preview book</a>', 'wp-readinglist'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
-			9 => sprintf( __('Scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview book</a>', 'wp-readinglist'),
+			4 => __('Work updated.', 'wp-readinglist'),
+			5 => isset($_GET['revision']) ? sprintf( __('Work restored to revision from %s', 'wp-readinglist'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			6 => sprintf( __('Work published. <a href="%s">View Work</a>', 'wp-readinglist'), esc_url( get_permalink($post_ID) ) ),
+			7 => __('Work saved.', 'wp-readinglist'),
+			8 => sprintf( __('Work submitted. <a target="_blank" href="%s">Preview Work</a>', 'wp-readinglist'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+			9 => sprintf( __('Scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview Work</a>', 'wp-readinglist'),
 			date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink($post_ID) ) ),
-			10 => sprintf( __('Draft updated. <a target="_blank" href="%s">Preview book</a>', 'wp-readinglist'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+			10 => sprintf( __('Draft updated. <a target="_blank" href="%s">Preview Work</a>', 'wp-readinglist'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
 	  );
 	return $messages;
 }
@@ -95,7 +95,7 @@ function codex_custom_help_tab() {
 	if( isset($_GET['post_type']) ) $post_type = $_GET['post_type'];
 	else $post_type = get_post_type( $post_ID );
 
-	if( $post_type == 'books' ){
+	if( $post_type == 'works' ){
 		$screen->add_help_tab( array(
 	        'id'	=> 'wprl_help_overview',
 	        'title'	=> __('WPRL Overview'),
@@ -105,27 +105,27 @@ function codex_custom_help_tab() {
 	        'id'	=> 'wprl_help_author',
 	        'title'	=> __('Author/s'),
 	        'content'	=> '<p>' . __('
-This metabox allows you to add "authors" to your Reading List items.  You can add any number of authors, just like regular post tags; just separate them with commas.  These authors can then be shown in your layout and managed from the "Authors" tab under the "Books" tab in the admin menu.
+This metabox allows you to add "authors" to your Reading List items.  You can add any number of authors, just like regular post tags; just separate them with commas.  These authors can then be shown in your layout and managed from the "Authors" tab under the "Works" tab in the admin menu.
 <br/>
 Examples: "William Shakespeare", "John" "Kate" "Will", "J. K. Rowling"
 ') . '</p>',
 	    ) );
 	    	$screen->add_help_tab(array(
 	        'id'	=> 'wprl_help_url',
-	        'title'	=> __('Book URL'),
+	        'title'	=> __('Work URL'),
 	        'content'	=> '<p>' . __('
-This metabox allows you to add custom urls to link to external sources by wrapping the link around the posts&apos;s cover image.  Use this box to direct users to where the original Reading List item can be found or use it as a link for affiliate programs like <a href="https:/*affiliate-program.amazon.com/" target="_blank">Amazon Associates</a>.  Be sure to verify the link is correct and make sure you have the "Show Cover Image Links" setting turned on in the general "WP Reading List Settings" page.  Also, make sure you have a cover image to link from!
+This metabox allows you to add custom urls to link to external sources by wrapping the link around the posts&apos;s cover image.  Use this box to direct users to where the original Reading List item can be found or use it as a link for affiliate programs like <a href="https://affiliate-program.amazon.com/" target="_blank">Amazon Associates</a>.  Be sure to verify the link is correct and make sure you have the "Show Cover Image Links" setting turned on in the general "WP Reading List Settings" page.  Also, make sure you have a cover image to link from!
 </br>
-Example: "http:/*www.amazon.com/The-Riverside-Shakespeare-2nd-Edition/dp/0395754909/ref=sr_1_1?ie=UTF8&qid=1377294257&sr=8-1&keywords=shakespeare+riverside"
+Example: "http://www.amazon.com/The-Riverside-Shakespeare-2nd-Edition/dp/0395754909/ref=sr_1_1?ie=UTF8&qid=1377294257&sr=8-1&keywords=shakespeare+riverside"
 ') . '</p>',
 	    ) );
 	    	$screen->add_help_tab(array(
 	        'id'	=> 'wprl_help_pages',
 	        'title'	=> __('Number of Pages'),
 	        'content'	=> '<p>' . __('
-This metabox allows you to specify how many pages are in the Reading List item.  Unfortunately at this time we cannot support page ranges, i.e. "210-450".  Make sure you do not spell out the page number.
+This metabox allows you to specify how many pages are in the Reading List item.  This plugin supports either individual numbers or page ranges, i.e. "210-450".  Make sure you do not spell out the page number.
 <br/>Examples: "1", "999"
-<br/>Range: 1-10000.
+<br/>Range: "1-10000".
 ') . '</p>',
 	    ) );
 	    	$screen->add_help_tab(array(

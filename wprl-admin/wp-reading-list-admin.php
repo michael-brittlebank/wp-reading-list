@@ -61,7 +61,7 @@ function wprl_add_help_tab() {
 <br/><br/>
 <b>Show Cover Image</b>: Check this option if you want to show cover images in the list layout.  This is not necessary for the list layout.
 <br/><br/>
-<b>Book Cover Size</b>: Use this option to change the size of the cover image shown in the list layout.  You can only set the width; the height will automatically be adjusted to what you input since it is enforced at a 4:3 ratio.  If a cover image is smaller than the dimensions you specified or is not originally in a 4:3 ratio, the original size will be shown up to whatever dimension limit it hits first.  Images will not be inflated or warped to fit this setting, it is more like setting a maximum size.
+<b>Cover Size</b>: Use this option to change the size of the cover image shown in the list layout.  You can only set the width; the height will automatically be adjusted to what you input since it is enforced at a 4:3 ratio.  If a cover image is smaller than the dimensions you specified or is not originally in a 4:3 ratio, the original size will be shown up to whatever dimension limit it hits first.  Images will not be inflated or warped to fit this setting, it is more like setting a maximum size.
 <br/>Range: 60-600.
 	        ') . '</p>',
 	    ) );
@@ -73,9 +73,11 @@ function wprl_add_help_tab() {
 <br/><br/>
 <b>Show Cover Image Link</b>: Check this option if you do not want any of your cover images to display the link you set in the Reading List item, i.e. post, editor.
 <br/><br/>
-<b>Show Link to Single Post</b>: Check this option if you want to show a link to the single post view.  If you only wish to show the list of books you read, like if you choose not to write anything in the post&apos;s content, this is a good option as it will only show the grid or list layout.
+<b>Show Link to Single Post</b>: Check this option if you want to show a link to the single post view.  If you only wish to show the list of works you read, like if you choose not to write anything in the post&apos;s content, this is a good option as it will only show the grid or list layout.
 <br/><br/>
 <b>Show Item Author/s</b>: Check this option if you want to show the author/s that you listed in the Reading List item&apos;s metabox labeled "Author/s". 
+<br/><br/>
+<b>Show Author/s Link</b>: Check this option if you want to show a link on the reading list item author/s&apos; name.  This is essentially an "archive" view for all reading list items that were written by the author selected.
 <br/><br/>
 <b>Show Post Author</b>: Check this option if you wish to show which user on the site wrote/published the Reading List item.
 <br/>*If you enable this, it is recommended that you also turn on the "Display on Whole Site" setting, otherwise a user&apos;s Reading List items will not show up in searches with regular posts by the same user.
@@ -96,7 +98,7 @@ function wprl_add_help_tab() {
 	        'id'	=> 'wprl_help_admin',
 	        'title'	=> __('Admin'),
 	        'content'	=> '<p>' . __('
-	        <b>Delete All</b>: If you would like to delete all of your Reading List items, select this option.  This deletes all books and authors but does not delete the feature images in the media library. <br/>*IMPORTANT! This is permanant and there is no way to recover the data once this option is checked and the "Save Settings" button is pressed.
+	        <b>Delete All</b>: If you would like to delete all of your Reading List items, select this option.  This deletes all works and authors but does not delete the feature images in the media library. <br/>*IMPORTANT! This is permanant and there is no way to recover the data once this option is checked and the "Save Settings" button is pressed.
 			<br/><br/>
 			This is the only way to delete all traces of this plugin from your database.  Deactivating and/or deleting the plugin only removes the plugin settings and does not delete your content.'). '</p>',
 	    ) );

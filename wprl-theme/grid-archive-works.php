@@ -1,6 +1,6 @@
 <?php
-/*FILE: grid-archive-books.php
-* DESCRIPTION: The template for displaying a list of books using the grid layout
+/*FILE: grid-archive-works.php
+* DESCRIPTION: The template for displaying reading list items using the grid layout
 */
 
 $wprl_options = get_option('wprl_plugin_options');
@@ -96,15 +96,15 @@ get_header(); ?>
 										<?php }
 										if ($wprl_options['show_author'])
 										{ ?>
-											<p id="book-author"><?php if ($authorlist = get_the_terms($metapost->ID, 'book-author'))
+											<p id="work-author"><?php if ($authorlist = get_the_terms($metapost->ID, 'work-author'))
 												{
 													_e('By: ');
 													$j=1;
 													$k=0;
 													$numItems = count($authorlist);
 													foreach($authorlist as $author)
-														$name = str_replace(' ', '-', trim($author->name)) .'/';
-														{	
+													{	
+															$name = str_replace(' ', '-', trim($author->name)) .'/';
 															if (++$k === $numItems && $numItems != 1)
 															{
 																_e(' & ');
@@ -112,13 +112,21 @@ get_header(); ?>
 															elseif ($j!=1)
 															{
 																_e(', ');
-															} ?>
-															<a href="<?php _e(site_url());?>/book-author/<?php _e($name);?>"><?php _e(trim($author->name));?></a><?php 
-														$j++;
+															}
+															if ($wprl_options['author_link']) 
+															{ ?>
+																<a href="<?php _e(site_url());?>/work-author/<?php _e($name);?>">
+															<?php }
+															_e(trim($author->name));
+															if ($wprl_options['author_link'])
+															{ ?>
+																</a>
+															<?php }														
+															$j++;
 														}
 												}?></p>
 										<?php } ?>
-										<?php if ($wprl_options['show_page_nums'])
+										<?php if ($wprl_options['show_page_nums'] && get_post_meta($post->ID,'wprl_pages',true))
 										{ ?>
 											<p id="book-pages">Pages: <?php _e(get_post_meta($metapost->ID,'wprl_pages',true));?></p>
 										<?php } ?>

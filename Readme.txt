@@ -1,14 +1,14 @@
 === Plugin Name ===
 Contributors: mstumpf
 Donate link: http://mikestumpf.com/portfolio/wordpress-reading-list-plugin/
-Tags: reading-list, books, custom-post, plugin, posts, images, links
+Tags: reading-list, works, custom-post, plugin, posts, images, links
 Requires at least: 3.0.1
 Tested up to: 3.6
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-**WP Reading List** is a plugin designed to help organize and display books, magazines, articles, and anything else that you have read lately. 
+WP Reading List is a plugin designed to help organize and display books, magazines, articles, and anything else that you have read lately. 
 
 == Description ==
 
@@ -19,14 +19,14 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 1. Upload `wp-reading-list.php` to the `/wp-content/plugins/` directory **or** Install the plugin by searching for "WP Reading List" in the WordPress.org plugin directory 
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Set the plugin settings via the submenu "WP Reading List" under "Settings" in the WordPress admin menu
-4. Add Reading List items in the "Book" tab
-5. View your Reading List items at "yourdomain.com/books"
+4. Add Reading List items in the "Works" tab
+5. View your Reading List items at "yourdomain.com/works"
 
 == Frequently Asked Questions ==
 
 = How do I see my WP Reading List items? =
 
-After activating the plugin, publish a reading list item or two under the "Books" tab in the WordPress admin menu and then navigate to "yourdomain.com/books/".  Adding the "/books/" to your site's base url directs users to your reading list items.  You can then add this url to your custom menu to make it easier for users to get to.
+After activating the plugin, publish a reading list item or two under the "Works" tab in the WordPress admin menu and then navigate to "yourdomain.com/works/".  Adding the "/works/" to your site's base url directs users to your reading list items.  You can then add this url to your custom menu to make it easier for users to get to.
 
 = If I deactivate/delete the WP Reading List plugin will I lose all the reading list items and authors I have already created? =
 
@@ -42,11 +42,11 @@ There are several options available in the WP Reading List admin settings to hel
 
 = How can I change the default WP Reading List image I see when I do not upload a "Cover Image"? =
 
-This will hopefully be implemented as an admin option for the plugin in the future.  For now, you will have to go to your website's file manager and go to "wp-content/plugins/wp-reading-list/wprl-theme/" and replace the "sample.png" image with your image of the same name.  It is recommended that you choose a default image with a 3:4 aspect ratio (width:height) to match the other cover images.
+This will hopefully be implemented as an admin option for the plugin in the future.  For now, you will have to go to your website's file manager and go to "wp-content/plugins/wp-reading-list/wprl-theme/" and replace the "default.png" image with your image of the same name.  It is recommended that you choose a default image with a 3:4 aspect ratio (width:height) to match the other cover images.
 
-= The "Books", "Authors" and "Reading List" terminology is confusing.  Is there a easier way to think of these things? =
+= The "Works", "Authors" and "Reading List" terminology is confusing.  Is there a easier way to think of these things? =
 
-Yes. Think of "books" as specialized "posts" and similarly for "authors" as a different kind of "tags".  The "Reading List" and "Reading List Items" is trying to be include reading materials other than books such as magazines, articles, etc.  
+Yes. Think of "works" as specialized "posts" and similarly for "authors" as a different kind of "tags".  The "Reading List" and "Reading List Items" is trying to be include reading materials other than books such as magazines, articles, etc.  
 
 
 == Screenshots ==
@@ -60,6 +60,14 @@ Yes. Think of "books" as specialized "posts" and similarly for "authors" as a di
 4. Author View
 
 == Changelog ==
+
+= 1.2 =
+* Added native update feature for future versions of the plugin
+* Added admin feature for links to author archives
+* Fixed small bugs since 1.1
+* Sharpened default image and screenshots
+* Added support for page ranges
+* Improved user input sanitation and validation
 
 = 1.1 =
 * Added code documentation and improved the WordPress Readme file
@@ -75,6 +83,9 @@ Yes. Think of "books" as specialized "posts" and similarly for "authors" as a di
 * First Stable release
 
 == Upgrade Notice ==
+
+= 1.2 =
+Added built-in update feature for future versions of the plugin and fixed small bugs
 
 = 1.1 =
 Fixed activation problem and fine-tuned plugin code from version 1.0
