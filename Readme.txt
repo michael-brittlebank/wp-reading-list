@@ -20,19 +20,23 @@ WP Reading List is a plugin designed to help organize and display books, magazin
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Set the plugin settings via the submenu "WP Reading List" under "Settings" in the WordPress admin menu
 4. Add Reading List items in the "Works" tab
-5. View your Reading List items at "yourdomain.com/works"
+5. View your Reading List items at "yourdomain.com/reading-list/"
 
 == Frequently Asked Questions ==
 
 = How do I see my WP Reading List items? =
 
-After activating the plugin, publish a reading list item or two under the "Works" tab in the WordPress admin menu and then navigate to "yourdomain.com/works/".  Adding the "/works/" to your site's base url directs users to your reading list items.  You can then add this url to your custom menu to make it easier for users to get to.
+After activating the plugin, publish a reading list item or two under the "Works" tab in the WordPress admin menu and then navigate to "yourdomain.com/reading-list/".  Adding the "/reading-list/" to your site's base url directs users to your reading list items.  You can then add this url to your custom menu to make it easier for users to get to.
+
+= Why doesn't "yourdomain.com/reading-list/" work? **or** Why is my website returning a 404 "Not Found" error when I try to view my reading list? =
+
+If this is the case, simply go to "Settings" and then "Permalinks" and hit save (you do not have to change any settings).  This refreshes your website's rewrite rules and now "yourdomain.com/reading-list/" should work.
 
 = If I deactivate/delete the WP Reading List plugin will I lose all the reading list items and authors I have already created? =
 
 If you deactivate or delete the plugin, you will not lose the content you have created but you will lose your plugin settings.
 
-= Why aren't my widgets displaying on the WP Reading List layout or single item view? =
+= Why aren't my widgets displaying on the WP Reading List layout view? =
 
 At this point, the plugin does not support widgets in its templates due to difficulty organizing the lists due to the unpredictability of widget sizes.  
 
