@@ -8,7 +8,7 @@ Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-**WP Reading List** is a plugin designed to help organize and display books, magazines, articles, and anything else that you have read lately. 
+WP Reading List is a plugin designed to help organize and display books, magazines, articles, and anything else that you have read lately. 
 
 == Description ==
 
