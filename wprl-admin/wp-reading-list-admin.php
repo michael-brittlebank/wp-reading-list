@@ -1,20 +1,19 @@
-<?
+<?php
 /*FILE: wp-reading-list-admin.php
 *DESCRIPTION: Plugin admin setup
 */
-//contextual help
 
-require 'wp-reading-list-admin-page.php';//the menu page
+require 'wp-reading-list-admin-page.php';/*the menu page */
 require 'wp-reading-list-admin-functions.php';
 
-//Set up the admin page
+/*Set up the admin page */
 function wprl_admin_menu(){
 	global $wprl_admin_page;
 	$wprl_admin_page = add_options_page('WP Reading List','WP Reading List','activate_plugins','wprl-options','wprl_admin_page');
 	add_action('load-'.$wprl_admin_page , 'wprl_add_help_tab');
 }
 
-//Add contextual help to the plugin admin page
+/*Add contextual help to the plugin admin page */
 function wprl_add_help_tab() {
 	global $wprl_admin_page;
 	$screen = get_current_screen();
@@ -97,7 +96,9 @@ function wprl_add_help_tab() {
 	        'id'	=> 'wprl_help_admin',
 	        'title'	=> __('Admin'),
 	        'content'	=> '<p>' . __('
-	        <b>Delete All</b>: If you would like to delete all of your Reading List items, select this option.  This deletes all books and authors but does not delete the feature images in the media library. <br/>*IMPORTANT! This is permanant and there is no way to recover the data once this option is checked and the "Save Settings" button is pressed.') . '</p>',
+	        <b>Delete All</b>: If you would like to delete all of your Reading List items, select this option.  This deletes all books and authors but does not delete the feature images in the media library. <br/>*IMPORTANT! This is permanant and there is no way to recover the data once this option is checked and the "Save Settings" button is pressed.
+			<br/><br/>
+			This is the only way to delete all traces of this plugin from your database.  Deactivating and/or deleting the plugin only removes the plugin settings and does not delete your content.'). '</p>',
 	    ) );
 }
 

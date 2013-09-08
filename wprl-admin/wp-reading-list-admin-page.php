@@ -1,4 +1,4 @@
-<?
+<?php
 /*FILE: wp-reading-list-admin-page.php
  *DESCRIPTION: Admin panel page
  */
@@ -20,8 +20,7 @@ if (!current_user_can('activate_plugins'))  {
 			<input name="wprl_plugin_options[reset]" type="submit" class="button-secondary" value="<?php esc_attr_e('Reset Defaults', 'wprl_options'); ?>" />
 		</form>
 	</div>
-<? }
+<?php }
 /*
 *End of File
 */
-?>

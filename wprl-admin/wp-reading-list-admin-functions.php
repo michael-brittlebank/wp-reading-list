@@ -1,12 +1,9 @@
-<?
+<?php
 /*FILE: wp-reading-list-admin-functions.php
 *DESCRIPTION: Plugin admin functions
 */
-//default cover image picker
-//change name of taxonomy
-//page ranges support
 
-//Valid layout choices
+/*Valid layout choices */
 function wprl_get_valid_layouts() {
      $layouts = array(
 	'grid' => array(
@@ -23,7 +20,7 @@ function wprl_get_valid_layouts() {
      return $layouts;
 }
 
-//Valid order directions
+/*Valid order directions */
 function wprl_get_valid_directions() {
      $layouts = array(
 	'ASC' => array(
@@ -38,7 +35,7 @@ function wprl_get_valid_directions() {
      return $layouts;
 }
 
-//Valid grid width choices
+/*Valid grid width choices */
 function wprl_get_valid_grid_num() {
      $width = array(
      	'1' => array(
@@ -85,7 +82,7 @@ function wprl_get_valid_grid_num() {
      return $width ;
 }
 
-//Valid order by choices
+/*Valid order by choices */
 function wprl_get_valid_order_by() {
      $width = array(
      	'date' => array(
@@ -108,169 +105,171 @@ function wprl_get_valid_order_by() {
      return $width ;
 }
 
-//Layout setting selector
+/*Layout setting selector */
 function wprl_settings_layouts() {
 	$wprl_options = get_option('wprl_plugin_options');
 	$wprl_layouts = wprl_get_valid_layouts();
 	$i = 0;
-     	foreach ($wprl_layouts as $layout) {
+     	foreach ($wprl_layouts as $layout) 
+		{
           	$currentlayout = ($layout ['slug'] == $wprl_options ['layout'] ? true : false); ?>
                 <input type="radio" id="<?php _e($layout['slug']); ?>" name="wprl_plugin_options[layout]" <?php checked($currentlayout)?> value="<?php _e($layout['slug']);?>"/>
 		<label for="<?php _e($layout['slug']); ?>"><?php _e($layout['name']);?>: </label>
 		<?php _e($layout['description']);?><br/>     
-	<?}
+	<?php }
 }
 
-//Order direction setting 
+/*Order direction setting  */
 function wprl_settings_list_direction() {
 	$wprl_options = get_option('wprl_plugin_options');
 	$wprl_directions = wprl_get_valid_directions();
-     	foreach ($wprl_directions as $direction) {
+     	foreach ($wprl_directions as $direction)
+		{
           	$currentdirection = ($direction['slug'] == $wprl_options['direction'] ? true : false); ?>
                 <input type="radio" id="<?php _e($direction['slug']); ?>" name="wprl_plugin_options[direction]" <?php checked($currentdirection)?> value="<?php _e($direction['slug']);?>"/>
 		<label for="<?php _e($direction['slug']); ?>"><?php _e($direction['name']);?></label><br/>
-	<?}
+	<?php }
 }
 
-//Grid width setting 
+/*Grid width setting  */
 function wprl_settings_grid_width() {
      	$wprl_options = get_option('wprl_plugin_options');
      	$wprl_nums = wprl_get_valid_grid_num();
      	$i = 0; ?>
      	<select id="wprl-options-grid-width" name="wprl_plugin_options[grid_width]" value="<?php _e($wprl_options['grid_width']);?>">
-     	<? foreach ($wprl_nums as $width) {
+     	<?php foreach ($wprl_nums as $width) {
      	     	if ($i > 3)
                 {
                       	break;
                 } ?>
                 <option <?php selected($width['value'], $wprl_options ['grid_width'])?> value="<?php _e($width['value']);?>"><?php _e($width['slug']);?></option>
 	<?php $i++; } ?>
-<?}
+<?php }
 
-//Book cover size setting
+/*Book cover size setting */
 function wprl_settings_size() {
      	$wprl_options = get_option('wprl_plugin_options');?>
         <input type="text" id="wprl-options-cover-width" name="wprl_plugin_options[cover_width_grid]" size="4" value="<?php _e($wprl_options['cover_width_grid']);?>" onchange="numValGrid()"/>
         <input type="text" id="wprl-options-cover-height" name="wprl_plugin_options[cover_height_grid]" size="4" value="<?php _e($wprl_options['cover_height_grid']);?>"readonly/>
-	<? _e('<p class="margin">(Sizes are enforced to a 3:4 aspect ratio and capped at a 600px by 800px maximum and 60px by 80px minimum.)</p>', 'wprl_options' );
+	<?php _e('<p class="margin">(Sizes are enforced to a 3:4 aspect ratio and capped at a 600px by 800px maximum and 60px by 80px minimum.)</p>', 'wprl_options' );
 }
 
-//Number of grid rows setting
+/*Number of grid rows setting */
 function wprl_settings_grid_rows() {
      	$wprl_options = get_option('wprl_plugin_options');
      	$wprl_nums = wprl_get_valid_grid_num(); ?>
      	<select id="wprl-options-grid-tall" name="wprl_plugin_options[grid_rows]" value="<?php _e($wprl_options['grid_rows']);?>">
-	<? foreach ($wprl_nums as $rows) { ?>
+	<?php foreach ($wprl_nums as $rows) { ?>
                 <option <?php selected($rows['value'],  $wprl_options ['grid_rows'])?> value="<?php _e($rows['value']);?>"><?php _e($rows['slug']);?></option>
 	<?php } ?>
 	</select>
-<? }
+<?php }
 
-//Order by setting
+/*Order by setting */
 function wprl_settings_list_order (){
      	$wprl_options = get_option('wprl_plugin_options');
      	$wprl_orders = wprl_get_valid_order_by(); ?>
      	<select id="wprl-options-list-order" name="wprl_plugin_options[order]" value="<?php _e($wprl_options['order']);?>">
-	<? foreach ($wprl_orders as $orders) { ?>
+	<?php foreach ($wprl_orders as $orders) { ?>
                 <option <?php selected($orders['value'],  $wprl_options ['order'])?> value="<?php _e($orders['value']);?>"><?php _e($orders['slug']);?></option>
 	<?php } ?>
 	</select>
-<? }
+<?php }
 
-//Show date setting 
+/*Show date setting  */
 function wprl_settings_date() {
      	$wprl_options = get_option('wprl_plugin_options');?>
-     	<input type="checkbox" id="wprl-options-date" name="wprl_plugin_options[show_post_date]"<? if($wprl_options['show_post_date']){_e('checked="checked"');} ?> value="show-post-date"/>
-<? }
+     	<input type="checkbox" id="wprl-options-date" name="wprl_plugin_options[show_post_date]"<?php if($wprl_options['show_post_date']){_e('checked="checked"');} ?> value="show-post-date"/>
+<?php }
 
-//Show books on homepage setting 
+/*Show books on homepage setting  */
 function wprl_settings_homepage() {
      	$wprl_options = get_option('wprl_plugin_options');?>
-     	<input type="checkbox" id="wprl-options-homepage" name="wprl_plugin_options[books_in_feed]"<? if($wprl_options['books_in_feed']){_e('checked="checked"');} ?> value="books-in-feed"/>
-	<? _e('<p class="margin">Shows Reading List items on the homepage and in search results</p>', 'wprl_options' );
+     	<input type="checkbox" id="wprl-options-homepage" name="wprl_plugin_options[books_in_feed]"<?php if($wprl_options['books_in_feed']){_e('checked="checked"');} ?> value="books-in-feed"/>
+	<?php _e('<p class="margin">Shows Reading List items on the homepage and in search results</p>', 'wprl_options' );
 }
 
-//Show book author setting 
+/*Show book author setting  */
 function wprl_settings_author() {
      	$wprl_options = get_option('wprl_plugin_options');?>
-     	<input type="checkbox" id="wprl-options-author" name="wprl_plugin_options[show_author]"<? if($wprl_options['show_author']){_e('checked="checked"');} ?> value="show-author"/>
-<? }
+     	<input type="checkbox" id="wprl-options-author" name="wprl_plugin_options[show_author]"<?php if($wprl_options['show_author']){_e('checked="checked"');} ?> value="show-author"/>
+<?php }
 
-//Show cover image url setting 
+/*Show cover image url setting  */
 function wprl_settings_show_url() {
      	$wprl_options = get_option('wprl_plugin_options');?>
-     	<input type="checkbox" id="wprl-options-url" name="wprl_plugin_options[show_url]"<? if($wprl_options['show_url']){_e('checked="checked"');} ?> value="show-url"/>
-<? }
+     	<input type="checkbox" id="wprl-options-url" name="wprl_plugin_options[show_url]"<?php if($wprl_options['show_url']){_e('checked="checked"');} ?> value="show-url"/>
+<?php }
 
-//Show page numbers setting 
+/*Show page numbers setting  */
 function wprl_settings_page_nums() {
      	$wprl_options = get_option('wprl_plugin_options');?>
-     	<input type="checkbox" id="wprl-options-page-nums" name="wprl_plugin_options[show_page_nums]"<? if($wprl_options['show_page_nums']){_e('checked="checked"');} ?> value="show-page-nums"/>
-<? }
+     	<input type="checkbox" id="wprl-options-page-nums" name="wprl_plugin_options[show_page_nums]"<?php if($wprl_options['show_page_nums']){_e('checked="checked"');} ?> value="show-page-nums"/>
+<?php }
 
-//Show single book link setting 
+/*Show single book link setting  */
 function wprl_settings_book_link() {
      	$wprl_options = get_option('wprl_plugin_options');?>
-     	<input type="checkbox" id="wprl-options-book-link" name="wprl_plugin_options[show_book]"<? if($wprl_options['show_book']){_e('checked="checked"');} ?> value="show-book-link"/>
-<? }
+     	<input type="checkbox" id="wprl-options-book-link" name="wprl_plugin_options[show_book]"<?php if($wprl_options['show_book']){_e('checked="checked"');} ?> value="show-book-link"/>
+<?php }
 
-//Show image in list layout setting
+/*Show image in list layout setting */
 function wprl_settings_list_image(){
      	$wprl_options = get_option('wprl_plugin_options');?>
-     	<input type="checkbox" id="wprl-options-list-image" name="wprl_plugin_options[list_image]"<? if($wprl_options['list_image']){_e('checked="checked"');} ?> value="show-list-image"/>
-<? }
+     	<input type="checkbox" id="wprl-options-list-image" name="wprl_plugin_options[list_image]"<?php if($wprl_options['list_image']){_e('checked="checked"');} ?> value="show-list-image"/>
+<?php }
 
-//Show post author setting
+/*Show post author setting */
 function wprl_settings_post_author(){
      	$wprl_options = get_option('wprl_plugin_options');?>
-     	<input type="checkbox" id="wprl-options-post-author" name="wprl_plugin_options[post_author]"<? if($wprl_options['post_author']){_e('checked="checked"');} ?> value="show-post-author"/>
-     	<? _e('<p class="margin">(If you wish to enable this, it is recommended that you also turn on the "Display on Whole Site" setting)</p>');
+     	<input type="checkbox" id="wprl-options-post-author" name="wprl_plugin_options[post_author]"<?php if($wprl_options['post_author']){_e('checked="checked"');} ?> value="show-post-author"/>
+     	<?php _e('<p class="margin">(If you wish to enable this, it is recommended that you also turn on the "Display on Whole Site" setting)</p>');
 }
 
-//Delete books setting
+/*Delete books setting */
 function wprl_settings_delete() {
      	$wprl_options = get_option('wprl_plugin_options');?>
         <input type="checkbox" id="wprl-options-delete" name="wprl_plugin_options[delete]" value="<?php _e($wprl_options['delete']);?>" onclick="if(this.checked){deleteConfirm()}"/>
-	<? _e('<p class="margin">Everyone needs a fresh start sometimes.  Check if you would like to delete your Reading List items and authors. However, please realize that this is permanent; there is no way back.</p>', 'wprl_options');
+	<?php _e('<p class="margin">Everyone needs a fresh start sometimes.  Check if you would like to delete your Reading List items and authors. However, please realize that this is permanent; there is no way back.</p>', 'wprl_options');
 }
 
-//Single book title
+/*Single book title */
 function wprl_settings_single(){
      	$wprl_options = get_option('wprl_plugin_options');?>
         <input type="text" id="wprl-options-title" name="wprl_plugin_options[title]" size="30" value="<?php _e($wprl_options['title']);?>" onchange="titleCheck()" />
-	<? _e('<p class="margin">What are you writing about? Notes, a review, fan fiction, ...?</p>', 'wprl_options');
+	<?php _e('<p class="margin">What are you writing about? Notes, a review, fan fiction, ...?</p>', 'wprl_options');
 }
 
-//Multiple book or layout title
+/*Multiple book or layout title */
 function wprl_settings_multiple(){
 	$wprl_options = get_option('wprl_plugin_options');?>
-        <input type="text" id="wprl-options-multiple-title" name="wprl_plugin_options[multiple_title]" size="30" value="<?php _e($wprl_options['multiple_title']);?>" onchange="titleCheck()" />
-	<? _e('<p class="margin">What do you want to call your list of items?</p>', 'wprl_options');
+        <input type="text" id="wprl-options-multiple-title" name="wprl_plugin_options[multiple_title]" size="30" value="<?php _e($wprl_options['multiple_title']);?>" onchange="layoutHeaderCheck()" />
+	<?php _e('<p class="margin">What do you want to call your list of items?</p>', 'wprl_options');
 }
 
-//List size setting
+/*List size setting */
 function wprl_settings_list_size(){
      	$wprl_options = get_option('wprl_plugin_options');?>
         <input type="text" id="wprl-options-list-size" name="wprl_plugin_options[list_size]" size="4" value="<?php _e($wprl_options['list_size']);?>" onchange="rowCheck()" />
-	<? _e('<p class="margin">Show up to 50 items in your list</p>', 'wprl_options');
+	<?php _e('<p class="margin">Show up to 50 items in your list</p>', 'wprl_options');
 }
 
-//Margin left setting
+/*Margin left setting */
 function wprl_settings_margin_left(){
      	$wprl_options = get_option('wprl_plugin_options');?>
         <input type="text" id="wprl-options-margin-left" name="wprl_plugin_options[css_margin_left]" size="4" value="<?php _e($wprl_options['css_margin_left']);?>" onchange="marginCheck()" />
-	<? _e('%<p class="margin">Distance of the layout from the left of the screen</p>', 'wprl_options' );
+	<?php _e('%<p class="margin">Distance of the layout from the left of the screen</p>', 'wprl_options' );
 
 }
 
-//Cover spacing in grid layout setting
+/*Cover spacing in grid layout setting */
 function wprl_settings_padding(){
      	$wprl_options = get_option('wprl_plugin_options');?>
         <input type="text" id="wprl-options-padding" name="wprl_plugin_options[padding]" size="4" value="<?php _e($wprl_options['padding']);?>" onchange="paddingCheck()" />
-	<? _e('%', 'wprl_options' );
+	<?php _e('%', 'wprl_options' );
 }
 
-//validate checkboxes
+/*Validate checkboxes helper*/
 function wprl_options_validate_helper($setting, $input){
 	if(isset($input[$setting]))
         {
@@ -281,7 +280,7 @@ function wprl_options_validate_helper($setting, $input){
 	}
 }
 
-//validate numbers given ranges
+/*validate numbers given ranges helper*/
 function wprl_options_validate_helper_numCheck($setting, $input, $wprl_defaults, $num1, $num2){
 	if(is_nan($input[$setting]) || $input[$setting] > $num1 || $input[$setting] < $num2)
         {
@@ -292,6 +291,7 @@ function wprl_options_validate_helper_numCheck($setting, $input, $wprl_defaults,
 	}
 }
 
+/*validate master settings input */
 function wprl_options_validate($input) {
      	$valid_input = get_option('wprl_plugin_options'); 
      	$wprl_defaults=wprl_default_options();
@@ -336,6 +336,8 @@ function wprl_options_validate($input) {
      	}
      	return $valid_input;
 }
+
+/* add style sheets depending on user's location */
 function wprl_enqueue($hook){
 	if ('settings_page_wprl-options' == $hook){
 	        wp_register_script('wprl-admin-script', plugins_url('wp-reading-list/wprl-admin/wp-reading-list-admin-script.js'));  
@@ -352,7 +354,7 @@ function wprl_enqueue($hook){
         }
 }
 
-//use single entry with array of options
+/*use single entry with array of options */
 function register_wprl_settings() {
 	register_setting('wprl_plugin_options', 'wprl_plugin_options', 'wprl_options_validate');
 	add_settings_section('wprl_settings_layout_options', 'Layout', '', 'wprl_options');
@@ -383,6 +385,7 @@ function register_wprl_settings() {
 	add_settings_field('wprl_settings_delete', 'Delete All', 'wprl_settings_delete', 'wprl_options', 'wprl_settings_admin');
 }
 
+/* Change description of "featured image" */
 function wprl_featured_image_html($content) {
 	if (is_admin() && 'books' == get_post_type())
         {
@@ -396,6 +399,7 @@ function wprl_featured_image_html($content) {
 	}
 }
 
+/* Changed name of "featured image" */
 function wprl_featured_image_mod($title) {
 	if (is_admin() && 'books' == get_post_type())
         {

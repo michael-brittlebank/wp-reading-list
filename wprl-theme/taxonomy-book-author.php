@@ -1,8 +1,7 @@
-<?
+<?php
 /*FILE: taxonomy-book-author.php
 *DESCRIPTION: The template for displaying a taxonomy archives
 */
-//todo !!!complete!!!
 $value = get_queried_object();
 get_header(); ?>
 	<div id="primary" class="content-area">
@@ -15,9 +14,22 @@ get_header(); ?>
 				</header><!-- .archive-header -->
 				<?php while (have_posts()) 
 				{
-					the_post();
-					get_template_part('content', get_post_format());
-				} ?>
+					the_post(); ?>
+					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+						<header class="entry-header">
+							<?php if ( has_post_thumbnail()) { ?>
+									<?php the_post_thumbnail(array(200,267)); ?>
+							<?php } ?>
+							<h1 class="entry-title">
+								<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
+							</h1>
+							<?php edit_post_link( __( 'Edit'), '<span class="edit-link">', '</span>' ); ?>
+						</header><!-- .entry-header -->
+						<div class="entry-summary">
+							<?php the_excerpt(); ?>
+						</div><!-- .entry-summary -->
+				</article><!-- #post -->
+				<?php } ?>
 				<nav class="navigation paging-navigation" role="navigation">
 					<h1 class="screen-reader-text">Books navigation</h1>
 					<div class="wprl-book-links nav-links">
@@ -27,7 +39,7 @@ get_header(); ?>
 			<?php }
 			else{ ?>
 				<h3 class="entry-header">No Results</h3>
-			<? } ?>
+			<?php } ?>
 		</div><!-- #content -->
 	</div><!-- #primary -->
 <?php get_sidebar(); ?>

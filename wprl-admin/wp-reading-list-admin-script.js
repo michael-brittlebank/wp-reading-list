@@ -7,9 +7,11 @@ var gw;
 var linkdefault;
 var row;
 var titledefault;
+var multititledefault;
 var margin;
 var padding;
 
+/*Save default variables printed on screen */
 function saveVars() {
 	gw = document.getElementById("wprl-options-cover-width").value;
 	linkdefault = document.getElementById("wprl-options-url").value;
@@ -17,10 +19,12 @@ function saveVars() {
 	titledefault = document.getElementById("wprl-options-title").value;
 	margin = document.getElementById("wprl-options-margin-left").value;
 	padding = document.getElementById("wprl-options-padding").value;
+	multititledefault = document.getElementById("wprl-options-multiple-title").value;
         }
 
 window.onload = saveVars;
 
+/*validate the book cover size */
 function numValGrid(){
 	var g=document.getElementById("wprl-options-cover-width").value;
 	if (isNaN(g) || g > 600 || g < 60)
@@ -34,6 +38,7 @@ function numValGrid(){
 	}
 }
 
+/*helper function for book cover validatation */
 function numValHelper(docObj){
 	if (docObj == 1)
 	{
@@ -43,6 +48,7 @@ function numValHelper(docObj){
 	}
 }
 
+/* helper check if string is url or not */
 function isUrl(s){
 	var testFor =new Array("http","https","ftp","ftps",".com",".net",".org",".edu",".gov",".int",".mil",".biz",".info",".jobs",
 	".mobi",".name","@");
@@ -56,6 +62,7 @@ function isUrl(s){
 	return false;
 }
 
+/* confirm box for delete feature */
 function deleteConfirm(){
 	var r=confirm('Deleting your Reading List items is permanent. This will also delete the list of authors.  If you are sure that you want to do this, click "Ok" and hit "Save Settings".');
 	if (r==true)
@@ -68,6 +75,7 @@ function deleteConfirm(){
   	}
 }
 
+/* validate the title of single post header*/
 function titleCheck(){
 	var title= document.getElementById("wprl-options-title").value;
 	if (isUrl(title))
@@ -82,6 +90,22 @@ function titleCheck(){
 	}
 }
 
+/* validate the title of layout header*/
+function layoutHeaderCheck(){
+	var multititle= document.getElementById("wprl-options-multiple-title").value;
+	if (isUrl(multititle))
+	{
+		alert('Do not enter a URL here. Instead, just enter what you would like to call the list of items.');
+		document.getElementById("wprl-options-multiple-title").value = window.multititledefault;
+	}
+	else if (multititle.length > 30)
+	{
+		alert('Sorry, the text you entered is too long.');
+		document.getElementById("wprl-options-multiple-title").value = window.multititledefault;
+	}
+}
+
+/* validate number of list items */
 function rowCheck(){
 	var rowMod = document.getElementById("wprl-options-list-size").value;
 	if (rowMod > 50 || rowMod < 1 || isNaN(rowMod) || rowMod.length === 0 || rowMod.replace(/\s/g,"") == "")
@@ -91,6 +115,7 @@ function rowCheck(){
 	}
 }
 
+/* validate left margin value */
 function marginCheck(){
 	var marginMod = document.getElementById("wprl-options-margin-left").value;
 	if (marginMod > 25 || marginMod < 0 || isNaN(marginMod) || marginMod.length === 0 || marginMod.replace(/\s/g,"") == "")
@@ -100,6 +125,7 @@ function marginCheck(){
 	}
 }
 
+/* validate layout item spacing */
 function paddingCheck(){
 	var paddingMod = document.getElementById("wprl-options-padding").value;
 	if (paddingMod > 10 || paddingMod  < 1 || isNaN(paddingMod) || paddingMod.length === 0 || paddingMod.replace(/\s/g,"") == "")

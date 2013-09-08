@@ -11,15 +11,15 @@
 /* HTML5 display-role reset for older browsers */
 #content article, #content header {display: block!important;}
 /*End reset*/
-#content .entry-meta {display:block!important;width: auto!important;vertical-align:text-bottom!important;margin-bottom:20px!important;}
+#content .entry-meta {display:inline-block!important;width: auto!important;vertical-align:text-bottom!important;margin-bottom:20px!important;}
 #content .entry-meta p {margin-bottom:0!important;}
 #content article {word-wrap:break-word;}
 #content .wp-post-image {max-width:none!important;}
 #content .meta-header {vertical-align:top!important;}
 #content h1.entry-header {margin: 0.75em 0 20px!important;}
-#content header.entry-title {max-width:none!important;margin-right:15px!important}
+#content .entry-title {max-width:none!important;margin: 0.75em 0 20px!important;}
 #content td span{margin-right:25px!important;margin-bottom:15px!important;}
 #content .screen-reader-text {visibility:hidden!important;}
-#content .entry-title {font-size:140%;font-weight:bold;}
+#content .entry-title {font-size:200%;font-weight:bold;}
 #primary, .site-content, #content .entry-content {width:100%!important;}
 #content .wprl-book-links.nav-links {font-size:125%;font-weight:bold;margin-bottom:1em!important;}

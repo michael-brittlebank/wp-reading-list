@@ -1,11 +1,9 @@
-<?
+<?php
 /*FILE: wp-reading-list-taxonomies.php
  * DESCRIPTION: Create a custom taxonomy for 'authors' and a custom post type for 'books'
  */
  
-/*
-*Create custom taxonomy for authors
-*/
+/* Create custom taxonomy for authors */
 function wprl_custom_tax() {
 	$labels = array(
 		'name' => __('Author/s', 'wp-readinglist'),
@@ -31,16 +29,12 @@ function wprl_custom_tax() {
 	));
 }
 
-/*
-*Load the custom meta boxes for 'books'
-*/
+/* Load the custom meta boxes for 'books' */
 require 'wp-reading-list-meta.php';
 add_action('load-post.php', 'wprl_post_meta_boxes_setup');
 add_action('load-post-new.php', 'wprl_post_meta_boxes_setup');
 
-/*
-*Create custom post type for 'books'
-*/
+/* Create custom post type for 'books' */
 function wprl_custom_post() {
 	$labels = array(
 		'name' => __('Books', 'wp-readinglist'),
@@ -71,14 +65,12 @@ function wprl_custom_post() {
 }
 add_action('init', 'wprl_custom_post');
 
-/*
-*Customize admin messages related to the wprl custom post type
-*/
+/* Customize admin messages related to the wprl custom post type */
 function wprl_custom_messages( $messages ) {
 	 global $post, $post_ID;
 
 	 $messages['books'] = array(
-			0 => '', // Unused. Messages start at index 1.
+			0 => '', /* Unused. Messages start at index 1. */
 			1 => sprintf( __('Book updated. <a href="%s">View book</a>', 'wp-readinglist'), esc_url( get_permalink($post_ID) ) ),
 			2 => __('Custom field updated.', 'wp-readinglist'),
 			3 => __('Custom field deleted.', 'wp-readinglist'),
@@ -95,9 +87,7 @@ function wprl_custom_messages( $messages ) {
 }
 add_filter( 'post_updated_messages', 'wprl_custom_messages' );
 
-/*
-*Custom help tab for wprl
-*/
+/* Custom help tab for wprl */
 function codex_custom_help_tab() {
 	global $post_ID;
 	$screen = get_current_screen();
@@ -124,9 +114,9 @@ Examples: "William Shakespeare", "John" "Kate" "Will", "J. K. Rowling"
 	        'id'	=> 'wprl_help_url',
 	        'title'	=> __('Book URL'),
 	        'content'	=> '<p>' . __('
-This metabox allows you to add custom urls to link to external sources by wrapping the link around the posts&apos;s cover image.  Use this box to direct users to where the original Reading List item can be found or use it as a link for affiliate programs like <a href="https://affiliate-program.amazon.com/" target="_blank">Amazon Associates</a>.  Be sure to verify the link is correct and make sure you have the "Show Cover Image Links" setting turned on in the general "WP Reading List Settings" page.  Also, make sure you have a cover image to link from!
+This metabox allows you to add custom urls to link to external sources by wrapping the link around the posts&apos;s cover image.  Use this box to direct users to where the original Reading List item can be found or use it as a link for affiliate programs like <a href="https:/*affiliate-program.amazon.com/" target="_blank">Amazon Associates</a>.  Be sure to verify the link is correct and make sure you have the "Show Cover Image Links" setting turned on in the general "WP Reading List Settings" page.  Also, make sure you have a cover image to link from!
 </br>
-Example: "http://www.amazon.com/The-Riverside-Shakespeare-2nd-Edition/dp/0395754909/ref=sr_1_1?ie=UTF8&qid=1377294257&sr=8-1&keywords=shakespeare+riverside"
+Example: "http:/*www.amazon.com/The-Riverside-Shakespeare-2nd-Edition/dp/0395754909/ref=sr_1_1?ie=UTF8&qid=1377294257&sr=8-1&keywords=shakespeare+riverside"
 ') . '</p>',
 	    ) );
 	    	$screen->add_help_tab(array(

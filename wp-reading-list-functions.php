@@ -1,14 +1,11 @@
-<?
+<?php
 /*FILE: wp-reading-list-functions.php
 *DESCRIPTION: Core plugin functions
-*ABBREVs: wprl => wp reading list 
 */
-//do contextual help for books edit/create new page
-//http://codex.wordpress.org/Function_Reference/add_theme_support
 
 defined( 'ABSPATH' ) OR exit;
 
-//Load the custom taxonomies for 'books' and 'authors'
+/*Load the custom taxonomies for 'books' and 'authors' */
 if (!current_theme_supports('post-thumbnails'))
 {
 	add_theme_support('post-thumbnails');
@@ -16,7 +13,7 @@ if (!current_theme_supports('post-thumbnails'))
 require 'wprl-core/wp-reading-list-taxonomies.php';
 add_action('init', 'wprl_custom_tax', 0);
 
-//Set wprl default option settings
+/*Set wprl default option settings */
 function wprl_default_options() {
 	$options = array(
           	'layout' => 'grid',
@@ -46,7 +43,7 @@ function wprl_default_options() {
     	return $options;
 }
 
-//Initialize wprl options
+/*Initialize wprl options */
 global $wprl_options;
 $wprl_options = get_option('wprl_plugin_options');
 if (false == $wprl_options) {
@@ -54,12 +51,12 @@ if (false == $wprl_options) {
      	}
 update_option('wprl_plugin_options', $wprl_options);
 
-//Check to see if user is in admin/backend
+/*Check to see if user is in admin/backend */
 if (is_admin()){
-	require 'wprl-admin/wp-reading-list-admin.php';//The admin menu option panel for wprl
+	require 'wprl-admin/wp-reading-list-admin.php';
 }
 
-//Add plugin templates for displaying books and books archive
+/*Add plugin templates for displaying books and books archive */
 function wprl_custom_templates($template) {
 	$wprl_options = get_option('wprl_plugin_options');
 	if (is_singular('books')){
@@ -83,6 +80,7 @@ function wprl_custom_templates($template) {
 add_filter('single_template', 'wprl_custom_templates') ;
 add_filter('archive_template', 'wprl_custom_templates');
 
+/* queue different files depending on the layout chosen and the location */
 function wprl_layout_query($query){
 	$wprl_options = get_option('wprl_plugin_options');
 	if (!is_admin() && $query->is_main_query() && $wprl_options['books_in_feed'] && !is_post_type_archive('books'))
@@ -122,7 +120,7 @@ function wprl_layout_query($query){
 
 add_action('pre_get_posts', 'wprl_layout_query');
 
-//Enqueue plugin stylesheet and allow for child theme to override
+/*Enqueue plugin stylesheet and allow for child theme to override */
 if (!function_exists('wprl_styles')) 
 {
 	function wprl_styles() {
@@ -142,12 +140,16 @@ if (!function_exists('wprl_styles'))
 		{
 			wp_enqueue_style('reading-list-single-style', plugins_url('/wprl-theme/single-style.css', __FILE__));
 		}
+		elseif (!is_admin() && is_tax('book-author'))
+		{
+			wp_enqueue_style('reading-list-single-style', plugins_url('/wprl-theme/taxonomy-style.css', __FILE__));
+		}
 	}
 }
 
 add_action('wp_enqueue_scripts', 'wprl_styles' );
 
-//Remove taxonomy function
+/*Remove taxonomy function */
 function remove_taxonomy($taxonomy) {
 	global $wp_taxonomies;
 	$terms = get_terms($taxonomy); 
@@ -157,7 +159,7 @@ function remove_taxonomy($taxonomy) {
 	unset($wp_taxonomies[$taxonomy]);
 }
 
-//Delete books and authors function, called after 'save settings' or when deleting the plugin
+/*Delete books and authors function, called after 'save settings' or when deleting the plugin */
 function delete_books(){
 	global $wpdb;
 	$query = "
@@ -169,6 +171,7 @@ function delete_books(){
 	$GLOBALS['wp_rewrite']->flush_rules();
 }
 
+/* Force users to include a title on reading list items */
 function force_post_title() {
 	if (is_admin() && 'books' == get_post_type())
         {
@@ -190,7 +193,7 @@ function force_post_title() {
 	}
 }
 
-//get featured image for books listing in admin columns
+/*get featured image for books listing in admin columns */
 function wprl_get_cover_image($post_ID) {
 	$post_thumbnail_id = get_post_thumbnail_id($post_ID);
 	if ($post_thumbnail_id) {
@@ -198,18 +201,20 @@ function wprl_get_cover_image($post_ID) {
 		return $post_thumbnail_img[0];
 	}
 }
-//add new column to admin listing for books
+/*add new column to admin listing for books */
 function wprl_columns_head($defaults) {
 	$defaults['author'] = 'Post Author';
 	$defaults['featured_image'] = 'Featured Image';
 	return $defaults;
 }
 
-//show the cover image for the admin books listing
+/*show the cover image for the admin books listing */
 function wprl_columns_content($column_name, $post_ID) {
-	if ($column_name == 'featured_image') {
+	if ($column_name == 'featured_image') 
+	{
 		$cover_image= wprl_get_cover_image($post_ID);
-		if ($cover_image) {
+		if ($cover_image)
+		{
 			_e('<img src="'.$cover_image.'"/>');
 		}
 	}
@@ -217,6 +222,7 @@ function wprl_columns_content($column_name, $post_ID) {
 add_filter('manage_posts_columns', 'wprl_columns_head');  
 add_action('manage_posts_custom_column', 'wprl_columns_content', 10, 2); 
 
+/* add an "author" column to the "all books" list */
 function post_author_column( $columns ) {
     $columns['author'] = 'author'; 
     return $columns;
