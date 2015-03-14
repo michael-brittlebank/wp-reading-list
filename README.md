@@ -8,3 +8,7 @@ The concept for this project stemmed from Andrew Spittle's repository on github,
 
 -----------------------------------------------------------------------------------------------------
 
+All development has been moved to the SVN repo hosted by Wordpress and ceased to be updated on Github.
+
+The trunk is available at: http://plugins.svn.wordpress.org/wp-reading-list/trunk
+
