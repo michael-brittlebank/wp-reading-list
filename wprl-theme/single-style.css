@@ -1,0 +1,12 @@
+/*FILE: single-style.css
+*DESCRIPTION: Stylesheet for a single post
+*/
+#content article {word-wrap:break-word;}
+#content .wp-post-image {max-width:none!important;}
+#content #post-thumbnail {float: right !important;vertical-align: text-top!important;margin-left: 10px!important;}
+#content .entry-meta {border-bottom-style:solid none!important;border-width:1px!important;border-color:#E6E6E6!important;margin-bottom:20px!important;}
+#content #single-title {margin-bottom:10px!important;display:inline-block!important;}
+#content .metaspan:last-child {float:right!important;clear:both!important;}
+#content .entry-header {font-size:200%;font-weight:bold;}
+#primary {width:100%!important;}
+.singlemeta {margin:0!important;}
