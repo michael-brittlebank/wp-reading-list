@@ -11,8 +11,6 @@ $version = "2.0";
 if (!current_theme_supports('post-thumbnails')) {
     add_theme_support('post-thumbnails');
 }
-require 'wprl-core/wp-reading-list-taxonomies.php';
-add_action('init', 'wprl_custom_tax', 0);
 
 /*Set wprl default option settings */
 function wprl_default_options() {
@@ -132,18 +130,6 @@ function remove_taxonomy($taxonomy) {
     unset($wp_taxonomies[$taxonomy]);
 }
 
-/*Delete works and authors function, called after 'save settings' or when deleting the plugin */
-function delete_works(){
-    global $wpdb;
-    $query = "
-		DELETE FROM wp_posts
-		WHERE post_type = 'works'
-	";
-    $wpdb->query($query);
-    remove_taxonomy('work-author');
-    $GLOBALS['wp_rewrite']->flush_rules();
-}
-
 /* Force users to include a title on reading list items */
 function force_post_title() {
     if (is_admin() && 'works' == get_post_type()) {
@@ -259,58 +245,6 @@ function content($limit) {
     $content = str_replace(']]>', ']]&gt;', $content);
     return $content;
 }
-
-function register_wprl_localization() {
-// Localization
-    load_plugin_textdomain( 'wp_reading_list', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-}
-add_action('init', 'register_wprl_localization');
-
-function wprl_rewrite_flush(){
-    global $wp_rewrite;
-    $wp_rewrite->flush_rules();
-}
-
-add_filter('widget_text', 'do_shortcode');
-
-function wprl_get_works($numPosts){
-    $wprl_options = get_option('wprl_plugin_options');
-    $orderby = $wprl_options['order'];
-    if ($orderby == 'author') {
-        $orderby .= ' title';
-    }
-    $args = array(
-        'post_type' => 'works',
-        'order' => $wprl_options['direction'],
-        'orderby' => $orderby,
-        'posts_per_page' => $numPosts,
-        'post_status' => "publish"
-    );
-    return new WP_Query($args);
-}
-
-function wprl_layout_shortcode($atts) {
-    $args = shortcode_atts(
-        array(
-            'layout' => 'plain',
-            'number' => '5',
-        ),
-        $atts);
-    if (isset($args["layout"]) && isset($args["number"])){
-        $query = wprl_get_works($args["number"]);
-        if ($query->have_posts()){
-            if ($args["layout"] === "plain"){
-                $output = "<ul>";
-                while ($query->have_posts() ) {
-                    $query->the_post();
-                    $output .= "<li><a href='".get_permalink()."'>".get_the_title()."</a></li>";
-                }
-                return $output."</ul>";
-            }
-        }
-    }
-}
-add_shortcode('wprl', 'wprl_layout_shortcode');
 
 /**
  * End of File

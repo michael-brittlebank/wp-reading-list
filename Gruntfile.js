@@ -38,7 +38,8 @@ module.exports = function(grunt) {
         uglify: {
             admin: {
                 files: {
-                    'dist/js/app.header.admin.js': [
+                    'dist/js/wprl-admin.min.js': [
+                        'js/admin.js'
                     ]
                 },
                 options: {
@@ -51,7 +52,7 @@ module.exports = function(grunt) {
             },
             main: {
                 files: {
-                    'dist/js/app.main.min.js': [
+                    'dist/js/wprl-app.min.js': [
                     ]
                 },
                 options: {

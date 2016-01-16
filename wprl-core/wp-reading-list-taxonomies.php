@@ -3,7 +3,6 @@
  * DESCRIPTION: Create a custom taxonomy for 'authors' and a custom post type for 'works'
  */
 
-/* Create custom taxonomy for authors */
 function wprl_custom_tax() {
     $labels = array(
         'name' => 'Author/s',
@@ -51,12 +50,6 @@ function wprl_custom_tax() {
     ));
 }
 
-/* Load the custom meta boxes for 'works' */
-require 'wp-reading-list-meta.php';
-add_action('load-post.php', 'wprl_post_meta_boxes_setup');
-add_action('load-post-new.php', 'wprl_post_meta_boxes_setup');
-
-/* Create custom post type for reading list 'items' */
 function register_wprl_cpt() {
     $labels = array(
         'name' => 'Works',
@@ -94,9 +87,7 @@ function register_wprl_cpt() {
     );
     register_post_type('works', $args);
 }
-add_action('init', 'register_wprl_cpt');
 
-/* Customize admin messages related to the wprl custom post type */
 function wprl_custom_messages( $messages ) {
     global $post, $post_ID;
     $messages['works'] = array(
@@ -115,9 +106,7 @@ function wprl_custom_messages( $messages ) {
     );
     return $messages;
 }
-add_filter( 'post_updated_messages', 'wprl_custom_messages' );
 
-/* Custom help tab for wprl */
 function codex_custom_help_tab() {
     global $post_ID;
     $screen = get_current_screen();
@@ -168,7 +157,6 @@ This metabox allows you to set a featured image or "cover image" for your Readin
         ));
     }
 }
-add_action('admin_head', 'codex_custom_help_tab');
 
 /*
 *End of File

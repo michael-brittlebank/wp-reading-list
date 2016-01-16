@@ -26,14 +26,10 @@ License: GPL2
 */
 defined( 'ABSPATH' ) OR exit;
 
-//register_activation_hook( __FILE__, 'wprl_rewrite_flush' );
-/*Load the plugin functions*/
-//require 'wp-reading-list-functions.php';
-require 'core/wprl-functions.php';
-//register_deactivation_hook( __FILE__, 'wprl_rewrite_flush' );
-/*For uninstalling the plugin
-register_uninstall_hook(__FILE__, 'delete_works');
-*/
+/*Load the plugin*/
+require_once 'core/database.php';
+require_once 'core/templates.php';
+require_once 'core/shortcodes.php';
 
 /*
 *End of File
