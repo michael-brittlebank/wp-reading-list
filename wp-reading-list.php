@@ -9,7 +9,7 @@ Author URI: http://mikestumpf.com
 License: GPL2
 */
 
-/*  Copyright 2015 Mike Stumpf  (email : mike@mikestumpf.com)
+/*  Copyright 2016 Mike Stumpf  (email : mike.a.stumpf@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -28,8 +28,8 @@ defined( 'ABSPATH' ) OR exit;
 
 //register_activation_hook( __FILE__, 'wprl_rewrite_flush' );
 /*Load the plugin functions*/
-require 'wp-reading-list-functions.php';
-
+//require 'wp-reading-list-functions.php';
+require 'core/wprl-functions.php';
 //register_deactivation_hook( __FILE__, 'wprl_rewrite_flush' );
 /*For uninstalling the plugin
 register_uninstall_hook(__FILE__, 'delete_works');
