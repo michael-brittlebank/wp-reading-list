@@ -13,9 +13,3 @@ input[type="text"] {border-color:#CCCCCC #CCCCCC #B8B8B8 #B8B8B8!important;}
 .margin {margin-bottom:0;}
 h3 {text-decoration:underline;}
 #wprl-options-cover-image-preview {width: 200px;}
-
-/* FILE: wp-reading-list-core-style.css
-*DESCRIPTION: Admin editor styling
-*/
-#content_wp_more, #qt_content_more {display:none!important;}
-.featured_image.column-featured_image img {width:60px;height:80px;}
