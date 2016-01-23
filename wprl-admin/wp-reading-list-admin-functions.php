@@ -382,7 +382,7 @@ function wprl_enqueue($hook){
         wp_enqueue_media();
         wp_register_script('wprl-admin-script', plugins_url('wp-reading-list/wprl-admin/wp-reading-list-admin-script.js?'.$version));
         wp_enqueue_script('wprl-admin-script');
-        wp_register_style('wprl-admin-style', plugins_url('wp-reading-list/dist/css/admin.min.css?'.$version));
+        wp_register_style('wprl-admin-style', plugins_url('wp-reading-list/wprl-admin/wp-reading-list-admin-style.css?'.$version));
         wp_enqueue_style('wprl-admin-style');
     }
     elseif (is_admin() && 'works' == get_post_type()) {
