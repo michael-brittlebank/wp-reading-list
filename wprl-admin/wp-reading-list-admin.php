@@ -36,8 +36,6 @@ function wprl_add_help_tab() {
 			<br/><br/>
 			<b>Order Direction</b>: Descending order is the WordPress default and it orders Reading List items from newest to oldest in the case dates and from the end of the alphabet to numbers for text.  Ascending order is the opposite.
 			<br/><br/>
-			<b>Left Margin</b>: This option allows you to specify how far over to the right (from the left-hand side of the screen) that you want your content.  Use this to match your theme&apos;s layout or customize your views.  <br/>Range: 0-25.
-			<br/><br/>
 			<b>Cover Image Spacing</b>: This option allows you to specify how far apart you want your layout items, left-right space for the grid layout and up-down space for the list layout.  <br/>Range: 1-10.', 'wp_reading_list') . '</p>',
     ));
     $screen->add_help_tab(array(

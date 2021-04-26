@@ -9,7 +9,6 @@ function wprl_admin_page() {
     }
     ?>
     <div class="wrap">
-        <?php screen_icon();?>
         <h2><?php _e('WP Reading List Settings', 'wp_reading_list' );?></h2>
         <form method="post" action="options.php">
             <?php

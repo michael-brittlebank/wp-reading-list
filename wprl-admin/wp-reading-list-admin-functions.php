@@ -285,20 +285,6 @@ function wprl_settings_list_size(){
     <?php echo('<p class="margin">');_e('Show up to 50 items in your list', 'wp_reading_list'); echo('</p>');
 }
 
-/*Margin left setting */
-function wprl_settings_margin_left(){
-    $wprl_options = get_option('wprl_plugin_options');?>
-    <input type="text" id="wprl-options-margin-left" name="wprl_plugin_options[css_margin_left]" size="4" value="<?php echo ($wprl_options['css_margin_left']);?>" onchange="marginCheck()" />
-    <?php echo('%<p class="margin">');_e('Distance of the layout from the left of the screen', 'wp_reading_list');echo('</p>');
-}
-
-/*Cover spacing in grid layout setting */
-function wprl_settings_padding(){
-    $wprl_options = get_option('wprl_plugin_options');?>
-    <input type="text" id="wprl-options-padding" name="wprl_plugin_options[padding]" size="4" value="<?php echo ($wprl_options['padding']);?>" onchange="paddingCheck()" />
-    <?php echo('%<p class="margin">');_e('Distance between items in the layout', 'wp_reading_list');echo('</p>');
-}
-
 /*Cover image setting */
 function wprl_settings_cover_image(){
     $wprl_options = get_option('wprl_plugin_options');?>
@@ -400,8 +386,6 @@ function register_wprl_settings() {
     add_settings_field('wprl_settings_layouts', 'Available Layouts', 'wprl_settings_layouts', 'wprl_options', 'wprl_settings_layout_options');
     add_settings_field('wprl_settings_list_order', 'Order Posts By', 'wprl_settings_list_order', 'wprl_options', 'wprl_settings_layout_options');
     add_settings_field('wprl_settings_list_direction', 'Order Direction', 'wprl_settings_list_direction', 'wprl_options', 'wprl_settings_layout_options');
-    add_settings_field('wprl_settings_margin_left', 'Left Margin', 'wprl_settings_margin_left', 'wprl_options', 'wprl_settings_layout_options');
-    add_settings_field('wprl_settings_padding', 'Item Spacing', 'wprl_settings_padding', 'wprl_options', 'wprl_settings_layout_options');
     add_settings_section('wprl_settings_grid_layout', 'Grid', '', 'wprl_options');
     add_settings_field('wprl_settings_grid_width', 'Grid Width', 'wprl_settings_grid_width', 'wprl_options', 'wprl_settings_grid_layout');
     add_settings_field('wprl_settings_grid_height', 'Number of Grid Rows', 'wprl_settings_grid_rows', 'wprl_options', 'wprl_settings_grid_layout');

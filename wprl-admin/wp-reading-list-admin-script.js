@@ -93,24 +93,6 @@ function rowCheck(){
     }
 }
 
-/* validate left margin value */
-function marginCheck(){
-    var marginMod = document.getElementById("wprl-options-margin-left").value;
-    if (marginMod > 25 || marginMod < 0 || isNaN(marginMod) || marginMod.length === 0 || marginMod.replace(/\s/g,"") == "")	{
-        alert('Please pick a percentage between 0 and 25.');
-        document.getElementById("wprl-options-margin-left").value = window.margin;
-    }
-}
-
-/* validate layout item spacing */
-function paddingCheck(){
-    var paddingMod = document.getElementById("wprl-options-padding").value;
-    if (paddingMod > 10 || paddingMod  < 1 || isNaN(paddingMod) || paddingMod.length === 0 || paddingMod.replace(/\s/g,"") == "") {
-        alert('Please pick a percentage between 1 and 10.');
-        document.getElementById("wprl-options-padding").value = window.padding;
-    }
-}
-
 /*Cover image uploader*/
 jQuery(document).ready(function($){
     var custom_uploader;
