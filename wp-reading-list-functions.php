@@ -29,8 +29,6 @@ function wprl_default_options() {
         'grid_width' => '3',
         'grid_rows' => '4',
         'list_size' => '25',
-        'css_margin_left' => '15',
-        'padding' => '4',
         'works_in_feed' => false,
         'show_post_date' => false,
         'delete' => false,
@@ -103,20 +101,8 @@ add_action('pre_get_posts', 'wprl_layout_query');
 if (!function_exists('wprl_styles')) {
     function wprl_styles() {
         global $version;
-        $wprl_options = get_option('wprl_plugin_options');
-        if (is_post_type_archive('works') && !is_admin()) {
-            if ($wprl_options['layout']=='grid') {
-                wp_enqueue_style( 'reading-list-grid-style', plugins_url('/wprl-theme/grid-style.css?'.$version, __FILE__));
-            }
-            elseif ($wprl_options['layout']=='list') {
-                wp_enqueue_style('reading-list-list-style', plugins_url('/wprl-theme/list-style.css?'.$version, __FILE__));
-            }
-        }
-        elseif (is_single() && 'works' == get_post_type()) {
-            wp_enqueue_style('reading-list-single-style', plugins_url('/wprl-theme/single-style.css?'.$version, __FILE__));
-        }
-        elseif (!is_admin() && is_tax('work-author') || is_tax('work-type') && $wprl_options['override_theme_taxonomies']) {
-            wp_enqueue_style('reading-list-single-style', plugins_url('/wprl-theme/taxonomy-style.css?'.$version, __FILE__));
+        if (!is_admin()) {
+            wp_enqueue_style( 'reading-list-default-style', plugins_url('/wprl-theme/default.css?'.$version, __FILE__));
         }
     }
 }

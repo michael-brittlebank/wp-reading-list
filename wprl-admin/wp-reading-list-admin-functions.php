@@ -143,7 +143,7 @@ function wprl_settings_grid_width() {
         <option <?php selected($width['value'], $wprl_options ['grid_width'])?> value="<?php echo ($width['value']);?>"><?php echo ($width['slug']);?></option>
         <?php $i++;
     }
-    echo ('</select><p class="margin">');_e('Number of works in each row.', 'wp_reading_list' );echo ('</p>');
+    echo ('</select><p class="margin">');_e('Number of works in each row on large screens, i.e. desktop mode.', 'wp_reading_list' );echo ('</p>');
 }
 
 /* cover size setting */
@@ -331,8 +331,6 @@ function wprl_options_validate($input) {
         $valid_input['cover_width_grid'] = wprl_options_validate_helper_numCheck('cover_width_grid', $input, $wprl_defaults, 60, 600);;
         $valid_input['cover_height_grid'] = wprl_options_validate_helper_numCheck('cover_height_grid', $input, $wprl_defaults, 80, 800);
         $valid_input['grid_width'] = wprl_options_validate_helper_numCheck('grid_width', $input, $wprl_defaults, 1, 4);
-        $valid_input['css_margin_left'] = wprl_options_validate_helper_numCheck('css_margin_left', $input, $wprl_defaults, 0, 100);
-        $valid_input['padding'] = wprl_options_validate_helper_numCheck('padding', $input, $wprl_defaults, 0, 100);
         $valid_input['list_size'] = wprl_options_validate_helper_numCheck('list_size', $input, $wprl_defaults, 1, 50);
         $valid_input['works_in_feed'] = wprl_options_validate_helper('works_in_feed', $input);
         $valid_input['show_post_date'] = wprl_options_validate_helper('show_post_date', $input);
