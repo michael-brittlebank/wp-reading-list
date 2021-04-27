@@ -5,7 +5,7 @@ Plugin URI: https://mikestumpf.com
 Description: WP Reading List is a plugin designed to help organize and display books, magazines, articles, and anything else that you have read lately. 
 Version: 4.0.0
 Author: Mike Stumpf
-Author URI: https://mikestumpf.com
+Author URI: http://mikestumpf.com
 License: GPL2
 */
 

@@ -1,0 +1,553 @@
+# Copyright (C) 2014 WP Reading List
+# This file is distributed under the same license as the WP Reading List package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Reading List\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-reading-list\n"
+"POT-Creation-Date: 2014-02-16 13:55:55+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-02-16 09:00-0500\n"
+"Last-Translator: mstumpf <admin@mikestumpf.com>\n"
+"Language-Team: mstumpf <admin@mikestumpf.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
+"X-Generator: Poedit 1.6.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: wp-reading-list-functions.php:317
+msgid "<script type='text/javascript'>\n"
+msgstr ""
+
+#: wp-reading-list-functions.php:319
+msgid ""
+"\r\r\n"
+"\t  \t\tjQuery('#publish').click(function(){\r\r\n"
+"\t        \tvar testervar = jQuery('[id^=\"titlediv\"]')\r\r\n"
+"\t        \t.find('#title');\r\r\n"
+"\t        \tif (testervar.val().length < 1)\r\r\n"
+"\t        \t{\r\r\n"
+"\t            \t\tsetTimeout(\"jQuery('.spinner').css('visibility', "
+"'hidden');\", 100);\r\r\n"
+"\t            \t\talert('Please enter a work title.');\r\r\n"
+"\t            \t\tsetTimeout(\"jQuery('#publish').removeClass('button-"
+"primary-disabled');\", 100);\r\r\n"
+"\t            \t\treturn false;\r\r\n"
+"\t        \t}\r\r\n"
+"\t    \t\t});\r\r\n"
+"\t  \t"
+msgstr ""
+
+#: wp-reading-list-functions.php:345
+msgid "</script>\n"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-functions.php:307
+msgid ""
+"<p class=\"margin\">(Sizes are enforced to a 3:4 aspect ratio and capped at "
+"a 600px by 800px maximum and 60px by 80px minimum.)</p>"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-functions.php:363
+#: wprl-admin/wp-reading-list-admin-functions.php:375
+#: wprl-admin/wp-reading-list-admin-functions.php:389
+#: wprl-admin/wp-reading-list-admin-functions.php:401
+#: wprl-admin/wp-reading-list-admin-functions.php:413
+#: wprl-admin/wp-reading-list-admin-functions.php:425
+#: wprl-admin/wp-reading-list-admin-functions.php:437
+#: wprl-admin/wp-reading-list-admin-functions.php:449
+#: wprl-admin/wp-reading-list-admin-functions.php:461
+#: wprl-admin/wp-reading-list-admin-functions.php:475
+#: wprl-admin/wp-reading-list-admin-functions.php:487
+#: wprl-admin/wp-reading-list-admin-functions.php:499
+msgid "checked=\"checked\""
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-functions.php:377
+msgid ""
+"<p class=\"margin\">Shows Reading List items on the homepage and in search "
+"results</p>"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-functions.php:463
+msgid ""
+"<p class=\"margin\">(If you wish to enable this, it is recommended that you "
+"also turn on the \"Display on Whole Site\" setting)</p>"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-functions.php:515
+msgid ""
+"<p class=\"margin\">Everyone needs a fresh start sometimes.  Check if you "
+"would like to delete your Reading List items and authors. However, please "
+"realize that this is permanent; there is no way back.</p>"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-functions.php:529
+msgid ""
+"<p class=\"margin\">What are you writing about? Notes, a review, fan "
+"fiction, ...?</p>"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-functions.php:543
+msgid "<p class=\"margin\">What do you want to call your list of items?</p>"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-functions.php:557
+msgid "<p class=\"margin\">Show up to 50 items in your list</p>"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-functions.php:571
+msgid ""
+"%<p class=\"margin\">Distance of the layout from the left of the screen</p>"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-functions.php:587
+msgid "%"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-functions.php:851
+msgid "Set featured image"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-functions.php:851
+msgid "Set cover image"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-functions.php:853
+msgid "Remove featured image"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-functions.php:853
+msgid "Remove cover image"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-page.php:15
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-page.php:25
+msgid "WP Reading List Settings"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-page.php:37
+msgid "Save Settings"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin-page.php:39
+msgid "Reset Defaults"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin.php:51
+#: wprl-core/wp-reading-list-taxonomies.php:267
+msgid "WPRL Overview"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin.php:53
+msgid ""
+"<b>WP Reading List</b> (or, <b>WPRL</b>)is a plugin designed to help "
+"organize and display books, magazines, articles, and or anything else that "
+"you have read lately.  This plugin allows users to display what they have "
+"read, attach text like a review or notes to it, and provide a link to where "
+"visitors can find the piece.<br/><br/>Please select any of the other tabs to "
+"read more about the various administration functions available in this "
+"plugin."
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin.php:61
+msgid "Layout"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin.php:63
+msgid ""
+"\r\r\n"
+"\t\t\t<b>Available Layouts</b>: There are two layouts available, \"grid\" "
+"and \"list\". \"Grid\" is a layout which emphasizes cover images is intended "
+"to be more visually appealing.  \"List\" is a layout which displays Reading "
+"List materials more like traditional posts, with one item per line.\r\r\n"
+"\t\t\t<br/><br/>\r\r\n"
+"\t\t\t<b>Order Posts By</b>: There are four options available for ordering "
+"your Reading List items, \"Date\", \"Post Author\", \"Random\", and \"Title"
+"\".  \"Date\" is the default, and WordPress&apos;s default, which orders "
+"posts by the date they were published.  \"Post Author\" orders Reading List "
+"items by alphabetizing the author of the post.  (*Note here, this is not the "
+"author or authors that you listed when you wrote your Reading List item.)  "
+"This is useful if you have multiple contributors who are all writing Reading "
+"List items and you want to sort by who is contributing what.  \"Random\" is "
+"pretty straightforward; your Reading List items are put in random order "
+"every time the page is loaded.  \"Title\" allows you to display Reading List "
+"items alphabetically by their title.\r\r\n"
+"\t\t\t<br/><br/>\r\r\n"
+"\t\t\t<b>Order Direction</b>: Descending order is the WordPress default and "
+"it orders Reading List items from newest to oldest in the case dates and "
+"from the end of the alphabet to numbers for text.  Ascending order is the "
+"opposite.\r\r\n"
+"\t\t\t<br/><br/>\r\r\n"
+"\t\t\t<b>Left Margin</b>: This option allows you to specify how far over to "
+"the right (from the left-hand side of the screen) that you want your "
+"content.  Use this to match your theme&apos;s layout or customize your "
+"views.  <br/>Range: 0-25.\r\r\n"
+"\t\t\t<br/><br/>\r\r\n"
+"\t\t\t<b>Cover Image Spacing</b>: This option allows you to specify how far "
+"apart you want your layout items, left-right space for the grid layout and "
+"up-down space for the list layout.  <br/>Range: 1-10."
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin.php:89
+msgid "Grid"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin.php:91
+msgid ""
+"\r\r\n"
+"\t\t\t<b>Grid Width</b>: This option sets the number of Reading List items "
+"on each line in the grid layout.\r\r\n"
+"\t\t\t<br/>Range: 1-4.\r\r\n"
+"\t\t\t<br/><br/>\r\r\n"
+"\t\t\t<b>Number of Grid Rows</b>: This option sets how many rows of Reading "
+"List items are displayed in the grid layout.\r\r\n"
+"\t\t\t<br/>Range: 1-10."
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin.php:109
+msgid "List"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin.php:111
+msgid ""
+"\r\r\n"
+"\t\t\t<b>Number of List Items</b>: This is similar to the option for showing "
+"the number of blog posts in the \"General Settings\" page.  This allows you "
+"to have a different number of Reading List items than the rest of the site.\r"
+"\r\n"
+"\t\t\t<br/>Range: 1-50.\r\r\n"
+"\t\t\t<br/><br/>\r\r\n"
+"\t\t\t<b>Show Cover Image</b>: Check this option if you want to show cover "
+"images in the list layout.  This is not necessary for the list layout.\r\r\n"
+"\t\t\t<br/><br/>\r\r\n"
+"\t\t\t<b>Cover Size</b>: Use this option to change the size of the cover "
+"image shown in the list layout.  You can only set the width; the height will "
+"automatically be adjusted to what you input since it is enforced at a 4:3 "
+"ratio.  If a cover image is smaller than the dimensions you specified or is "
+"not originally in a 4:3 ratio, the original size will be shown up to "
+"whatever dimension limit it hits first.  Images will not be inflated or "
+"warped to fit this setting, it is more like setting a maximum size.\r\r\n"
+"\t\t\t<br/>Range: 60-600.\r\r\n"
+"\t        "
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin.php:135
+msgid "Display"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin.php:137
+msgid ""
+"*These options will affect both the archive layouts and the single item "
+"layout.\r\r\n"
+"\t\t\t<br/><br/>\r\r\n"
+"\t\t\t<b>Show Cover Image Link</b>: Check this option if you do not want any "
+"of your cover images to display the link you set in the Reading List item, i."
+"e. post, editor.\r\r\n"
+"\t\t\t<br/><br/>\r\r\n"
+"\t\t\t<b>Show Link to Single Postb>: Check this option if you want to show a "
+"link to the single post view.  If you only wish to show the list of works "
+"you read, like if you choose not to write anything in the post&apos;s "
+"content, this is a good option as it will only show the grid or list layout."
+"\r\r\n"
+"\t\t\t<br/><br/>\r\r\n"
+"\t\t\t<b>Show Item Author/s</b>: Check this option if you want to show the "
+"author/s that you listed in the Reading List item&apos;s metabox labeled "
+"\"Author/s\". \r\r\n"
+"\t\t\t<br/><br/>\r\r\n"
+"\t\t\t<b>Show Author/s Link</b>: Check this option if you want to show a "
+"link on the reading list item author/s&apos; name.  This is essentially an "
+"\"archive\" view for all reading list items that were written by the author "
+"selected.\r\r\n"
+"\t\t\t<br/><br/>\r\r\n"
+"\t\t\t<b>Show Post Author</b>: Check this option if you wish to show which "
+"user on the site wrote/published the Reading List item.\r\r\n"
+"\t\t\t<br/>*If you enable this, it is recommended that you also turn on the "
+"\"Display on Whole Site\" setting, otherwise a user&apos;s Reading List "
+"items will not show up in searches with regular posts by the same user.\r\r\n"
+"\t        "
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin.php:169
+msgid "General"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin.php:171
+msgid ""
+"\r\r\n"
+"\t\t\t<b>Display on Whole Site</b>: Check this option if you wish to show "
+"Reading List items in your blog&apos;s feed and search results.  This also "
+"enables Reading List items to show up if searching for a specific user&apos;"
+"s content.\r\r\n"
+"\t\t\t<br/><br/>\r\r\n"
+"\t\t\t<b>Single Post Header</b>: Use this option to change what the content "
+"of the single item view is called.\r\r\n"
+"\t\t\t<br/><br/>\r\r\n"
+"\t\t\t<b>Layout Header</b>: Use this option to change what the header of the "
+"grid or list layout view is called."
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin.php:189
+msgid "Admin"
+msgstr ""
+
+#: wprl-admin/wp-reading-list-admin.php:191
+msgid ""
+"\r\r\n"
+"\t\t\t<b>Delete All</b>: If you would like to delete all of your Reading "
+"List items, select this option.  This deletes all works and authors but does "
+"not delete the feature images in the media library. \r\r\n"
+"\t\t\t<br/>*IMPORTANT! This is permanant and there is no way to recover the "
+"data once this option is checked and the \"Save Settings\" button is pressed."
+"\r\r\n"
+"\t\t\t<br/><br/>\r\r\n"
+"\t\t\tThis is the only way to delete all traces of this plugin from your "
+"database.  Deactivating and/or deleting the plugin only removes the plugin "
+"settings and does not delete your content."
+msgstr ""
+
+#: wprl-core/wp-reading-list-meta.php:41
+#: wprl-core/wp-reading-list-taxonomies.php:295
+msgid "Work URL"
+msgstr ""
+
+#: wprl-core/wp-reading-list-meta.php:57
+#: wprl-core/wp-reading-list-taxonomies.php:313
+msgid "Number of Pages"
+msgstr ""
+
+#: wprl-core/wp-reading-list-meta.php:79
+msgid "Add a link to the work"
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:213
+msgid "Work updated. <a href=\"%s\">View Work</a>"
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:215
+msgid "Custom field updated."
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:217
+msgid "Custom field deleted."
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:219
+msgid "Work updated."
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:221
+msgid "Work restored to revision from %s"
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:223
+msgid "Work published. <a href=\"%s\">View Work</a>"
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:225
+msgid "Work saved."
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:227
+msgid "Work submitted. <a target=\"_blank\" href=\"%s\">Preview Work</a>"
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:229
+msgid ""
+"Scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
+"\">Preview Work</a>"
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:231
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:233
+msgid "Draft updated. <a target=\"_blank\" href=\"%s\">Preview Work</a>"
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:269
+msgid ""
+"<b>WP Reading List</b> (or, <b>WPRL</b>) is a plugin designed to help "
+"organize and display books, magazines, articles, and or anything else that "
+"you have read lately.  This plugin allows users to display what they have "
+"read, attach text like a review or notes to it, and provide a link to where "
+"visitors can find the piece."
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:269
+msgid ""
+"Please select any of the other tabs to read more about the various "
+"administration functions available in this plugin."
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:277
+msgid "Author/s"
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:279
+msgid ""
+"\r\r\n"
+"This metabox allows you to add \"authors\" to your Reading List items.  You "
+"can add any number of authors, just like regular post tags; just separate "
+"them with commas.  These authors can then be shown in your layout and "
+"managed from the \"Authors\" tab under the \"Works\" tab in the admin menu."
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:285
+msgid ""
+"Examples: \"William Shakespeare\", \"John\" \"Kate\" \"Will\", \"J.K. Rowling"
+"\""
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:297
+msgid ""
+"\r\r\n"
+"This metabox allows you to add custom urls to link to external sources by "
+"wrapping the link around the posts&apos;s cover image.  Use this box to "
+"direct users to where the original Reading List item can be found or use it "
+"as a link for affiliate programs like <a href=\"https://affiliate-program."
+"amazon.com/\" target=\"_blank\">Amazon Associates</a>.  Be sure to verify "
+"the link is correct and make sure you have the \"Show Cover Image Links\" "
+"setting turned on in the general \"WP Reading List Settings\" page.  Also, "
+"make sure you have a cover image to link from!"
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:303
+msgid ""
+"Example: \"http://www.amazon.com/The-Riverside-Shakespeare-2nd-Edition/"
+"dp/0395754909/ref=sr_1_1?ie=UTF8&qid=1377294257&sr=8-1&keywords=shakespeare"
+"+riverside\"\r\r\n"
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:315
+msgid ""
+"\r\r\n"
+"This metabox allows you to specify how many pages are in the Reading List "
+"item.  This plugin supports either individual numbers or page ranges, i.e. "
+"\"210-450\".  Make sure you do not spell out the page number."
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:319
+msgid "Examples: \"1\", \"999\""
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:321
+msgid "Range: \"1-10000\"."
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:329
+msgid "Cover Image"
+msgstr ""
+
+#: wprl-core/wp-reading-list-taxonomies.php:331
+msgid ""
+"\r\r\n"
+"This metabox allows you to set a featured image or \"cover image\" for your "
+"Reading List item.  This can then be shown in a Reading List layout.\r\r\n"
+msgstr ""
+
+#: wprl-theme/archive-works.php:139 wprl-theme/archive-works.php:475
+#: wprl-theme/single-works.php:165 wprl-theme/taxonomy-work-author.php:87
+#: wprl-theme/taxonomy-work-type.php:173
+msgid "</a>"
+msgstr ""
+
+#: wprl-theme/archive-works.php:213 wprl-theme/archive-works.php:523
+msgid "By: "
+msgstr ""
+
+#: wprl-theme/archive-works.php:231 wprl-theme/archive-works.php:321
+#: wprl-theme/archive-works.php:541 wprl-theme/archive-works.php:655
+#: wprl-theme/single-works.php:63
+msgid " & "
+msgstr ""
+
+#: wprl-theme/archive-works.php:239 wprl-theme/archive-works.php:329
+#: wprl-theme/archive-works.php:549 wprl-theme/archive-works.php:663
+#: wprl-theme/single-works.php:71
+msgid ", "
+msgstr ""
+
+#: wprl-theme/archive-works.php:273 wprl-theme/archive-works.php:603
+#: wprl-theme/single-works.php:107
+msgid "Pages:"
+msgstr ""
+
+#: wprl-theme/archive-works.php:281 wprl-theme/archive-works.php:587
+#: wprl-theme/single-works.php:115
+msgid "Posted on:"
+msgstr ""
+
+#: wprl-theme/archive-works.php:289
+msgid "Posted by:"
+msgstr ""
+
+#: wprl-theme/archive-works.php:303 wprl-theme/archive-works.php:637
+msgid "Type: "
+msgstr ""
+
+#: wprl-theme/archive-works.php:367
+msgid "<div class=\"spacer\">&nbsp;</div>"
+msgstr ""
+
+#: wprl-theme/archive-works.php:615
+msgid "Posted by: "
+msgstr ""
+
+#: wprl-theme/single-works.php:45
+msgid "By:"
+msgstr ""
+
+#: wprl-theme/single-works.php:123
+msgid "Posted By:"
+msgstr ""
+
+#: wprl-theme/single-works.php:191
+msgid "No Results:"
+msgstr ""
+
+#: wprl-theme/taxonomy-work-author.php:27 wprl-theme/taxonomy-work-type.php:53
+msgid "Archive for"
+msgstr ""
+
+#: wprl-theme/taxonomy-work-author.php:49 wprl-theme/taxonomy-work-type.php:97
+msgid "style=\"margin-bottom:50px!important;\""
+msgstr ""
+
+#: wprl-theme/taxonomy-work-author.php:115
+#: wprl-theme/taxonomy-work-type.php:229
+msgid "Edit"
+msgstr ""
+
+#: wprl-theme/taxonomy-work-author.php:149
+#: wprl-theme/taxonomy-work-type.php:297
+msgid "No Results"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WP Reading List"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://mikestumpf.com/portfolio/wordpress-reading-list-plugin/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"WP Reading List is a plugin designed to help organize and display books, "
+"magazines, articles, and anything else that you have read lately."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Mike Stumpf"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://mikestumpf.com"
+msgstr ""

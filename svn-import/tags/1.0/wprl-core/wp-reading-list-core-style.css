@@ -1,0 +1,5 @@
+/* FILE: wp-reading-list-core-style.css
+*DESCRIPTION: Admin editor styling
+*/
+#content_wp_more, #qt_content_more {display:none!important;}
+.featured_image.column-featured_image img {width:60px;height:80px;}

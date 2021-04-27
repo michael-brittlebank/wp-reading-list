@@ -1,0 +1,2 @@
+[16-Feb-2014 10:02:58 America/Chicago] PHP Fatal error:  Call to undefined function get_queried_object() in /home/pna6fb9i/public_html/wp-content/plugins/wp-reading-list/wprl-theme/taxonomy-work-author.php on line 9
+[16-Feb-2014 10:03:23 America/Chicago] PHP Fatal error:  Call to undefined function get_queried_object() in /home/pna6fb9i/public_html/wp-content/plugins/wp-reading-list/wprl-theme/taxonomy-work-author.php on line 9

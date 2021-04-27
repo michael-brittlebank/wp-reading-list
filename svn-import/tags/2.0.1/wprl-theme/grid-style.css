@@ -1,0 +1,29 @@
+/*FILE: grid-style.php
+*DESCRIPTION: Stylesheet for the grid layout
+*/
+/*Modified snippet of Eric Meyer's reset css http://meyerweb.com/eric/tools/css/reset/ */
+#content div, #content span, #content h1, #content h2, #content h3, #content  p, #content a, #content img, #content article, #content header, #content {
+	margin: 0!important;
+	padding: 0!important;
+	border: 0!important;
+	vertical-align: baseline!important;
+}
+/* HTML5 display-role reset for older browsers */
+#content article, #content header {display: block!important;}
+/*End reset*/
+/*CSS Responsive*/
+#content img {max-width: 100%;!important;}
+/*End Responsive*/
+#content {width:1000px;max-width:100%!important;}
+#content .spacer{clear:both;}
+#content .entry-meta {padding:0!important;}
+#content .entry-meta p {margin-bottom:0!important;}
+#content article{display:inline-block!important;word-wrap:break-word;}
+#content .wp-post-image {max-width:none!important;}
+#content .spacer2{height:1px;}
+#content .meta-header {vertical-align:top!important;}
+#content h1.entry-title {margin: 0.75em 0 20px!important;}
+#content .screen-reader-text {visibility:hidden!important;}
+#content .entry-title {font-size:200%;font-weight:bold;}
+#primary, .site-content, #content .entry-content {width:100%!important;}
+#content .wprl-book-links.nav-links {font-size:125%;font-weight:bold;margin-bottom:1em!important;}

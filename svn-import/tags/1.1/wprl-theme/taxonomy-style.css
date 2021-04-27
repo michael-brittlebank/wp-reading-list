@@ -1,0 +1,7 @@
+/*FILE: taxonomy-style.css
+*DESCRIPTION: Stylesheet for a taxonomy archive for reading list authors
+*/
+#content article {word-wrap:break-word;}
+.entry-title {display:inline!important;}
+.wp-post-image {float:right!important;}
+#primary {width:100%!important;}

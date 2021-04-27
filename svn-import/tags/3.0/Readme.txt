@@ -1,9 +1,10 @@
 === Plugin Name ===
 Contributors: mstumpf
+Donate link: http://mikestumpf.com/portfolio/wordpress-reading-list-plugin/
 Tags: reading-list, works, custom-post, plugin, posts, images, links, reading list, books, magazines, articles, journals, reading
-Requires at least: 3.0
-Tested up to: 5.7
-Stable tag: 4.0.0
+Requires at least: 3.0.1
+Tested up to: 4.1
+Stable tag: 3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,7 +12,7 @@ WP Reading List is a plugin designed to help organize and display books, magazin
 
 == Description ==
 
-**WP Reading List** (or, **WPRL**) is a plugin designed to help organize and display books, magazines, articles, and anything else that you have read lately.  This plugin allows users to display what they have read, attach text like a review or notes to it, and provide a link to where visitors can find the piece.  The plugin comes bundled with two archive templates (as well as templates for single items and "author" & "type" archives) and is easily customizable with CSS.  View a working example at `https://mikestumpf.com`
+**WP Reading List** (or, **WPRL**) is a plugin designed to help organize and display books, magazines, articles, and anything else that you have read lately.  This plugin allows users to display what they have read, attach text like a review or notes to it, and provide a link to where visitors can find the piece.  The plugin comes bundled with two archive templates (as well as templates for single items and "author" & "type" archives) and is easily customizable with CSS.  View a working example at `https://www.mikestumpf.com
 
 == Installation ==
 
@@ -60,17 +61,15 @@ The WP Reading List shortcode embeds a list of items on a page or sidebar widget
 
 1. Grid Layout
 
-2. Single Item View
+2. List Layout
 
-3. Author View
+3. Single Item View
 
-4. Shortcode View
+4. Author View
+
+5. Shortcode View
 
 == Changelog ==
-
-= 4.0.0 =
-* Replaced frontend templates and styling to be response, i.e. mobile friendly, and to reuse common logic
-* Refactored code to be more human-readable and removed redundant admin settings
 
 = 3.0 =
 *Added image uploader for default cover image

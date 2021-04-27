@@ -1,17 +1,18 @@
 === Plugin Name ===
 Contributors: mstumpf
+Donate link: http://mikestumpf.com/portfolio/wordpress-reading-list-plugin/
 Tags: reading-list, works, custom-post, plugin, posts, images, links, reading list, books, magazines, articles, journals, reading
-Requires at least: 3.0
-Tested up to: 5.7
-Stable tag: 4.0.0
+Requires at least: 3.0.1
+Tested up to: 3.8.1
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WP Reading List is a plugin designed to help organize and display books, magazines, articles, and anything else that you have read lately.
+WP Reading List is a plugin designed to help organize and display books, magazines, articles, and anything else that you have read lately. 
 
 == Description ==
 
-**WP Reading List** (or, **WPRL**) is a plugin designed to help organize and display books, magazines, articles, and anything else that you have read lately.  This plugin allows users to display what they have read, attach text like a review or notes to it, and provide a link to where visitors can find the piece.  The plugin comes bundled with two archive templates (as well as templates for single items and "author" & "type" archives) and is easily customizable with CSS.  View a working example at `https://mikestumpf.com`
+**WP Reading List** (or, **WPRL**) is a plugin designed to help organize and display books, magazines, articles, and anything else that you have read lately.  This plugin allows users to display what they have read, attach text like a review or notes to it, and provide a link to where visitors can find the piece.  The plugin comes bundled with two archive templates (as well as templates for single items and "author" & "type" archives) and is easily customizable with CSS.  View a working example at `https://www.mikestumpf.com`
 
 == Installation ==
 
@@ -29,7 +30,7 @@ After activating the plugin, publish a reading list item or two under the "Works
 
 = Why doesn't "mydomain.com/reading-list/" or "mydomain.com/?post_type=works" work? **A.K.A.** Why is my website returning a 404 "Not Found" error when I try to view my reading list? =
 
-If this is the case, simply go to "Settings" and then "Permalinks" and hit save (you do not have to change any settings).  This refreshes your website's rewrite rules and now "mydomain.com/reading-list/" or "mydomain.com/?post_type=works" should work.  Otherwise, make sure you have at least one published reading list item.
+If this is the case, simply go to "Settings" and then "Permalinks" and hit save (you do not have to change any settings).  This refreshes your website's rewrite rules and now "mydomain.com/reading-list/" or "mydomain.com/?post_type=works" should work.
 
 = If I deactivate/delete the WP Reading List plugin will I lose all the reading list items and authors I have already created? =
 
@@ -37,52 +38,32 @@ If you deactivate or delete the plugin, you will not lose the content you have c
 
 = Why aren't my widgets or sidebars displaying on the WP Reading List layout view? =
 
-At this point, the plugin does not support widgets or sidebars in its templates due to difficulty organizing the lists due to the unpredictability of widget/sidebar sizes.
+At this point, the plugin does not support widgets or sidebars in its templates due to difficulty organizing the lists due to the unpredictability of widget/sidebar sizes.  
 
 = What can I do if I want to change the look of the Reading List layout to better fit with my theme? =
 
 There are several options available in the WP Reading List admin settings to help the reading list layouts fit smoothly into any existing theme.  In addition, the templates have been highly detailed in terms of extra id's and classes for easy customization via CSS.  Many themes have a "Custom CSS" tab built into the admin menu where you can add your changes.  Otherwise, you can always place your modifications within the "style.css" file of your parent or child theme.
 
-= How can I change the default WP Reading List image? =
+= How can I change the default WP Reading List image I see when I do not upload a "Cover Image"? =
 
-There are two options: 1) You can use the settings in the admin panel and use the file uploader there. 2) You can use a file manager and go to "wp-content/plugins/wp-reading-list/wprl-theme/" and replace the "default.png" image with your image of the same name.  It is recommended that you choose a default image with a 3:4 aspect ratio (width:height) to match the other cover images.
+This will hopefully be implemented as an admin option for the plugin in the future.  For now, you will have to go to your website's file manager and go to "wp-content/plugins/wp-reading-list/wprl-theme/" and replace the "default.png" image with your image of the same name.  It is recommended that you choose a default image with a 3:4 aspect ratio (width:height) to match the other cover images.
 
 = The "Works", "Authors", "Types", and "Reading List" terminology is confusing.  Is there a easier way to think of these things? =
 
-Yes. Think of "works" as specialized "posts" and similarly of "authors" & "types" as different kinds of "tags".  The "Reading List" and "Reading List Items" is a phrase which tries to include all kinds of reading materials such as books, magazines, articles, etc.
-
-= How do I use the WP Reading List shortcodes? =
-
-The WP Reading List shortcode embeds a list of items on a page or sidebar widget according to both the plugin settings in the admin panel and the parameters passed to the shortcode.  The format is: [wprl layout="plain" number="10"].  At this time, the only format available is "plain" but you can specify any number for the number of works displayed. (*Note, -1 returns all works.)
+Yes. Think of "works" as specialized "posts" and similarly of "authors" & "types" as different kinds of "tags".  The "Reading List" and "Reading List Items" is a phrase which tries to include all kinds of reading materials such as books, magazines, articles, etc.  
 
 
 == Screenshots ==
 
 1. Grid Layout
 
-2. Single Item View
+2. List Layout
 
-3. Author View
+3. Single Item View
 
-4. Shortcode View
+4. Author View
 
 == Changelog ==
-
-= 4.0.0 =
-* Replaced frontend templates and styling to be response, i.e. mobile friendly, and to reuse common logic
-* Refactored code to be more human-readable and removed redundant admin settings
-
-= 3.0 =
-*Added image uploader for default cover image
-*Added shortcode support for embedding plain reading list
-*Fixed whitespace issue in source code
-*Fixed issue with grid view layout
-
-= 2.2.3 =
-*Fixed information fields not displaying in works archive
-
-= 2.2.2 =
-*Added more meta fields showing in single works template
 
 = 2.2.1 =
 *Added css id for use in styling plugin templates
@@ -134,9 +115,6 @@ The WP Reading List shortcode embeds a list of items on a page or sidebar widget
 * First Stable release
 
 == Upgrade Notice ==
-
-= 3.0 =
-Added shortcodes and updated default cover image options
 
 = 2.1 =
 Fixed bug with grid view
