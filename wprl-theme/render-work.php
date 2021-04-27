@@ -164,9 +164,11 @@ function renderContent(){
     </p>
 <?php }
 
-function renderPost($isArchive = true)
+function renderPost($renderArchiveTemplate = true)
 {
     global $wprl_options;
+    global $isArchive;
+    $isArchive = $renderArchiveTemplate;
     $width = $wprl_options['grid_width'];
     $columnClasses = ["wprl-entry-container"];
     if ($isArchive) {

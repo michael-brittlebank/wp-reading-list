@@ -58,20 +58,7 @@ function deleteConfirm(){
     document.getElementById("wprl-options-delete").checked=confirm('Deleting your Reading List items is permanent. This will also delete the list of authors.  If you are sure that you want to do this, click "Ok" and hit "Save Settings".');
 }
 
-/* validate the title of single post header*/
-function titleCheck(){
-    var title= document.getElementById("wprl-options-title").value;
-    if (isUrl(title)) {
-        alert('Do not enter a URL here. Instead, just enter what you would like to call the main body text.');
-        document.getElementById("wprl-options-title").value = window.titledefault;
-    }
-    else if (title.length > 30)	{
-        alert('Sorry, the text you entered is too long.');
-        document.getElementById("wprl-options-title").value = window.titledefault;
-    }
-}
-
-/* validate the title of layout header*/
+/* validate the title of archive header*/
 function layoutHeaderCheck(){
     var multititle= document.getElementById("wprl-options-multiple-title").value;
     if (isUrl(multititle)) {

@@ -3,23 +3,6 @@
 *DESCRIPTION: Plugin admin functions
 */
 
-/*Valid layout choices */
-function wprl_get_valid_layouts() {
-    $layouts = array(
-        'grid' => array(
-            'slug' => 'grid',
-            'name' => 'Grid',
-            'description' => 'Display multiple items per line',
-        ),
-        'list' => array(
-            'slug' => 'list',
-            'name' => 'List',
-            'description' => 'Display one item per line',
-        )
-    );
-    return $layouts;
-}
-
 /*Valid order directions */
 function wprl_get_valid_directions() {
     $layouts = array(
@@ -242,13 +225,6 @@ function wprl_settings_delete() {
     <?php echo('<p class="margin">');_e('Everyone needs a fresh start sometimes.  Check if you would like to delete your Reading List items and authors. However, please realize that this is permanent; there is no way back.', 'wp_reading_list'); echo('</p>');
 }
 
-/*Single item title */
-function wprl_settings_single(){
-    $wprl_options = get_option('wprl_plugin_options');?>
-    <input type="text" id="wprl-options-title" name="wprl_plugin_options[title]" size="30" value="<?php echo ($wprl_options['title']);?>" onchange="titleCheck()" />
-    <?php echo ('<p class="margin">');_e('What are you writing about? Notes, a review, fan fiction, ...?', 'wp_reading_list'); echo ('</p>');
-}
-
 /*Multiple item or layout title */
 function wprl_settings_multiple(){
     $wprl_options = get_option('wprl_plugin_options');?>
@@ -289,7 +265,6 @@ function wprl_options_validate($input) {
     $submit = (!empty( $input['submit']) ? true : false);
     $reset = (!empty($input['reset']) ? true : false);
     if ($submit) {
-        $valid_layouts = wprl_get_valid_layouts();
         $valid_direction = wprl_get_valid_directions();
         $valid_grid_height = wprl_get_valid_grid_num();
         $valid_order = wprl_get_valid_order_by();
@@ -299,10 +274,7 @@ function wprl_options_validate($input) {
         else{
             $valid_input['delete'] = false;
         }
-        $valid_input['cover_width_grid'] = wprl_options_validate_helper_numCheck('cover_width_grid', $input, $wprl_defaults, 60, 600);;
-        $valid_input['cover_height_grid'] = wprl_options_validate_helper_numCheck('cover_height_grid', $input, $wprl_defaults, 80, 800);
         $valid_input['grid_width'] = wprl_options_validate_helper_numCheck('grid_width', $input, $wprl_defaults, 1, 4);
-        $valid_input['list_size'] = wprl_options_validate_helper_numCheck('list_size', $input, $wprl_defaults, 1, 50);
         $valid_input['works_in_feed'] = wprl_options_validate_helper('works_in_feed', $input);
         $valid_input['show_post_date'] = wprl_options_validate_helper('show_post_date', $input);
         $valid_input['show_page_nums'] = wprl_options_validate_helper('show_page_nums', $input);
@@ -319,8 +291,6 @@ function wprl_options_validate($input) {
         $valid_input['order'] = (array_key_exists($input['order'], $valid_order) ? $input['order'] : $valid_input['order'] );
         $valid_input['direction'] = (array_key_exists($input['direction'], $valid_direction) ? $input['direction'] : $valid_input['direction'] );
         $valid_input['grid_rows'] = (array_key_exists($input['grid_rows'], $valid_grid_height) ? $input['grid_rows'] : $valid_input['grid_rows'] );
-        $valid_input['layout'] = (array_key_exists($input['layout'], $valid_layouts) ? $input['layout'] : $valid_input['layout'] );
-        $valid_input['title'] = sanitize_text_field($input['title']);
         $valid_input['multiple_title'] = sanitize_text_field($input['multiple_title']);
         $valid_input['cover_image'] = filter_var($input['cover_image'], FILTER_VALIDATE_URL)?$input['cover_image']:$wprl_defaults['cover_image'];
     }
@@ -354,9 +324,8 @@ function register_wprl_settings() {
     add_settings_section('wprl_settings_layout_options', 'Layout', '', 'wprl_options');
     add_settings_field('wprl_settings_list_order', 'Order Posts By', 'wprl_settings_list_order', 'wprl_options', 'wprl_settings_layout_options');
     add_settings_field('wprl_settings_list_direction', 'Order Direction', 'wprl_settings_list_direction', 'wprl_options', 'wprl_settings_layout_options');
-    add_settings_section('wprl_settings_grid_layout', 'Grid', '', 'wprl_options');
-    add_settings_field('wprl_settings_grid_width', 'Grid Width', 'wprl_settings_grid_width', 'wprl_options', 'wprl_settings_grid_layout');
-    add_settings_field('wprl_settings_grid_height', 'Number of Grid Rows', 'wprl_settings_grid_rows', 'wprl_options', 'wprl_settings_grid_layout');
+    add_settings_field('wprl_settings_grid_width', 'Grid Width', 'wprl_settings_grid_width', 'wprl_options', 'wprl_settings_layout_options');
+    add_settings_field('wprl_settings_grid_height', 'Grid Rows', 'wprl_settings_grid_rows', 'wprl_options', 'wprl_settings_layout_options');
     add_settings_section('wprl_settings_layout_display', 'Display', '', 'wprl_options');
     add_settings_field('wprl_settings_show_list_excerpt', 'Show Item Excerpt', 'wprl_settings_show_list_excerpt', 'wprl_options', 'wprl_settings_layout_display');
     add_settings_field('wprl_settings_list_image', 'Show Cover Image', 'wprl_settings_list_image', 'wprl_options', 'wprl_settings_layout_display');
@@ -371,8 +340,7 @@ function register_wprl_settings() {
     add_settings_field('wprl_settings_page_nums', 'Show Page Numbers', 'wprl_settings_page_nums', 'wprl_options', 'wprl_settings_layout_display');
     add_settings_section('wprl_settings_appearance', 'General', '', 'wprl_options');
     add_settings_field('wprl_settings_homepage', 'Display on Whole Site', 'wprl_settings_homepage', 'wprl_options', 'wprl_settings_appearance');
-    add_settings_field('wprl_settings_single', 'Single Post Header', 'wprl_settings_single', 'wprl_options', 'wprl_settings_appearance');
-    add_settings_field('wprl_settings_multiple', 'Layout Header', 'wprl_settings_multiple', 'wprl_options', 'wprl_settings_appearance');
+    add_settings_field('wprl_settings_multiple', 'Archive Header', 'wprl_settings_multiple', 'wprl_options', 'wprl_settings_appearance');
     add_settings_field('wprl_settings_cover_image', 'Cover Image', 'wprl_settings_cover_image', 'wprl_options', 'wprl_settings_appearance');
     add_settings_section('wprl_settings_advanced', 'Advanced', '', 'wprl_options');
     add_settings_field('wprl_settings_override_taxonomy', 'Taxonomy Override', 'wprl_settings_override_taxonomy', 'wprl_options', 'wprl_settings_advanced');

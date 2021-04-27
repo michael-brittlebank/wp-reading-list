@@ -43,7 +43,7 @@ function wprl_add_help_tab() {
 			<b>Grid Width</b>: This option sets the number of Reading List items on each line in the grid layout.
 			<br/>Range: 1-4.
 			<br/><br/>
-			<b>Number of Grid Rows</b>: This option sets how many rows of Reading List items are displayed in the grid layout.
+			<b>Grid Rows</b>: This option sets how many rows of Reading List items are displayed in the grid layout.
 			<br/>Range: 1-10.', 'wp_reading_list') . '</p>',
     ));
     $screen->add_help_tab(array(
@@ -79,9 +79,7 @@ function wprl_add_help_tab() {
         'content'	=> '<p>' . __('
 			<b>Display on Whole Site</b>: Check this option if you wish to show Reading List items in your blog&apos;s feed and search results.  This also enables Reading List items to show up if searching for a specific user&apos;s content.
 			<br/><br/>
-			<b>Single Post Header</b>: Use this option to change what the content of the single item view is called.
-			<br/><br/>
-			<b>Layout Header</b>: Use this option to change what the header of the grid or list layout view is called.', 'wp_reading_list') . '</p>',
+			<b>Archive Header</b>: Use this option to change what the header of the grid or list layout view is called.', 'wp_reading_list') . '</p>',
     ));
     $screen->add_help_tab(array(
         'id'	=> 'wprl_help_admin',

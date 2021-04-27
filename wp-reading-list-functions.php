@@ -5,7 +5,7 @@
 defined( 'ABSPATH' ) OR exit;
 
 global $version;
-$version = "2.0";
+$version = "4.0";
 
 /*Load the custom taxonomies for 'works' and 'authors' */
 if (!current_theme_supports('post-thumbnails')) {
@@ -18,17 +18,13 @@ add_action('init', 'wprl_custom_tax', 0);
 function wprl_default_options() {
     global $version;
     $options = array(
-        'layout' => 'grid',
         'title' => 'Notes',
         'multiple_title' => 'Reading List',
         'cover_image' => plugins_url('wp-reading-list/wprl-theme/default.png'),
         'order' => 'date',
         'direction' => 'DESC',
-        'cover_width_grid' => '250',
-        'cover_height_grid' => '333',
         'grid_width' => '3',
         'grid_rows' => '4',
-        'list_size' => '25',
         'works_in_feed' => false,
         'show_post_date' => false,
         'delete' => false,
