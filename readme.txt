@@ -3,7 +3,7 @@ Contributors: mstumpf
 Tags: reading-list, works, custom-post, plugin, posts, images, links, reading list, books, magazines, articles, journals, reading
 Requires at least: 3.0.1
 Tested up to: 5.7.1
-Stable tag: 3.1.0
+Stable tag: 4.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,18 +60,17 @@ The WP Reading List shortcode embeds a list of items on a page or sidebar widget
 
 1. Grid Layout
 
-2. List Layout
+2. Single Item View
 
-3. Single Item View
+3. Author View
 
-4. Author View
-
-5. Shortcode View
+4. Shortcode View
 
 == Changelog ==
 
-= 3.1.0 =
-* Replaced frontend options and styling to be response, i.e. mobile friendly
+= 4.0.0 =
+* Replaced frontend templates and styling to be response, i.e. mobile friendly, and to reuse common logic
+* Refactored code to be more human-readable and removed redundant admin settings
 
 = 3.0 =
 *Added image uploader for default cover image
