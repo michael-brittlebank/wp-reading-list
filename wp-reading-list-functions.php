@@ -5,7 +5,7 @@
 defined( 'ABSPATH' ) OR exit;
 
 global $version;
-$version = "4.0.0";
+$version = "4.0.1";
 
 /*Load the custom taxonomies for 'works' and 'authors' */
 if (!current_theme_supports('post-thumbnails')) {
