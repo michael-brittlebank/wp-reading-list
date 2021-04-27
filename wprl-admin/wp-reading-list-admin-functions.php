@@ -105,20 +105,6 @@ function wprl_get_valid_order_by() {
     return $width ;
 }
 
-
-/*Layout setting selector */
-function wprl_settings_layouts() {
-    $wprl_options = get_option('wprl_plugin_options');
-    $wprl_layouts = wprl_get_valid_layouts();
-    $i = 0;
-    foreach ($wprl_layouts as $layout) {
-        $currentlayout = ($layout ['slug'] == $wprl_options ['layout'] ? true : false); ?>
-        <input type="radio" id="<?php echo ($layout['slug']); ?>" name="wprl_plugin_options[layout]" <?php checked($currentlayout)?> value="<?php echo ($layout['slug']);?>"/>
-        <label for="<?php echo ($layout['slug']); ?>"><?php echo ($layout['name']);?>: </label>
-        <?php echo ($layout['description']);?><br/>
-    <?php }
-}
-
 /*Order direction setting  */
 function wprl_settings_list_direction() {
     $wprl_options = get_option('wprl_plugin_options');
@@ -144,14 +130,6 @@ function wprl_settings_grid_width() {
         <?php $i++;
     }
     echo ('</select><p class="margin">');_e('Number of works in each row on large screens, i.e. desktop mode.', 'wp_reading_list' );echo ('</p>');
-}
-
-/* cover size setting */
-function wprl_settings_size() {
-    $wprl_options = get_option('wprl_plugin_options');?>
-    <input type="text" id="wprl-options-cover-width" name="wprl_plugin_options[cover_width_grid]" size="4" value="<?php echo ($wprl_options['cover_width_grid']);?>" onchange="numValGrid()"/>
-    <input type="text" id="wprl-options-cover-height" name="wprl_plugin_options[cover_height_grid]" size="4" value="<?php echo ($wprl_options['cover_height_grid']);?>"readonly/>
-    <?php echo ('<p class="margin">');_e('Sizes are enforced to a 3:4 aspect ratio and capped at a 600px by 800px maximum and 60px by 80px minimum.', 'wp_reading_list' );echo ('</p>');
 }
 
 /*Number of grid rows setting */
@@ -278,13 +256,6 @@ function wprl_settings_multiple(){
     <?php echo('<p class="margin">');_e('What do you want to call your list of items?', 'wp_reading_list'); echo('</p>');
 }
 
-/*List size setting */
-function wprl_settings_list_size(){
-    $wprl_options = get_option('wprl_plugin_options');?>
-    <input type="text" id="wprl-options-list-size" name="wprl_plugin_options[list_size]" size="4" value="<?php echo ($wprl_options['list_size']);?>" onchange="rowCheck()" />
-    <?php echo('<p class="margin">');_e('Show up to 50 items in your list', 'wp_reading_list'); echo('</p>');
-}
-
 /*Cover image setting */
 function wprl_settings_cover_image(){
     $wprl_options = get_option('wprl_plugin_options');?>
@@ -381,27 +352,23 @@ function wprl_enqueue($hook){
 function register_wprl_settings() {
     register_setting('wprl_plugin_options', 'wprl_plugin_options', 'wprl_options_validate');
     add_settings_section('wprl_settings_layout_options', 'Layout', '', 'wprl_options');
-    add_settings_field('wprl_settings_layouts', 'Available Layouts', 'wprl_settings_layouts', 'wprl_options', 'wprl_settings_layout_options');
     add_settings_field('wprl_settings_list_order', 'Order Posts By', 'wprl_settings_list_order', 'wprl_options', 'wprl_settings_layout_options');
     add_settings_field('wprl_settings_list_direction', 'Order Direction', 'wprl_settings_list_direction', 'wprl_options', 'wprl_settings_layout_options');
     add_settings_section('wprl_settings_grid_layout', 'Grid', '', 'wprl_options');
     add_settings_field('wprl_settings_grid_width', 'Grid Width', 'wprl_settings_grid_width', 'wprl_options', 'wprl_settings_grid_layout');
     add_settings_field('wprl_settings_grid_height', 'Number of Grid Rows', 'wprl_settings_grid_rows', 'wprl_options', 'wprl_settings_grid_layout');
-    add_settings_section('wprl_settings_list_layout', 'List', '', 'wprl_options');
-    add_settings_field('wprl_settings_list_size', 'Number of List Items', 'wprl_settings_list_size', 'wprl_options', 'wprl_settings_list_layout');
-    add_settings_field('wprl_settings_show_list_excerpt', 'Show Item Excerpt', 'wprl_settings_show_list_excerpt', 'wprl_options', 'wprl_settings_list_layout');
-    add_settings_field('wprl_settings_size', 'Cover Size', 'wprl_settings_size', 'wprl_options', 'wprl_settings_list_layout');
-    add_settings_section('wprl_settings_layout_dispay', 'Display', '', 'wprl_options');
-    add_settings_field('wprl_settings_list_image', 'Show Cover Image', 'wprl_settings_list_image', 'wprl_options', 'wprl_settings_layout_dispay');
-    add_settings_field('wprl_settings_show_url', 'Show Cover Image Link', 'wprl_settings_show_url', 'wprl_options', 'wprl_settings_layout_dispay');
-    add_settings_field('wprl_settings_work_link', 'Show Link to Single Post', 'wprl_settings_work_link', 'wprl_options', 'wprl_settings_layout_dispay');
-    add_settings_field('wprl_settings_author', 'Show Item Author/s', 'wprl_settings_author', 'wprl_options', 'wprl_settings_layout_dispay');
-    add_settings_field('wprl_settings_author_link', 'Show Author/s Archive', 'wprl_settings_author_link', 'wprl_options', 'wprl_settings_layout_dispay');
-    add_settings_field('wprl_settings_show_work_type', 'Show Item Type', 'wprl_settings_show_work_type', 'wprl_options', 'wprl_settings_layout_dispay');
-    add_settings_field('wprl_settings_show_type_link', 'Show Type/s Archive', 'wprl_settings_show_type_link', 'wprl_options', 'wprl_settings_layout_dispay');
-    add_settings_field('wprl_settings_post_author', 'Show Post Author', 'wprl_settings_post_author', 'wprl_options', 'wprl_settings_layout_dispay');
-    add_settings_field('wprl_settings_date', 'Show Date Published', 'wprl_settings_date', 'wprl_options', 'wprl_settings_layout_dispay');
-    add_settings_field('wprl_settings_page_nums', 'Show Page Numbers', 'wprl_settings_page_nums', 'wprl_options', 'wprl_settings_layout_dispay');
+    add_settings_section('wprl_settings_layout_display', 'Display', '', 'wprl_options');
+    add_settings_field('wprl_settings_show_list_excerpt', 'Show Item Excerpt', 'wprl_settings_show_list_excerpt', 'wprl_options', 'wprl_settings_layout_display');
+    add_settings_field('wprl_settings_list_image', 'Show Cover Image', 'wprl_settings_list_image', 'wprl_options', 'wprl_settings_layout_display');
+    add_settings_field('wprl_settings_show_url', 'Show Cover Image Link', 'wprl_settings_show_url', 'wprl_options', 'wprl_settings_layout_display');
+    add_settings_field('wprl_settings_work_link', 'Show Link to Single Post', 'wprl_settings_work_link', 'wprl_options', 'wprl_settings_layout_display');
+    add_settings_field('wprl_settings_author', 'Show Item Author/s', 'wprl_settings_author', 'wprl_options', 'wprl_settings_layout_display');
+    add_settings_field('wprl_settings_author_link', 'Show Author/s Archive', 'wprl_settings_author_link', 'wprl_options', 'wprl_settings_layout_display');
+    add_settings_field('wprl_settings_show_work_type', 'Show Item Type', 'wprl_settings_show_work_type', 'wprl_options', 'wprl_settings_layout_display');
+    add_settings_field('wprl_settings_show_type_link', 'Show Type/s Archive', 'wprl_settings_show_type_link', 'wprl_options', 'wprl_settings_layout_display');
+    add_settings_field('wprl_settings_post_author', 'Show Post Author', 'wprl_settings_post_author', 'wprl_options', 'wprl_settings_layout_display');
+    add_settings_field('wprl_settings_date', 'Show Date Published', 'wprl_settings_date', 'wprl_options', 'wprl_settings_layout_display');
+    add_settings_field('wprl_settings_page_nums', 'Show Page Numbers', 'wprl_settings_page_nums', 'wprl_options', 'wprl_settings_layout_display');
     add_settings_section('wprl_settings_appearance', 'General', '', 'wprl_options');
     add_settings_field('wprl_settings_homepage', 'Display on Whole Site', 'wprl_settings_homepage', 'wprl_options', 'wprl_settings_appearance');
     add_settings_field('wprl_settings_single', 'Single Post Header', 'wprl_settings_single', 'wprl_options', 'wprl_settings_appearance');

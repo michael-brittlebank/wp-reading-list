@@ -30,8 +30,6 @@ function wprl_add_help_tab() {
         'id'	=> 'wprl_help_layout',
         'title'	=> __('Layout'),
         'content'	=> '<p>' . __('
-			<b>Available Layouts</b>: There are two layouts available, "grid" and "list". "Grid" is a layout which emphasizes cover images is intended to be more visually appealing.  "List" is a layout which displays Reading List materials more like traditional posts, with one item per line.
-			<br/><br/>
 			<b>Order Posts By</b>: There are four options available for ordering your Reading List items, "Date", "Post Author", "Random", and "Title".  "Date" is the default, and WordPress&apos;s default, which orders posts by the date they were published.  "Post Author" orders Reading List items by alphabetizing the author of the post.  (*Note here, this is not the author or authors that you listed when you wrote your Reading List item.)  This is useful if you have multiple contributors who are all writing Reading List items and you want to sort by who is contributing what.  "Random" is pretty straightforward; your Reading List items are put in random order every time the page is loaded.  "Title" allows you to display Reading List items alphabetically by their title.
 			<br/><br/>
 			<b>Order Direction</b>: Descending order is the WordPress default and it orders Reading List items from newest to oldest in the case dates and from the end of the alphabet to numbers for text.  Ascending order is the opposite.
@@ -52,9 +50,6 @@ function wprl_add_help_tab() {
         'id'	=> 'wprl_help_list',
         'title'	=> __('List', 'wp_reading_list'),
         'content'	=> '<p>' . __('
-			<b>Number of List Items</b>: This is similar to the option for showing the number of blog posts in the "General Settings" page.  This allows you to have a different number of Reading List items than the rest of the site.
-			<br/>Range: 1-50.
-			<br/><br/>
 			<b>Show Cover Image</b>: Check this option if you want to show cover images in the list layout.  This is not necessary for the list layout.
 			<br/><br/>
 			<b>Cover Size</b>: Use this option to change the size of the cover image shown in the list layout.  You can only set the width; the height will automatically be adjusted to what you input since it is enforced at a 4:3 ratio.  If a cover image is smaller than the dimensions you specified or is not originally in a 4:3 ratio, the original size will be shown up to whatever dimension limit it hits first.  Images will not be inflated or warped to fit this setting, it is more like setting a maximum size.

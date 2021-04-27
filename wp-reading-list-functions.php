@@ -84,15 +84,9 @@ function wprl_layout_query($query){
             $query->set('orderby', $orderby);
             $query->set('order', $wprl_options['direction']);
         }
-        if ($wprl_options['layout']=='grid') {
-            $numposts = $wprl_options['grid_width'] * $wprl_options['grid_rows'];
-            $query->set('posts_per_page', $numposts);
-            return $query;
-        }
-        elseif ($wprl_options['layout']=='list') {
-            $query->set('posts_per_page', $wprl_options['list_size']);
-            return $query;
-        }
+        $numposts = $wprl_options['grid_width'] * $wprl_options['grid_rows'];
+        $query->set('posts_per_page', $numposts);
+        return $query;
     }
 }
 add_action('pre_get_posts', 'wprl_layout_query');
