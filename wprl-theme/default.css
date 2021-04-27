@@ -822,7 +822,7 @@ textarea {
 .wprl-entry-image {
     max-width: 100%;
 }
-.wprl-archive-container .wprl-row {
+.wprl-archive-container .wprl-row, .wprl-taxonomy-container .wprl-row {
     align-items: baseline;
 }
 .wprl-entry-title, .wprl-entry-author, .wprl-entry-date, .wprl-work-author, .wprl-entry-pages, .wprl-type {

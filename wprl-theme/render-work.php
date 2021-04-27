@@ -167,7 +167,6 @@ function renderContent(){
 function renderPost($isArchive = true)
 {
     global $wprl_options;
-    global $isArchive;
     $width = $wprl_options['grid_width'];
     $columnClasses = ["wprl-entry-container"];
     if ($isArchive) {
@@ -184,13 +183,25 @@ function renderPost($isArchive = true)
     <article id="wprl-post-<?php the_ID(); ?>" class="<?php echo join(" ",$columnClasses);?>">
         <?php
         renderImage();
+        renderMetadata();
         if ($isArchive) {
             renderExcerpt();
-        }
-        renderMetadata();
-        if (!$isArchive){
+        } else {
             renderContent();
         }
         ?>
     </article><!-- #post-<?php the_ID(); ?> -->
+<?php }
+
+function renderNavigation() { ?>
+    <nav class="navigation paging-navigation" role="navigation">
+        <h1 class="wprl-screen-reader-text">Works navigation</h1>
+        <div class="wprl-work-links nav-links">
+            <?php posts_nav_link(); ?>
+        </div><!-- .nav-links -->
+    </nav>
+<?php }
+
+function renderNoResults() { ?>
+    <h3 class="wprl-no-results">No Results</h3>
 <?php }

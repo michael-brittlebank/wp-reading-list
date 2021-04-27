@@ -18,23 +18,16 @@ get_header();
                     $rows = $wprl_options['grid_rows'];
                     $width = $wprl_options['grid_width'];
                     $metainfo = array();
-                    $post_counter = 0;
                     while (have_posts()) {
                         the_post();
                         renderPost();
-                        $post_counter++;
                     }
                     ?>
                 </div>
-                <nav class="navigation paging-navigation" role="navigation">
-                    <h1 class="wprl-screen-reader-text">Works navigation</h1>
-                    <div class="wprl-work-links nav-links">
-                        <?php posts_nav_link(); ?>
-                    </div><!-- .nav-links -->
-                </nav>
-            <?php } else { ?>
-                <h3 class="wprl-no-results">No Results</h3>
-            <?php } ?>
+            <?php renderNavigation();
+            } else {
+                renderNoResults();
+            } ?>
         </section>
     </main>
 <?php get_footer(); ?>
