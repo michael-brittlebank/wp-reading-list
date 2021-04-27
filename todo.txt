@@ -1,2 +1,0 @@
-style posts to have text line up
-refactor files to echo the same post function across templates

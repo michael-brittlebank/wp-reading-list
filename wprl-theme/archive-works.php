@@ -7,7 +7,7 @@ $wprl_options = get_option('wprl_plugin_options');
 get_header();
 
 ?>
-    <main id="wprl-container" role="main">
+    <main class="wprl-container" role="main">
         <h1 class="wprl-title">
             <?php echo($wprl_options['multiple_title']); ?>
         </h1>

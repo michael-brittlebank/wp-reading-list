@@ -28,9 +28,10 @@ function renderExcerpt()
 function renderTitle() {
     global $wprl_options;
     global $metapost;
+    global $isArchive;
     $title = get_the_title($metapost->ID);
     $permalink = get_permalink($metapost->ID);
-    if ($wprl_options['show_single_work']) { ?>
+    if ($isArchive && $wprl_options['show_single_work']) { ?>
         <a href="<?php echo($permalink); ?>">
             <h2 class="wprl-entry-title">
                 <?php echo($title); ?>
@@ -156,24 +157,40 @@ function renderMetadata() {
     <?php }
 }
 
-function renderPost()
+function renderContent(){
+    ?>
+    <p class="wprl-entry-content">
+        <?php the_content(); ?>
+    </p>
+<?php }
+
+function renderPost($isArchive = true)
 {
     global $wprl_options;
+    global $isArchive;
     $width = $wprl_options['grid_width'];
-    $columnClasses = ["wprl-col", "wprl-entry-container"];
-    // we want the second condition to cascade into cases 3 & 4
-    if ($width == 2) {
-        array_push($columnClasses, "wprl-col-sm-6");
-    } else if($width == 3) {
-        array_push($columnClasses, "wprl-col-sm-6", "wprl-col-md-4");
-    } else if ($width == 4) {
-        array_push($columnClasses, "wprl-col-sm-6", "wprl-col-md-3");
-    }?>
+    $columnClasses = ["wprl-entry-container"];
+    if ($isArchive) {
+        array_push($columnClasses, "wprl-col");
+        if ($width == 2) {
+            array_push($columnClasses, "wprl-col-sm-6");
+        } else if($width == 3) {
+            array_push($columnClasses, "wprl-col-sm-6", "wprl-col-md-4");
+        } else if ($width == 4) {
+            array_push($columnClasses, "wprl-col-sm-6", "wprl-col-md-3");
+        }
+    }
+    ?>
     <article id="wprl-post-<?php the_ID(); ?>" class="<?php echo join(" ",$columnClasses);?>">
         <?php
         renderImage();
-        renderExcerpt();
+        if ($isArchive) {
+            renderExcerpt();
+        }
         renderMetadata();
+        if (!$isArchive){
+            renderContent();
+        }
         ?>
     </article><!-- #post-<?php the_ID(); ?> -->
 <?php }
