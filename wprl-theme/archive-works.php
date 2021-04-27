@@ -5,12 +5,15 @@
 require 'render-work.php';
 $wprl_options = get_option('wprl_plugin_options');
 get_header();
-
 ?>
     <main class="wprl-container" role="main">
-        <h1 class="wprl-title">
-            <?php echo($wprl_options['multiple_title']); ?>
-        </h1>
+        <?php
+        $archiveTitle = $wprl_options['multiple_title'];
+        if (strlen($archiveTitle) > 0) { ?>
+            <h1 class="wprl-title">
+                <?php echo($archiveTitle); ?>
+            </h1>
+        <?php } ?>
         <section class="wprl-full-screen-grid-container wprl-archive-container">
             <?php if (have_posts()) {?>
                 <div class="wprl-row">
@@ -24,7 +27,7 @@ get_header();
                     }
                     ?>
                 </div>
-            <?php renderNavigation();
+                <?php renderNavigation();
             } else {
                 renderNoResults();
             } ?>
