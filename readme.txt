@@ -1,5 +1,6 @@
 === Plugin Name ===
 Contributors: mstumpf
+Donate link: https://mikestumpf.com/
 Tags: reading-list, works, custom-post, plugin, posts, images, links, reading list, books, magazines, articles, journals, reading
 Requires at least: 3.0
 Tested up to: 6.1
